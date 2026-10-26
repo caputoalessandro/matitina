@@ -1,5 +1,5 @@
 // Matitina: funzionamento offline. Cambia VERSION a ogni aggiornamento dell'app.
-const VERSION = "matitina-v1";
+const VERSION = "matitina-v2";
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-180.png", "./icon-32.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener("activate", e => {

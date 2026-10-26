@@ -5,39 +5,45 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#F3C6A5">
+<meta name="theme-color" content="#F6F0E3">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Matitina">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Stile fumetto piatto: colori pieni, contorni neri spessi, ombre piatte senza sfumature */
+/* Stile a pastello: carta da disegno, riempimenti a tratteggio, bordi irregolari, colori a cera */
 :root{
-  --bg:#F3C6A5; --bg-shade:#D99A73; --surface:#FFFFFF; --ink:#1A1A1A; --muted:#6B3A26; --hair:rgba(26,26,26,.16);
-  --deep:#9C2F1F; --deep-shade:#6A1D12; --on-deep:#FFFFFF; --soft:#FBE3D2;
-  --good:#17703F; --good-bg:#C6EED3; --bad:#B0122C; --bad-bg:#FFD4D4;
-  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --bg:#F6F0E3; --bg-shade:#E3D6BC; --surface:#FFFDF7; --ink:#1A1A1A; --muted:#62533F; --hair:rgba(60,50,40,.18);
+  --line:#3B3631;                                   /* il "grafite" dei bordi */
+  --deep:#C7362B; --deep-shade:#8E2219; --on-deep:#FFFFFF; --soft:#FCF6EA;
+  --k1:#D93A2E; --k2:#EE8A1D; --k3:#F2C230; --k4:#3F9D4A; --k5:#2F6FC4; --k6:#8A4FB5;   /* i pastelli */
+  --good:#17703F; --good-bg:#CDEBD3; --bad:#B0122C; --bad-bg:#FFD9D4;
+  --wob:20px 26px 18px 28px / 26px 18px 28px 20px;   /* angoli un po' storti, come a mano */
+  --f-display:"Kalam", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
   --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   color-scheme:light;
 }
-/* palette selezionabili (testo sempre nero su sfondi chiari, contrasto verificato) */
-:root[data-palette="girasoli"]{--bg:#F6D867;--bg-shade:#D4B13C;--deep:#1F3C88;--deep-shade:#12255A;--soft:#FCEFB8;--muted:#5A4C17}
-:root[data-palette="grafite"]{--bg:#E4E1D8;--bg-shade:#BDB8AA;--deep:#33414A;--deep-shade:#1E272D;--soft:#F3F1EA;--muted:#4F4B42}
-:root[data-palette="salvia"]{--bg:#CFE3C6;--bg-shade:#9DBF8F;--deep:#2C5B3F;--deep-shade:#1A3826;--soft:#E8F2E3;--muted:#3D5634}
+/* palette selezionabili: sempre carta chiara e testo nero, cambiano i pastelli */
+:root[data-palette="sanguigna"]{--bg:#F5E8DA;--bg-shade:#E2CBB2;--deep:#9C2F1F;--deep-shade:#6A1D12;--soft:#FBF2E8;--muted:#6B3A26;
+  --k1:#A8321F;--k2:#C9662F;--k3:#D9A441;--k4:#7C8B3E;--k5:#6E4A35;--k6:#B85A6B}
+:root[data-palette="carboncino"]{--bg:#EEEBE4;--bg-shade:#D5D0C4;--deep:#33414A;--deep-shade:#1E272D;--soft:#F7F5F0;--muted:#4F4B42;
+  --k1:#2F3A40;--k2:#6B6F72;--k3:#A39B8B;--k4:#4E6A73;--k5:#7A5C45;--k6:#56495E}
+:root[data-palette="acquerello"]{--bg:#EDF3F0;--bg-shade:#CFDDD6;--deep:#1F5D7A;--deep-shade:#123C50;--soft:#F6FAF8;--muted:#3E5650;
+  --k1:#2E7FA8;--k2:#3FA58C;--k3:#9CC45B;--k4:#5A6FC9;--k5:#C2669B;--k6:#E09A4A}
 
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;
+html,body{min-height:100%}
+body{margin:0;background-color:var(--bg);background-image:var(--paper,none);background-size:240px;color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   -webkit-tap-highlight-color:transparent}
 #app{max-width:560px;margin:0 auto;padding-block:max(20px,env(safe-area-inset-top,0px)) 120px}
 button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px dashed var(--deep);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;line-height:1.1}
 h2{overflow-wrap:anywhere;hyphens:auto}
 .label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .pop{animation:pop .25s ease}
@@ -46,110 +52,136 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 @keyframes hop{0%{transform:translateY(12px) scale(.92)}60%{transform:translateY(-6px)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+/* ---- il "pastello": riempimento a tratteggio (::before) + bordo a matita (::after), il testo resta nitido ---- */
+.cr{position:relative;isolation:isolate;background:none;border:0}
+.cr::before,.cr::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:var(--r,var(--wob));pointer-events:none;
+  -webkit-mask-image:var(--tex,none);mask-image:var(--tex,none);-webkit-mask-size:180px;mask-size:180px}
+.cr::before{background:var(--fill,var(--surface))}
+.cr::after{border:var(--bw,3px) solid var(--edge,var(--line));-webkit-mask-image:var(--tex2,none);mask-image:var(--tex2,none)}
+.cr.flat::after{display:none}
+
 /* barra superiore */
-.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;row-gap:12px;margin-bottom:22px}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;row-gap:12px;margin-bottom:20px}
 .brand{display:flex;align-items:center;gap:6px}
-.logo{font-size:32px;font-weight:800;letter-spacing:-.01em;color:#fff;-webkit-text-stroke:6px var(--ink);paint-order:stroke fill;white-space:nowrap}
+.logo{font-size:38px;font-weight:700;letter-spacing:.01em;white-space:nowrap;line-height:1}
+.logo span:nth-child(6n+1){color:var(--k1)} .logo span:nth-child(6n+2){color:var(--k2)} .logo span:nth-child(6n+3){color:var(--k5)}
+.logo span:nth-child(6n+4){color:var(--k4)} .logo span:nth-child(6n+5){color:var(--k6)} .logo span:nth-child(6n){color:var(--k1)}
+.logo span{display:inline-block;filter:url(#fx-line)}
+.logo span:nth-child(odd){transform:rotate(-3deg)} .logo span:nth-child(even){transform:rotate(2deg) translateY(1px)}
 .stats{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--surface);border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--bg-shade);font-family:var(--f-mono);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
-.chip svg{width:15px;height:15px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;--r:999px 860px 999px 900px;--bw:2.5px;--fill:var(--surface);font-family:var(--f-mono);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
+.chip svg{width:17px;height:17px}
 
-/* card principale con la mascotte */
-.hero{position:relative;overflow:hidden;background:var(--deep);color:var(--on-deep);border:3px solid var(--ink);border-radius:24px;box-shadow:0 7px 0 var(--bg-shade);padding:12px 22px 22px;display:grid;gap:10px;margin-bottom:16px}
-.hero .label{color:rgba(255,255,255,.88)}
-.hero h2{font-size:26px;font-weight:800;color:#fff}
-.hero p{margin:0;opacity:.92}
+/* card principale: cornice arcobaleno a pastello */
+.hero{--fill:conic-gradient(from 210deg,var(--k5),var(--k4),var(--k3),var(--k2),var(--k1),var(--k1),var(--k6),var(--k5));--edge:transparent;padding:13px;margin-bottom:16px;--r:30px 38px 28px 40px / 38px 28px 40px 30px}
+.hero-in{--fill:var(--soft);--edge:transparent;--r:22px 28px 20px 30px / 28px 20px 30px 22px;padding:10px 20px 20px;display:grid;gap:10px}
+.hero h2{font-size:30px}
+.hero p{margin:0;color:var(--muted)}
+.hero-in::before{-webkit-mask-image:none;mask-image:none}
 .hero-art{position:relative;height:118px}
-.hero-art .mascot{position:absolute;right:16px;bottom:0;animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 100%}
-.bubble{position:absolute;right:130px;top:18px;white-space:nowrap;background:#fff;color:var(--ink);border:2.5px solid var(--ink);font-family:var(--f-display);font-weight:700;font-size:15px;padding:5px 11px;border-radius:14px 14px 2px 14px}
-.pg{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:14px;background:#fff;color:var(--ink);border:2.5px solid var(--ink);border-radius:10px;padding:3px 9px;width:max-content}
+.hero-art .mascot{position:absolute;right:10px;bottom:0;animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.bubble{position:absolute;right:122px;top:16px;white-space:nowrap;font-family:var(--f-display);font-weight:700;font-size:18px;padding:3px 12px;--fill:#fff;--bw:2.5px;--r:16px 18px 4px 16px}
+.pg{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:14px;padding:4px 10px;width:max-content;--fill:color-mix(in srgb,var(--k3) 35%,#fff);--bw:2.5px;--r:10px 13px 9px 12px}
 
-/* pulsanti che si schiacciano */
-.btn{border:3px solid var(--ink);border-radius:14px;padding:15px 18px;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center}
-.btn-main{background:var(--bg);color:var(--ink);box-shadow:0 5px 0 var(--ink)}
-.btn-deep{background:var(--deep);color:#fff;box-shadow:0 5px 0 var(--ink)}
-.btn-ghost{background:var(--surface);box-shadow:0 4px 0 var(--bg-shade)}
-.btn-main:active,.btn-deep:active,.btn-ghost:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
-.btn:disabled{opacity:.45;box-shadow:0 2px 0 var(--ink)}
-.btn-sm{padding:10px 12px;font-size:15px}
+/* pulsanti */
+.btn{padding:15px 18px;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center;font-family:var(--f-display);transition:transform .08s}
+.btn-main{--fill:color-mix(in srgb,var(--k3) 70%,#fff);color:var(--ink)}
+.btn-deep{--fill:var(--deep);color:#fff;--edge:var(--deep-shade)}
+.btn-ghost{--fill:var(--surface)}
+.btn:active{transform:translateY(3px) rotate(-.6deg)}
+.btn-sm{padding:10px 12px;font-size:16px}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* elenco */
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 10px}
-.sec-h:first-child{margin-top:6px}
-.list{display:grid;gap:10px}
-.row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--bg-shade);padding:10px 14px}
-.row:active{transform:translateY(3px);box-shadow:0 2px 0 var(--bg-shade)}
-.num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:15px;border:2.5px solid var(--ink);background:var(--soft)}
-.row.done .num{background:var(--deep);color:#fff}
+/* elenchi */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:24px 0 10px}
+.sec-h h3{font-size:24px}
+.list{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 14px;--fill:var(--surface);--edge:color-mix(in srgb,var(--k) 75%,#3B3631)}
+.row:active{transform:translateY(2px) rotate(.4deg)}
+.num{width:46px;height:46px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:19px;--r:52% 48% 50% 50% / 48% 52% 48% 52%;--bw:2.5px;--fill:color-mix(in srgb,var(--k) 28%,#fff);--edge:var(--k)}
+.row.done .num{--fill:var(--k);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35)}
 .row .t{min-width:0}
-.row b{font-family:var(--f-display);font-size:17px;display:block;line-height:1.2;overflow-wrap:anywhere}
+.row b{font-family:var(--f-display);font-size:19px;display:block;line-height:1.15;overflow-wrap:anywhere}
 .row .sub{color:var(--muted);font-size:14px}
-.meter{width:54px;height:8px;border-radius:4px;background:var(--surface);border:1.5px solid var(--ink);overflow:hidden}
-.meter i{display:block;height:100%;background:var(--deep)}
-.go{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.meter{width:58px;height:12px;--r:7px 9px 6px 8px;--bw:2px;--fill:var(--surface);overflow:hidden}
+.meter i{position:absolute;left:2px;top:2px;bottom:2px;display:block;background:var(--k);border-radius:5px;-webkit-mask-image:var(--tex,none);mask-image:var(--tex,none);-webkit-mask-size:180px;mask-size:180px}
+.go{font-family:var(--f-display);font-size:24px;color:color-mix(in srgb,var(--k) 70%,#000)}
 .foot{margin-top:28px;color:var(--muted);font-size:13px;display:grid;gap:6px}
 
 /* pagine interne */
-.back{background:none;border:0;padding:8px 0;color:var(--ink);font-weight:700;display:flex;align-items:center;gap:6px;font-size:15px;margin-bottom:10px}
+.back{background:none;border:0;padding:8px 0;color:var(--ink);font-weight:700;display:flex;align-items:center;gap:6px;font-size:17px;margin-bottom:8px;font-family:var(--f-display)}
 .page-h{margin-bottom:18px;display:grid;gap:6px}
-.page-h h2{font-size:30px;font-weight:800}
+.page-h h2{font-size:36px}
 .page-h .en{margin:0;color:var(--muted);font-style:italic}
-.card{background:var(--surface);border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--bg-shade);padding:16px;margin-bottom:16px}
-.card h3{font-size:19px;margin-bottom:8px}
-.idea{background:var(--soft);font-size:18px;font-weight:700;font-family:var(--f-display);line-height:1.3}
-.idea .label{display:block;margin-bottom:6px;font-family:var(--f-mono);font-weight:500}
-.points{margin:0;padding-left:22px;display:grid;gap:10px}
-.points li::marker{font-family:var(--f-mono);font-weight:500;color:var(--deep)}
+.scribble{display:block;width:120px;height:12px;margin-top:2px}
+.card{padding:16px 18px;margin-bottom:16px;--fill:var(--surface)}
+.card h3{font-size:23px;margin-bottom:8px}
+.idea{--fill:color-mix(in srgb,var(--k) 22%,#fff);--edge:var(--k);font-size:20px;font-weight:700;font-family:var(--f-display);line-height:1.3}
+.idea .label{display:block;margin-bottom:6px;font-family:var(--f-mono);font-weight:500;font-size:12px}
+.points{margin:0;padding-left:24px;display:grid;gap:10px}
+.points li::marker{font-family:var(--f-display);font-weight:700;color:color-mix(in srgb,var(--k,var(--deep)) 70%,#000)}
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.kv{display:grid;gap:4px;margin:0 0 12px}
+.kv{display:grid;gap:4px;margin:0 0 14px}
 .kv:last-child{margin-bottom:0}
 .kv p{margin:0}
-.why{border-left:5px solid var(--deep);padding-left:12px;margin:0}
+.why{border-left:5px solid var(--k,var(--deep));padding-left:12px;margin:0;border-radius:2px}
 .react{display:flex;justify-content:center;margin:-4px 0 6px}
 .react .mascot{animation:hop .4s ease}
 .donebar{display:grid;gap:10px;margin-bottom:16px}
-.ok{background:var(--good-bg);border:3px solid var(--ink);border-radius:14px;padding:10px 14px;font-weight:700;color:var(--good)}
-textarea{width:100%;min-height:110px;font:inherit;font-size:16px;border:2.5px solid var(--ink);border-radius:12px;padding:10px 12px;background:var(--surface);color:var(--ink);resize:vertical}
+.ok{--fill:var(--good-bg);--edge:var(--good);padding:10px 14px;font-weight:700;color:var(--good);font-family:var(--f-display);font-size:19px}
+textarea{width:100%;min-height:110px;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:14px 18px 12px 16px;padding:10px 12px;color:var(--ink);resize:vertical;
+  background:var(--surface) repeating-linear-gradient(transparent 0 27px,rgba(47,111,196,.18) 27px 28px);line-height:28px}
 .hint{color:var(--muted);font-size:14px;margin:6px 0 0}
-.nav2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.nav2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 
 /* promemoria */
 details.card{padding:0}
-details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--f-display);font-weight:700;font-size:18px}
+details.card summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--f-display);font-weight:700;font-size:21px}
 details.card summary::-webkit-details-marker{display:none}
-details.card summary::after{content:"+";font-family:var(--f-mono);font-size:22px;line-height:1}
+details.card summary::after{content:"+";font-family:var(--f-display);font-size:26px;line-height:1;color:var(--k,var(--deep))}
 details.card[open] summary::after{content:"–"}
-details.card .in{padding:0 16px 16px}
-.tick{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1.5px solid var(--hair);padding:10px 2px}
+details.card .in{padding:0 18px 16px}
+.tick{display:grid;grid-template-columns:32px 1fr;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1.5px dashed var(--hair);padding:10px 2px}
 .tick:first-child{border-top:0}
-.tick .bx{width:28px;height:28px;border:2.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;background:var(--surface);font-weight:800}
-.tick.on .bx{background:var(--deep);color:#fff}
+.bx{width:30px;height:30px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:20px;--r:7px 10px 6px 9px;--bw:2.5px;--fill:var(--surface)}
+.tick.on .bx{--fill:color-mix(in srgb,var(--k4) 45%,#fff);--edge:var(--k4)}
 .tick .sub{display:block;color:var(--muted);font-size:14px}
 
 /* impostazioni */
-.pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:10px}
-.pal{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--surface);border:2.5px solid var(--ink);border-radius:16px;padding:10px;box-shadow:0 4px 0 var(--bg-shade)}
-.pal.on{outline:3px solid var(--deep);outline-offset:2px}
-.sw{position:relative;height:62px;border-radius:10px;border:2.5px solid var(--ink);display:flex;align-items:center;padding:0 12px;overflow:hidden}
-.sw i{position:absolute;right:0;top:0;bottom:0;width:38%;border-left:2.5px solid var(--ink)}
-.sw b{font-family:var(--f-display);font-size:24px;color:#1A1A1A;position:relative}
+.pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:10px}
+.pal{display:flex;flex-direction:column;gap:8px;text-align:left;padding:12px;--fill:var(--surface)}
+.pal.on{--edge:var(--deep);--bw:4px}
+.sw{position:relative;height:62px;display:flex;align-items:center;gap:4px;padding:0 10px;--bw:2px;--r:10px 14px 9px 13px}
+.sw i{flex:1;height:34px;--r:40% 60% 45% 55% / 55% 45% 60% 40%}
 .pt2{display:flex;flex-direction:column;min-width:0}
-.pt2 b{font-family:var(--f-display);font-size:17px}
+.pt2 b{font-family:var(--f-display);font-size:20px}
 .pt2 span{color:var(--muted);font-size:13px}
 .stack{display:grid;gap:12px;margin-bottom:10px}
 .msg{min-height:1.5em;color:var(--muted);font-size:14px}
 .stepper{display:grid;grid-template-columns:60px 1fr 60px;align-items:center;gap:10px}
-.stepper .btn{padding:10px 0;font-size:24px}
-.stepper output{text-align:center;font-family:var(--f-display);font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.stepper .btn{padding:8px 0;font-size:28px}
+.stepper output{text-align:center;font-family:var(--f-display);font-size:38px;font-weight:700;font-variant-numeric:tabular-nums}
 
 /* barra delle sezioni */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--surface);border-top:3px solid var(--ink);
-  padding:8px max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
-.tab{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:2.5px solid transparent;border-radius:14px;padding:6px 2px 5px;font-size:12px;font-weight:700;color:var(--muted);max-width:150px;width:100%;justify-self:center}
-.tab.on{color:var(--ink);background:var(--bg);border-color:var(--ink);box-shadow:0 3px 0 var(--ink)}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background-color:var(--bg);background-image:var(--paper,none);background-size:240px;
+  padding:9px max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tabbar::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--k1),var(--k2),var(--k3),var(--k4),var(--k5),var(--k6));
+  -webkit-mask-image:var(--tex2,none);mask-image:var(--tex2,none);-webkit-mask-size:180px;mask-size:180px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 2px 4px;font-size:14px;font-weight:700;color:var(--muted);max-width:150px;width:100%;justify-self:center;font-family:var(--f-display);--edge:transparent;--fill:transparent}
+.tab svg{width:28px;height:28px}
+.tab.on{color:var(--ink);--fill:var(--surface);--edge:var(--line);--bw:2.5px}
 </style>
 </head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <!-- grana del pastello + bordo leggermente tremolante, per icone e lettere -->
+  <filter id="fx-line" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="1" seed="2" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.15" result="m"/>
+    <feComposite in="SourceGraphic" in2="m" operator="in" result="g"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="5" result="w"/>
+    <feDisplacementMap in="g" in2="w" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
 <main id="app"></main>
 <script>
 (function(){
@@ -613,12 +645,12 @@ const MEMO = [
 
 const GREET = ["Ciao!", "Matita pronta?", "Si disegna!", "Occhio aperto!", "Guarda bene!"];
 const EXS = [];   // tutti gli esercizi in ordine, con il capitolo di appartenenza
-CH.forEach(c => c.ex.forEach(e => { e.ch = c.id; EXS.push(e); }));
+CH.forEach((c, i) => { c.k = "var(--k" + (i % 6 + 1) + ")"; c.ex.forEach(e => { e.ch = c.id; EXS.push(e); }); });
 
 /* ---------- stato salvato ---------- */
 const KEY = "matitina.v1";     // non cambiarla mai dopo la prima pubblicazione: è dove stanno i dati dell'utente
 const app = document.getElementById("app");
-function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, palette:"sanguigna"}; }
+function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, palette:"pastelli"}; }
 function load(){ try{ const r = localStorage.getItem(KEY); if(r) return Object.assign(fresh(), JSON.parse(r)); }catch(e){} return fresh(); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 let S = load();
@@ -649,23 +681,61 @@ function chProgress(c){
 }
 const doneCount = () => EXS.filter(e => S.done[e.id]).length;
 
-const ICON = {
-  flame:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5Z" fill="var(--deep)"/></svg>',
-  check:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--deep)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>',
-  back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
-  page:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v4h4"/></svg>',
-  book:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M3 5c3-1 6-1 9 1v14c-3-2-6-2-9-1Z"/><path d="M21 5c-3-1-6-1-9 1v14c3-2 6-2 9-1Z"/></svg>',
-  pencil:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19Z"/><path d="M13.5 6.5l4 4"/></svg>',
-  pin:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>',
-  gear:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>'
-};
+/* ---------- texture a pastello: generate una volta sola con un canvas ---------- */
+// --tex: riempimento a tratteggio obliquo · --tex2: tratto granuloso dei bordi · --paper: grana della carta
+function makeTextures(){
+  try{
+    const T = 180;
+    const mk = (fn) => { const c = document.createElement("canvas"); c.width = c.height = T; const g = c.getContext("2d"); fn(g); return "url(" + c.toDataURL() + ")"; };
+    const strokes = (g, n, a0, a1, w0, w1, ang) => {
+      for(let i = 0; i < n; i++){
+        const x = Math.random() * T, y = Math.random() * T, l = 5 + Math.random() * 16, a = ang + (Math.random() - .5) * .35;
+        const dx = Math.cos(a) * l, dy = Math.sin(a) * l;
+        g.globalAlpha = a0 + Math.random() * (a1 - a0); g.lineWidth = w0 + Math.random() * (w1 - w0);
+        for(const ox of [-T, 0, T]) for(const oy of [-T, 0, T]){ g.beginPath(); g.moveTo(x + ox, y + oy); g.lineTo(x + dx + ox, y + dy + oy); g.stroke(); }
+      }
+      g.globalAlpha = 1;
+    };
+    const tex = mk(g => {
+      g.globalAlpha = .82; g.fillRect(0, 0, T, T); g.globalAlpha = 1; g.lineCap = "round";
+      strokes(g, 900, .2, .6, .8, 1.8, -0.95);
+      g.globalCompositeOperation = "destination-out"; strokes(g, 380, .25, .55, .6, 1.3, -0.95);
+    });
+    const tex2 = mk(g => {
+      g.globalAlpha = .9; g.fillRect(0, 0, T, T); g.globalCompositeOperation = "destination-out";
+      for(let i = 0; i < 2200; i++){ g.globalAlpha = .25 + Math.random() * .6; g.fillRect(Math.random() * T, Math.random() * T, 1 + Math.random() * 1.6, 1 + Math.random() * 1.6); }
+    });
+    const paper = mk(g => {
+      for(let i = 0; i < 1400; i++){ g.fillStyle = Math.random() < .5 ? "#7A5A30" : "#FFFFFF"; g.globalAlpha = .03 + Math.random() * .06; g.fillRect(Math.random() * T, Math.random() * T, 1 + Math.random() * 2, 1 + Math.random() * 2); }
+      g.strokeStyle = "#8A6A3A"; g.lineCap = "round";
+      for(let i = 0; i < 40; i++){ const x = Math.random() * T, y = Math.random() * T, a = Math.random() * 6.28, l = 4 + Math.random() * 10; g.globalAlpha = .05; g.lineWidth = .6; g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + Math.cos(a) * l, y, x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); }
+    });
+    const r = document.documentElement.style;
+    r.setProperty("--tex", tex); r.setProperty("--tex2", tex2); r.setProperty("--paper", paper);
+  }catch(e){}
+}
 
-/* ---------- la mascotte: Matitina, una matita gialla con la gomma rosa ---------- */
+// icone a pastello: tratto colorato (currentColor) con la grana del filtro #fx-line
+const ic = (body, w) => `<svg viewBox="0 0 24 24" width="${w || 24}" height="${w || 24}" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g filter="url(#fx-line)">${body}</g></svg>`;
+const ICON = {
+  flame: `<svg viewBox="0 0 24 24" aria-hidden="true"><g filter="url(#fx-line)"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5Z" fill="var(--k2)"/><path d="M12 13c1 2 2.5 2.6 2.5 4.4a2.5 2.5 0 0 1-5 0c0-1.2.9-2 1.4-2.6.2.9.6 1.2 1.1 1.3Z" fill="var(--k3)"/></g></svg>`,
+  check: `<span style="color:var(--k4);display:inline-flex">${ic('<path d="M4 12.5 9.5 18 20 6"/>', 17)}</span>`,
+  back: ic('<path d="M15 5l-7 7 7 7"/>', 20),
+  page: ic('<path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v4h4"/>', 16),
+  book: ic('<path d="M3 5c3-1 6-1 9 1v14c-3-2-6-2-9-1Z"/><path d="M21 5c-3-1-6-1-9 1v14c3-2 6-2 9-1Z"/>'),
+  pencil: ic('<path d="M4 20l1-5L16 4l4 4L9 19Z"/><path d="M13.5 6.5l4 4"/>'),
+  pin: ic('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/>'),
+  gear: ic('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>')
+};
+// sottolineatura a scarabocchio sotto i titoli
+const scribble = (k) => `<svg class="scribble" viewBox="0 0 120 12" aria-hidden="true"><g filter="url(#fx-line)"><path d="M3 7 Q18 1 33 7 T63 7 T93 6 T117 5" fill="none" stroke="${k}" stroke-width="4.5" stroke-linecap="round"/></g></svg>`;
+
+/* ---------- la mascotte: Matitina, una matita gialla a pastello con la gomma rosa ---------- */
 // mood: wave · happy · sad · cheer · squint (un occhio chiuso, traguarda con la matita)
 let mid = 0;
 function mascot(mood, size){
   const id = "m" + (++mid);
-  const K = "#1A1A1A", Y = "#F2C230", YS = "#D39A14", W = "#F3D7AE", P = "#F08DA3", PS = "#D86A82", M = "#C3C8CE";
+  const K = "#2E2A26", Y = "#F2C230", YS = "#DE9A12", W = "#F3D7AE", P = "#F08DA3", PS = "#D9637F", M = "#B9C0C8";
   const armPaths = {
     wave:   ["M48 100 Q36 104 30 116", "M92 96 Q106 88 110 68"],
     happy:  ["M48 100 Q36 106 32 118", "M92 100 Q104 106 108 118"],
@@ -673,49 +743,65 @@ function mascot(mood, size){
     sad:    ["M48 102 Q42 114 40 126", "M92 102 Q98 114 100 126"],
     squint: ["M48 102 Q38 110 34 120", "M92 92 Q108 90 122 88"]
   }[mood] || [];
-  const arms = armPaths.map(d => `<path d="${d}" stroke="${K}" stroke-width="11" stroke-linecap="round" fill="none"/><path d="${d}" stroke="${Y}" stroke-width="5" stroke-linecap="round" fill="none"/>`).join("");
-  const eye = (x, y, lid) => `<ellipse cx="${x}" cy="${y}" rx="6.5" ry="7.5" fill="#fff" stroke="${K}" stroke-width="2.6"/><circle cx="${x+1}" cy="${y+2}" r="3.2" fill="${K}"/>` +
-    (lid ? `<path d="M${x-6.5} ${y-1} Q${x} ${y-8} ${x+6.5} ${y-1}" fill="${Y}" stroke="${K}" stroke-width="2.4"/>` : "");
+  const arms = armPaths.map(d => `<path d="${d}" stroke="${K}" stroke-width="10" stroke-linecap="round" fill="none"/><path d="${d}" stroke="${Y}" stroke-width="5" stroke-linecap="round" fill="none"/>`).join("");
+  const eye = (x, y, lid) => `<ellipse cx="${x}" cy="${y}" rx="6.5" ry="7.5" fill="#fff" stroke="${K}" stroke-width="2.4"/><circle cx="${x+1}" cy="${y+2}" r="3.2" fill="${K}"/>` +
+    (lid ? `<path d="M${x-6.5} ${y-1} Q${x} ${y-8} ${x+6.5} ${y-1}" fill="${Y}" stroke="${K}" stroke-width="2.2"/>` : "");
   const shut = (x, y) => `<path d="M${x-6} ${y+1} Q${x} ${y-5} ${x+6} ${y+1}" fill="none" stroke="${K}" stroke-width="3" stroke-linecap="round"/>`;
   let face;
-  if(mood === "cheer") face = shut(61, 78) + shut(79, 78) + `<path d="M62 90 Q70 104 78 90 Z" fill="#7A1027" stroke="${K}" stroke-width="2.6" stroke-linejoin="round"/>`;
+  if(mood === "cheer") face = shut(61, 78) + shut(79, 78) + `<path d="M62 90 Q70 104 78 90 Z" fill="#B8323F" stroke="${K}" stroke-width="2.4" stroke-linejoin="round"/>`;
   else if(mood === "sad") face = eye(61, 78, 1) + eye(79, 78, 1) + `<path d="M64 97 Q70 91 76 97" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
   else if(mood === "squint") face = `<path d="M55 78 L67 78" stroke="${K}" stroke-width="3" stroke-linecap="round"/>` + eye(79, 78, 0) + `<path d="M64 93 Q71 97 77 92" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
   else face = eye(61, 78, 0) + eye(79, 78, 0) + `<path d="M63 91 Q70 99 77 91" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
-  const spark = (x, y, s) => `<path d="M${x} ${y-s} Q${x} ${y} ${x+s} ${y} Q${x} ${y} ${x} ${y+s} Q${x} ${y} ${x-s} ${y} Q${x} ${y} ${x} ${y-s} Z" fill="#fff" stroke="${K}" stroke-width="2"/>`;
+  // guance rosa a pastello
+  const cheeks = mood === "sad" ? "" : `<ellipse cx="55" cy="90" rx="4.5" ry="3" fill="${P}"/><ellipse cx="85" cy="90" rx="4.5" ry="3" fill="${P}"/>`;
+  const star = (x, y, s, c) => `<path d="M${x} ${y-s} Q${x} ${y} ${x+s} ${y} Q${x} ${y} ${x} ${y+s} Q${x} ${y} ${x-s} ${y} Q${x} ${y} ${x} ${y-s} Z" fill="${c}" stroke="${K}" stroke-width="1.6"/>`;
   let extras = "";
-  if(mood === "cheer") extras = spark(20, 40, 7) + spark(120, 34, 6);
-  else if(mood === "wave") extras = spark(122, 40, 6);
-  else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="${Y}" stroke-width="3" stroke-linecap="round"/>`;
-  else if(mood === "sad") extras = `<path d="M100 60 Q96 68 100 72 Q104 68 100 60 Z" fill="#9BD3F2" stroke="${K}" stroke-width="2"/>`;
+  if(mood === "cheer") extras = star(20, 40, 8, "#F2C230") + star(120, 34, 7, "#2F6FC4") + star(26, 18, 5, "#D93A2E");
+  else if(mood === "wave") extras = star(122, 40, 7, "#3F9D4A");
+  else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="#2F6FC4" stroke-width="3.4" stroke-linecap="round"/>`;
+  else if(mood === "sad") extras = `<path d="M100 60 Q96 68 100 72 Q104 68 100 60 Z" fill="#7FC0EA" stroke="${K}" stroke-width="1.8"/>`;
   const body = "M48 44 L92 44 L92 120 L48 120 Z";
   return `<svg class="mascot" viewBox="0 0 140 160" width="${size}" height="${Math.round(size*160/140)}" role="img" aria-label="Matitina, la mascotte">
-    <defs><clipPath id="${id}"><path d="${body}"/></clipPath><clipPath id="${id}e"><path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z"/></clipPath></defs>
+    <defs>
+      <clipPath id="${id}"><path d="${body}"/></clipPath>
+      <clipPath id="${id}e"><path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z"/></clipPath>
+      <filter id="${id}f" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="4" result="n"/>
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 2.05" result="m"/>
+        <feComposite in="SourceGraphic" in2="m" operator="in" result="g"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="9" result="w"/>
+        <feDisplacementMap in="g" in2="w" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <g filter="url(#${id}f)">
     ${extras}${arms}
     <path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z" fill="${P}"/>
     <g clip-path="url(#${id}e)"><rect x="78" y="8" width="14" height="30" fill="${PS}"/></g>
-    <path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z" fill="none" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
-    <path d="M48 120 L92 120 L70 155 Z" fill="${W}" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z" fill="none" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M48 120 L92 120 L70 155 Z" fill="${W}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>
     <path d="M63.3 144.3 L76.7 144.3 L70 155 Z" fill="${K}" stroke="${K}" stroke-width="2" stroke-linejoin="round"/>
     <path d="${body}" fill="${Y}"/>
     <g clip-path="url(#${id})"><rect x="80" y="40" width="14" height="84" fill="${YS}"/></g>
-    <path d="M62 46 L62 118 M78 46 L78 118" stroke="${YS}" stroke-width="1.6"/>
-    <path d="M48 120 Q55 127 62 120 Q70 127 78 120 Q85 127 92 120" fill="${Y}" stroke="${K}" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="${body}" fill="none" stroke="${K}" stroke-width="3.4" stroke-linejoin="round"/>
-    <rect x="46" y="32" width="48" height="15" rx="3" fill="${M}" stroke="${K}" stroke-width="3"/>
-    <path d="M47 39.5 L93 39.5" stroke="${K}" stroke-width="1.8"/>
+    <path d="M62 46 L62 118 M78 46 L78 118" stroke="${YS}" stroke-width="1.8"/>
+    <path d="M48 120 Q55 127 62 120 Q70 127 78 120 Q85 127 92 120" fill="${Y}" stroke="${K}" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="${body}" fill="none" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
+    <rect x="46" y="32" width="48" height="15" rx="3" fill="${M}" stroke="${K}" stroke-width="2.8"/>
+    <path d="M47 39.5 L93 39.5" stroke="${K}" stroke-width="1.6"/>
     <path d="M54 52 L54 112" stroke="#FFF3C4" stroke-width="4" stroke-linecap="round"/>
-    ${face}
+    ${cheeks}${face}
+    </g>
   </svg>`;
 }
 
 /* ---------- palette di colori ---------- */
+// ks: i sei pastelli mostrati nel campione
 const PALETTES = [
-  {id:"sanguigna", name:"Sanguigna", sub:"Pesca e gesso rosso, come i maestri", bg:"#F3C6A5", deep:"#9C2F1F"},
-  {id:"girasoli",  name:"Girasoli",  sub:"Giallo Van Gogh e blu notte",        bg:"#F6D867", deep:"#1F3C88"},
-  {id:"grafite",   name:"Carta e grafite", sub:"Grigio caldo, la più sobria",  bg:"#E4E1D8", deep:"#33414A"},
-  {id:"salvia",    name:"Salvia",    sub:"Verde salvia e bosco",              bg:"#CFE3C6", deep:"#2C5B3F"}
+  {id:"pastelli",   name:"Pastelli",   sub:"La scatola completa, tutti i colori", bg:"#F6F0E3", deep:"#C7362B", ks:["#D93A2E","#EE8A1D","#F2C230","#3F9D4A","#2F6FC4","#8A4FB5"]},
+  {id:"sanguigna",  name:"Sanguigna",  sub:"Terre, ocra e gesso rosso",          bg:"#F5E8DA", deep:"#9C2F1F", ks:["#A8321F","#C9662F","#D9A441","#7C8B3E","#6E4A35","#B85A6B"]},
+  {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]},
+  {id:"acquerello", name:"Acquerello", sub:"Blu, verdi e un tocco di rosa",       bg:"#EDF3F0", deep:"#1F5D7A", ks:["#2E7FA8","#3FA58C","#9CC45B","#5A6FC9","#C2669B","#E09A4A"]}
 ];
+if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "pastelli"; save(); }   // palette della prima versione
 function applyPalette(){
   try{
     document.documentElement.setAttribute("data-palette", S.palette);
@@ -775,20 +861,21 @@ function mount(v){
 
 /* ---------- barra delle sezioni in basso ---------- */
 function tabBar(active){
-  const tabs = [["home","Libro",ICON.book,home],["list","Esercizi",ICON.pencil,list],["memo","Promemoria",ICON.pin,memo],["settings","Opzioni",ICON.gear,settings]];
-  const bar = $(`<nav class="tabbar" aria-label="Sezioni">${tabs.map(([id, l, ic]) => `<button class="tab ${id === active ? "on" : ""}" data-t="${id}" ${id === active ? 'aria-current="page"' : ""}>${ic}<span>${l}</span></button>`).join("")}</nav>`);
+  const tabs = [["home","Libro",ICON.book,home,"--k1"],["list","Esercizi",ICON.pencil,list,"--k2"],["memo","Promemoria",ICON.pin,memo,"--k4"],["settings","Opzioni",ICON.gear,settings,"--k5"]];
+  const bar = $(`<nav class="tabbar" aria-label="Sezioni">${tabs.map(([id, l, icon, , k]) => `<button class="tab cr ${id === active ? "on" : ""}" data-t="${id}" ${id === active ? 'aria-current="page"' : ""}><span style="color:var(${k});display:flex">${icon}</span><span>${l}</span></button>`).join("")}</nav>`);
   bar.querySelectorAll(".tab").forEach(b => b.onclick = () => { if(b.dataset.t !== active) tabs.find(t => t[0] === b.dataset.t)[3](); else window.scrollTo({top:0, behavior:"smooth"}); });
   return bar;
 }
 
 function exRow(e, i, showCh){
   const c = chById(e.ch), done = !!S.done[e.id];
-  return `<button class="row ${done ? "done" : ""}" data-ex="${e.id}">
-    <span class="num">${done ? "✓" : esc(i)}</span>
+  return `<button class="row cr ${done ? "done" : ""}" data-ex="${e.id}" style="--k:${c.k}">
+    <span class="num cr">${done ? "✓" : esc(i)}</span>
     <span class="t"><b>${esc(e.t)}</b><span class="sub">PDF p. ${esc(pgs(e.pp))} · ${esc(e.min)}${showCh ? " · cap. " + esc(c.n) : ""}</span></span>
     <span class="go" aria-hidden="true">›</span>
   </button>`;
 }
+const logo = () => `<h1 class="logo" aria-label="Matitina">${[..."Matitina"].map(ch => `<span aria-hidden="true">${ch}</span>`).join("")}</h1>`;
 
 /* ---------- HOME: il libro capitolo per capitolo ---------- */
 function home(){
@@ -796,35 +883,35 @@ function home(){
   const next = EXS.find(e => !S.done[e.id]);
   const n = doneCount(), drew = S.days[today()];
   const hero = next ? `
-    <section class="hero">
-      <div class="hero-art"><span class="bubble">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
+    <section class="hero cr"><div class="hero-in cr">
+      <div class="hero-art"><span class="bubble cr">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
       <span class="label">Prossimo esercizio · cap. ${esc(chById(next.ch).n)}</span>
       <h2>${esc(next.t)}</h2>
-      <span class="pg">${ICON.page} PDF p. ${esc(pgs(next.pp))}</span>
-      <button class="btn btn-main" id="go">Apri l'esercizio</button>
-    </section>` : `
-    <section class="hero">
-      <div class="hero-art"><span class="bubble">Bravissimo!</span>${mascot("cheer", 100)}</div>
+      <span class="pg cr">${ICON.page} PDF p. ${esc(pgs(next.pp))}</span>
+      <button class="btn btn-deep cr" id="go">Apri l'esercizio</button>
+    </div></section>` : `
+    <section class="hero cr"><div class="hero-in cr">
+      <div class="hero-art"><span class="bubble cr">Bravissimo!</span>${mascot("cheer", 100)}</div>
       <span class="label">Corso completato</span>
       <h2>Hai fatto tutti gli esercizi</h2>
       <p>Ora un disegno al giorno, e copia i maestri.</p>
-    </section>`;
+    </div></section>`;
   const v = $(`<div class="pop">
     <header class="top">
-      <div class="brand">${mascot("happy", 40)}<h1 class="logo">Matitina</h1></div>
+      <div class="brand">${mascot("happy", 40)}${logo()}</div>
       <div class="stats">
-        <span class="chip" title="Esercizi fatti">${ICON.check}${n}/${EXS.length}</span>
-        <span class="chip" title="Giorni di fila">${ICON.flame}${streakNow()}</span>
+        <span class="chip cr" title="Esercizi fatti">${ICON.check}${n}/${EXS.length}</span>
+        <span class="chip cr" title="Giorni di fila">${ICON.flame}${streakNow()}</span>
       </div>
     </header>
     ${hero}
-    <button class="btn btn-ghost" id="drew">${drew ? "✓ Oggi hai disegnato" : "Ho disegnato oggi"}</button>
+    <button class="btn ${drew ? "btn-ghost" : "btn-main"} cr" id="drew">${drew ? "✓ Oggi hai disegnato" : "Ho disegnato oggi"}</button>
     <div class="sec-h"><h3>Capitoli</h3><span class="label">${CH.length - 1} + intro</span></div>
     <div class="list">${CH.map(c => { const pr = chProgress(c); return `
-      <button class="row ${pr >= 1 ? "done" : ""}" data-ch="${c.id}">
-        <span class="num">${pr >= 1 ? "✓" : esc(c.n)}</span>
+      <button class="row cr ${pr >= 1 ? "done" : ""}" data-ch="${c.id}" style="--k:${c.k}">
+        <span class="num cr">${pr >= 1 ? "✓" : esc(c.n)}</span>
         <span class="t"><b>${esc(c.it)}</b><span class="sub">PDF pp. ${pg(c.from)}–${pg(c.to)} · ${c.ex.length ? c.ex.length + (c.ex.length > 1 ? " esercizi" : " esercizio") : "solo lettura"}</span></span>
-        <span class="meter" aria-label="${Math.round(pr * 100)}%"><i style="width:${Math.round(pr * 100)}%"></i></span>
+        <span class="meter cr" aria-label="${Math.round(pr * 100)}%"><i style="width:calc(${Math.round(pr * 100)}% - 4px)"></i></span>
       </button>`; }).join("")}</div>
     <footer class="foot"><span>Compagna di studio per <i>Drawing on the Right Side of the Brain</i> di Betty Edwards (4ª ed., 2012). Le pagine sono quelle del PDF.</span><span>I dati sono salvati solo su questo dispositivo.</span></footer>
   </div>`);
@@ -839,22 +926,22 @@ function home(){
 function chapter(id){
   screen({s:"chapter", id});
   const c = chById(id), i = CH.indexOf(c), prev = CH[i - 1], nxt = CH[i + 1];
-  const v = $(`<div class="pop">
+  const v = $(`<div class="pop" style="--k:${c.k}">
     <button class="back" id="bk">${ICON.back} Libro</button>
     <div class="page-h">
       <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · PDF pp. ${pg(c.from)}–${pg(c.to)}</span>
-      <h2>${esc(c.it)}</h2>
+      <h2>${esc(c.it)}</h2>${scribble(c.k)}
       <p class="en">${esc(c.en)}</p>
     </div>
-    <div class="card idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
-    <div class="card"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>
+    <div class="card cr idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
+    <div class="card cr"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>
     ${c.ex.length ? `<div class="sec-h"><h3>Esercizi</h3><span class="label">${c.ex.filter(e => S.done[e.id]).length} di ${c.ex.length} fatti</span></div>
       <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>` : ""}
     <div class="sec-h"><h3>Lettura</h3></div>
-    <button class="btn ${S.read[c.id] ? "btn-ghost" : "btn-deep"}" id="read">${S.read[c.id] ? "✓ Capitolo letto · annulla" : "Ho letto il capitolo"}</button>
-    <div class="nav2" style="margin-top:16px">
-      ${prev ? `<button class="btn btn-ghost btn-sm" id="prev">‹ ${prev.id === "intro" ? "Intro" : "Cap. " + esc(prev.n)}</button>` : "<span></span>"}
-      ${nxt ? `<button class="btn btn-ghost btn-sm" id="nxt">Cap. ${esc(nxt.n)} ›</button>` : "<span></span>"}
+    <button class="btn ${S.read[c.id] ? "btn-ghost" : "btn-deep"} cr" id="read">${S.read[c.id] ? "✓ Capitolo letto · annulla" : "Ho letto il capitolo"}</button>
+    <div class="nav2">
+      ${prev ? `<button class="btn btn-ghost btn-sm cr" id="prev">‹ ${prev.id === "intro" ? "Intro" : "Cap. " + esc(prev.n)}</button>` : "<span></span>"}
+      ${nxt ? `<button class="btn btn-ghost btn-sm cr" id="nxt">Cap. ${esc(nxt.n)} ›</button>` : "<span></span>"}
     </div>
   </div>`);
   v.querySelector("#bk").onclick = home;
@@ -869,30 +956,30 @@ function chapter(id){
 function exercise(id, from, mood){
   screen({s:"ex", id, from});
   const e = exById(id), c = chById(e.ch), done = S.done[id];
-  const v = $(`<div class="pop">
+  const v = $(`<div class="pop" style="--k:${c.k}">
     <button class="back" id="bk">${ICON.back} ${from === "list" ? "Esercizi" : from === "home" ? "Libro" : "Capitolo " + esc(c.n)}</button>
     <div class="page-h">
       <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · esercizio</span>
-      <h2>${esc(e.t)}</h2>
+      <h2>${esc(e.t)}</h2>${scribble(c.k)}
     </div>
     <div class="meta">
-      <span class="pg">${ICON.page} PDF p. ${esc(pgs(e.pp))}</span>
-      ${e.img ? `<span class="pg">Immagine a p. ${pg(e.img)}</span>` : ""}
-      <span class="chip">${esc(e.min)}</span>
+      <span class="pg cr">${ICON.page} PDF p. ${esc(pgs(e.pp))}</span>
+      ${e.img ? `<span class="pg cr">Immagine a p. ${pg(e.img)}</span>` : ""}
+      <span class="chip cr">${esc(e.min)}</span>
     </div>
     <div class="react">${mascot(mood || (done ? "cheer" : "squint"), 96)}</div>
-    <div class="card">
+    <div class="card cr">
       <div class="kv"><span class="label">Ti serve</span><p>${esc(e.mat)}</p></div>
       <div class="kv"><span class="label">In breve</span><ol class="points">${e.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
       <div class="kv"><span class="label">Perché</span><p class="why">${esc(e.why)}</p></div>
       <p class="hint">Le istruzioni complete sono nel libro, da p. ${pg(e.p)}: leggile prima di iniziare.</p>
     </div>
     <div class="donebar">
-      ${done ? `<div class="ok">✓ Fatto il ${esc(niceDate(done))}</div>
-        <button class="btn btn-ghost btn-sm" id="undo">Segna come da fare</button>`
-      : `<button class="btn btn-deep" id="do">Segna come fatto</button>`}
+      ${done ? `<div class="ok cr">✓ Fatto il ${esc(niceDate(done))}</div>
+        <button class="btn btn-ghost btn-sm cr" id="undo">Segna come da fare</button>`
+      : `<button class="btn btn-deep cr" id="do">Segna come fatto</button>`}
     </div>
-    <div class="card">
+    <div class="card cr">
       <label class="label" for="note">I tuoi appunti</label>
       <textarea id="note" placeholder="Com'è andata? Cosa hai notato? Quanto tempo ci hai messo?">${esc(S.notes[id] || "")}</textarea>
       <p class="hint" id="saved">Si salvano da soli.</p>
@@ -915,7 +1002,7 @@ function list(){
   screen({s:"list"});
   const n = doneCount();
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Esercizi</span><h2>${n} di ${EXS.length} fatti</h2></div>
+    <div class="page-h"><span class="label">Esercizi</span><h2>${n} di ${EXS.length} fatti</h2>${scribble("var(--k2)")}</div>
     <div class="react">${mascot(n >= EXS.length ? "cheer" : n ? "happy" : "wave", 90)}</div>
     ${CH.filter(c => c.ex.length).map(c => `
       <div class="sec-h"><h3>${c.id === "intro" ? "" : "Cap. " + esc(c.n) + " · "}${esc(c.it)}</h3></div>
@@ -931,14 +1018,14 @@ function memo(){
   screen({s:"memo"});
   const have = MATS.filter(m => S.mats[m.id]).length;
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Promemoria</span><h2>Da tenere sottomano</h2></div>
-    <details class="card" ${have < MATS.length ? "open" : ""}><summary>Materiali · ${have}/${MATS.length}</summary>
+    <div class="page-h"><span class="label">Promemoria</span><h2>Da tenere sottomano</h2>${scribble("var(--k4)")}</div>
+    <details class="card cr" style="--k:var(--k4)" ${have < MATS.length ? "open" : ""}><summary>Materiali · ${have}/${MATS.length}</summary>
       <div class="in">
         <p class="hint" style="margin:0 0 6px">Elenco completo alle pp. ${pg(44)}–${pg(46)}. Tocca ciò che hai già.</p>
-        ${MATS.map(m => `<button class="tick ${S.mats[m.id] ? "on" : ""}" data-m="${m.id}" aria-pressed="${!!S.mats[m.id]}"><span class="bx">${S.mats[m.id] ? "✓" : ""}</span><span>${esc(m.t)}<span class="sub">${esc(m.s)}</span></span></button>`).join("")}
+        ${MATS.map(m => `<button class="tick ${S.mats[m.id] ? "on" : ""}" data-m="${m.id}" aria-pressed="${!!S.mats[m.id]}"><span class="bx cr">${S.mats[m.id] ? "✓" : ""}</span><span>${esc(m.t)}<span class="sub">${esc(m.s)}</span></span></button>`).join("")}
       </div>
     </details>
-    ${MEMO.map(x => `<details class="card"><summary>${esc(x.t)}</summary>
+    ${MEMO.map((x, i) => `<details class="card cr" style="--k:var(--k${(i + 1) % 6 + 1})"><summary>${esc(x.t)}</summary>
       <div class="in"><ol class="points">${x.items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
       <p class="hint">Nel libro: PDF p. ${pg(x.p)}</p></div></details>`).join("")}
   </div>`);
@@ -955,22 +1042,22 @@ function memo(){
 function settings(note){
   screen({s:"settings"});
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Opzioni</span><h2>Colori, pagine e dati</h2></div>
-    <div class="sec-h"><h3>Colori</h3><span class="label">Tocca per provarli</span></div>
-    <div class="pals">${PALETTES.map(p => `<button class="pal ${p.id === S.palette ? "on" : ""}" data-id="${p.id}">
-        <span class="sw" style="background:${p.bg}"><i style="background:${p.deep}"></i><b>Aa</b></span>
+    <div class="page-h"><span class="label">Opzioni</span><h2>Colori, pagine e dati</h2>${scribble("var(--k5)")}</div>
+    <div class="sec-h"><h3>Scatola di colori</h3><span class="label">Tocca per provarli</span></div>
+    <div class="pals">${PALETTES.map(p => `<button class="pal cr ${p.id === S.palette ? "on" : ""}" data-id="${p.id}">
+        <span class="sw cr" style="--fill:${p.bg}">${p.ks.map(k => `<i class="cr flat" style="--fill:${k}"></i>`).join("")}</span>
         <span class="pt2"><b>${esc(p.name)}</b><span>${esc(p.sub)}</span></span>
       </button>`).join("")}</div>
     <div class="sec-h"><h3>Numeri di pagina</h3></div>
-    <div class="card">
+    <div class="card cr">
       <p style="margin:0 0 10px">Le pagine sono quelle del PDF della 4ª edizione (2012). Se il tuo file ha pagine in più o in meno, correggi qui lo scarto: tutte le pagine dell'app si spostano.</p>
-      <div class="stepper"><button class="btn btn-ghost" id="minus" aria-label="Meno">−</button><output id="off">${S.off > 0 ? "+" + S.off : S.off}</output><button class="btn btn-deep" id="plus" aria-label="Più">+</button></div>
+      <div class="stepper"><button class="btn btn-ghost cr" id="minus" aria-label="Meno">−</button><output id="off">${S.off > 0 ? "+" + S.off : S.off}</output><button class="btn btn-deep cr" id="plus" aria-label="Più">+</button></div>
       <p class="hint">Prova: il capitolo 1 dovrebbe iniziare a p. ${pg(33)}.</p>
     </div>
     <div class="sec-h"><h3>Backup</h3></div>
     <div class="stack">
-      <button class="btn btn-ghost" id="exp">Esporta backup</button>
-      <label class="btn btn-ghost" for="imp">Ripristina backup</label><input type="file" id="imp" accept="application/json,.json" hidden>
+      <button class="btn btn-ghost cr" id="exp">Esporta backup</button>
+      <label class="btn btn-ghost cr" for="imp">Ripristina backup</label><input type="file" id="imp" accept="application/json,.json" hidden>
       <span class="msg" id="msg">${esc(note || "")}</span>
     </div>
     <footer class="foot"><span>Matitina non è affiliata all'autrice né all'editore: riassunti e schede sono scritti apposta per l'app, il libro resta indispensabile.</span></footer>
@@ -994,6 +1081,7 @@ function settings(note){
   mount(v);
 }
 
+makeTextures();
 applyPalette();
 try{ history.replaceState({s:"home"}, ""); }catch(e){}
 home();
