@@ -6,10 +6,10 @@ Funziona nel browser, si installa sulla schermata Home e funziona anche offline.
 
 ## Cosa c'è
 
-- **Libro**: i 12 capitoli più l'introduzione, con avanzamento; il prossimo esercizio da fare; «Ho disegnato oggi» per i giorni di fila.
+- **Libro**: i 12 capitoli più l'introduzione, ognuno «In breve» (idea e concetti chiave) e «Approfondito» (spiegazione estesa), con avanzamento; il prossimo esercizio da fare; «Ho disegnato oggi» per i giorni di fila.
 - **Esercizi**: tutti i 34 esercizi; ognuno con pagine del PDF, materiali, passi in breve, «perché», segna come fatto e appunti personali.
 - **Promemoria**: lista dei materiali da spuntare e le regole da tenere sottomano (routine di partenza, prospettiva, proporzioni della testa, logica della luce).
-- **Opzioni**: 4 palette, scarto dei numeri di pagina (se il tuo PDF è diverso), backup.
+- **Opzioni**: 4 scatole di colori (Laguna, Pastelli, Sanguigna, Carboncino), scarto dei numeri di pagina (se il tuo PDF è diverso), backup.
 
 Riassunti e schede sono scritti apposta per l'app: le istruzioni complete restano nel libro.
 

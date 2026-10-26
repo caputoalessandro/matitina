@@ -5,24 +5,24 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#F6F0E3">
+<meta name="theme-color" content="#F0F3EE">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Matitina">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
 /* Stile a pastello: carta da disegno, riempimenti a tratteggio, bordi irregolari, colori a cera */
 :root{
-  --bg:#F6F0E3; --bg-shade:#E3D6BC; --surface:#FFFDF7; --ink:#1A1A1A; --muted:#62533F; --hair:rgba(60,50,40,.18);
-  --line:#3B3631;                                   /* il "grafite" dei bordi */
-  --deep:#C7362B; --deep-shade:#8E2219; --on-deep:#FFFFFF; --soft:#FCF6EA;
-  --k1:#D93A2E; --k2:#EE8A1D; --k3:#F2C230; --k4:#3F9D4A; --k5:#2F6FC4; --k6:#8A4FB5;   /* i pastelli */
+  --bg:#F0F3EE; --bg-shade:#D3DDD6; --surface:#FFFFFF; --ink:#1A1A1A; --muted:#3E5563; --hair:rgba(40,60,70,.18);
+  --line:#2F3A40;                                   /* il "grafite" dei bordi */
+  --deep:#1D5E99; --deep-shade:#123F69; --on-deep:#FFFFFF; --soft:#F8FAF7;
+  --k1:#1F6FB2; --k2:#2BA39A; --k3:#6CC3E8; --k4:#3E9A57; --k5:#1D4E89; --k6:#7FCBA8;   /* i pastelli: blu, verde acqua, celeste, verde, blu notte, menta */
   --good:#17703F; --good-bg:#CDEBD3; --bad:#B0122C; --bad-bg:#FFD9D4;
   --wob:20px 26px 18px 28px / 26px 18px 28px 20px;   /* angoli un po' storti, come a mano */
-  --f-display:"Kalam", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  --f-display:"Fredoka", "Nunito", "Varela Round", "Segoe UI", system-ui, sans-serif;
   --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   color-scheme:light;
@@ -32,8 +32,8 @@
   --k1:#A8321F;--k2:#C9662F;--k3:#D9A441;--k4:#7C8B3E;--k5:#6E4A35;--k6:#B85A6B}
 :root[data-palette="carboncino"]{--bg:#EEEBE4;--bg-shade:#D5D0C4;--deep:#33414A;--deep-shade:#1E272D;--soft:#F7F5F0;--muted:#4F4B42;
   --k1:#2F3A40;--k2:#6B6F72;--k3:#A39B8B;--k4:#4E6A73;--k5:#7A5C45;--k6:#56495E}
-:root[data-palette="acquerello"]{--bg:#EDF3F0;--bg-shade:#CFDDD6;--deep:#1F5D7A;--deep-shade:#123C50;--soft:#F6FAF8;--muted:#3E5650;
-  --k1:#2E7FA8;--k2:#3FA58C;--k3:#9CC45B;--k4:#5A6FC9;--k5:#C2669B;--k6:#E09A4A}
+:root[data-palette="pastelli"]{--bg:#F6F0E3;--bg-shade:#E3D6BC;--surface:#FFFDF7;--line:#3B3631;--deep:#C7362B;--deep-shade:#8E2219;--soft:#FCF6EA;--muted:#62533F;
+  --k1:#D93A2E;--k2:#EE8A1D;--k3:#F2C230;--k4:#3F9D4A;--k5:#2F6FC4;--k6:#8A4FB5}
 
 *{box-sizing:border-box}
 html,body{min-height:100%}
@@ -43,7 +43,7 @@ body{margin:0;background-color:var(--bg);background-image:var(--paper,none);back
 #app{max-width:560px;margin:0 auto;padding-block:max(20px,env(safe-area-inset-top,0px)) 120px}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px dashed var(--deep);outline-offset:3px}
-h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;line-height:1.1}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;text-wrap:balance;margin:0;line-height:1.1}
 h2{overflow-wrap:anywhere;hyphens:auto}
 .label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .pop{animation:pop .25s ease}
@@ -63,7 +63,7 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 /* barra superiore */
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;row-gap:12px;margin-bottom:20px}
 .brand{display:flex;align-items:center;gap:6px}
-.logo{font-size:38px;font-weight:700;letter-spacing:.01em;white-space:nowrap;line-height:1}
+.logo{font-size:36px;font-weight:700;letter-spacing:.01em;white-space:nowrap;line-height:1}
 .logo span:nth-child(6n+1){color:var(--k1)} .logo span:nth-child(6n+2){color:var(--k2)} .logo span:nth-child(6n+3){color:var(--k5)}
 .logo span:nth-child(6n+4){color:var(--k4)} .logo span:nth-child(6n+5){color:var(--k6)} .logo span:nth-child(6n){color:var(--k1)}
 .logo span{display:inline-block;filter:url(#fx-line)}
@@ -75,7 +75,7 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 /* card principale: cornice arcobaleno a pastello */
 .hero{--fill:conic-gradient(from 210deg,var(--k5),var(--k4),var(--k3),var(--k2),var(--k1),var(--k1),var(--k6),var(--k5));--edge:transparent;padding:13px;margin-bottom:16px;--r:30px 38px 28px 40px / 38px 28px 40px 30px}
 .hero-in{--fill:var(--soft);--edge:transparent;--r:22px 28px 20px 30px / 28px 20px 30px 22px;padding:10px 20px 20px;display:grid;gap:10px}
-.hero h2{font-size:30px}
+.hero h2{font-size:27px}
 .hero p{margin:0;color:var(--muted)}
 .hero-in::before{-webkit-mask-image:none;mask-image:none}
 .hero-art{position:relative;height:118px}
@@ -111,7 +111,7 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 /* pagine interne */
 .back{background:none;border:0;padding:8px 0;color:var(--ink);font-weight:700;display:flex;align-items:center;gap:6px;font-size:17px;margin-bottom:8px;font-family:var(--f-display)}
 .page-h{margin-bottom:18px;display:grid;gap:6px}
-.page-h h2{font-size:36px}
+.page-h h2{font-size:32px}
 .page-h .en{margin:0;color:var(--muted);font-style:italic}
 .scribble{display:block;width:120px;height:12px;margin-top:2px}
 .card{padding:16px 18px;margin-bottom:16px;--fill:var(--surface)}
@@ -133,6 +133,15 @@ textarea{width:100%;min-height:110px;font:inherit;font-size:16px;border:2px soli
   background:var(--surface) repeating-linear-gradient(transparent 0 27px,rgba(47,111,196,.18) 27px 28px);line-height:28px}
 .hint{color:var(--muted);font-size:14px;margin:6px 0 0}
 .nav2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+
+/* selettore In breve / Approfondito */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;margin-bottom:16px;--fill:var(--surface);--r:16px 20px 14px 18px}
+.seg button{border:0;background:none;padding:10px 6px;font-family:var(--f-display);font-weight:600;font-size:17px;color:var(--muted);--edge:transparent;--fill:transparent;--r:11px 14px 10px 13px}
+.seg button.on{color:var(--ink);--fill:color-mix(in srgb,var(--k) 30%,#fff);--edge:var(--k);--bw:2.5px}
+.long h3{font-size:21px;margin:4px 0 8px;color:color-mix(in srgb,var(--k) 65%,#000)}
+.long p{margin:0 0 12px;line-height:1.65}
+.long p:last-child{margin-bottom:0}
+.long .card{padding:18px 18px 16px}
 
 /* promemoria */
 details.card{padding:0}
@@ -642,6 +651,187 @@ const MEMO = [
   {t:"Logica della luce", p:267, items:["Luce piena: dove la luce colpisce direttamente.","Ombra portata: la più scura, dove la luce è bloccata.","Luce riflessa: luce rimbalzata dalle superfici vicine.","Ombra di cresta: sul colmo della forma, tra luce e luce riflessa.","Strizza gli occhi per vedere le grandi masse; fermati quando la forma «appare»."]},
   {t:"Quando sei bloccato", p:294, items:["Fai due minuti di contorno puro su un oggetto complesso.","Capovolgi il modello (o il disegno) e continua.","Disegna lo spazio o la forma accanto, non la parte «difficile».","Smetti di nominare le parti: chiediti solo angoli, larghezze, curve.","Togliti dalle distrazioni: il cambio di modalità è fragile."]}
 ];
+/* ---------- approfondimenti: spiegazione estesa di ogni capitolo (testi originali) ---------- */
+// per capitolo: sezioni {h: titoletto, p: [paragrafi]}
+const LONG = {
+intro:[
+ {h:"Disegnare come leggere", p:[
+  "L'idea di fondo del libro è un paragone con la lettura. Nessuno pensa che per leggere serva un dono speciale: si imparano le lettere, i suoni, le sillabe, il lessico, e a un certo punto i pezzi si fondono e si «legge» senza pensarci. Il disegno funziona allo stesso modo: è un'abilità globale fatta di abilità più piccole, e chi dice «non so disegnare» di solito non ha mai imparato una o più di queste componenti.",
+  "Il libro è pensato proprio per chi parte da zero e pensa di non avere talento. Gli esercizi non puntano a fare «arte», ma a costruire l'alfabeto del vedere: una base solida su cui poi ognuno può andare dove vuole, dal ritratto al paesaggio all'astratto."]},
+ {h:"Le cinque abilità di base", p:[
+  "Per disegnare ciò che si ha davanti servono cinque modi di vedere. I bordi: dove una cosa finisce e ne comincia un'altra. Gli spazi: ciò che sta intorno e tra le cose. I rapporti: angoli e proporzioni, cioè prospettiva. Le luci e le ombre: i gradi di chiaro e di scuro che fanno sembrare le cose in rilievo. E la gestalt, la percezione dell'insieme.",
+  "Le prime quattro vanno insegnate in modo diretto, una alla volta, ed è quello che fanno i capitoli dal 6 al 10. La quinta non si insegna: arriva come una conseguenza, un «aha» che si prova quando, dopo aver osservato con cura le parti, all'improvviso si vede la cosa intera. L'autrice la avvicina al piacere estetico, alla sensazione di bellezza."]},
+ {h:"La strategia: un compito che la parte verbale rifiuta", p:[
+  "Il cuore del metodo è una constatazione semplice. La parte del cervello che lavora con le parole è veloce, dominante e tende a buttarsi su ogni compito, anche quando non è adatta. Davanti a un volto, invece di guardare, «nomina»: occhio, naso, bocca, e disegna i simboli che conosce. Combatterla di petto non funziona.",
+  "Funziona invece aggirarla: proporre un compito che lei trova inutile, noioso o impossibile, così si fa da parte da sola. Ogni esercizio del libro è una variante di questo trucco: un'immagine capovolta che non si lascia nominare, un contorno così lento da essere insopportabile, uno spazio vuoto che non è «niente», un angolo che contraddice ciò che si sa, un'ombra che cambia forma a ogni movimento."]},
+ {h:"Plasticità, sabotatore e trasferimento", p:[
+  "Oggi sappiamo che il cervello si modifica con l'esperienza: imparare una nuova abilità crea nuovi collegamenti. Questo mette in crisi l'idea di un talento fisso, dato o non dato alla nascita. Come la lettura, una volta acquisito il disegno resta per tutta la vita.",
+  "Attenzione però al «grande sabotatore»: proprio perché viene messa da parte, la mente verbale troverà sempre qualcosa di più urgente da fare. Il rimedio è lo stesso: iniziare comunque con qualcosa che lei scarta, anche solo uno spazio negativo o una copia capovolta. Con il tempo le resistenze calano. E le abilità del vedere, imparate disegnando, si possono trasferire al modo di pensare e risolvere problemi: è il tema del capitolo 11."]}
+],
+c1:[
+ {h:"Perché la bicicletta", p:[
+  "Insegnare a disegnare somiglia a insegnare ad andare in bicicletta: si può descrivere a parole quanto si vuole, ma la cosa vera si capisce solo provandola, magari dopo aver visto qualcuno farla. Per questo frasi come «guarda meglio» o «controlla le proporzioni» servono a poco: chi impara non sa cosa guardare, né come.",
+  "Il disegno dal vero dipende da un modo di vedere particolare, diverso da quello che usiamo ogni giorno per riconoscere gli oggetti e muoverci. Nella vita normale ci basta capire «che cosa» è una cosa; per disegnarla bisogna invece vedere «com'è» davvero, con le sue forme, i suoi angoli, i suoi rapporti."]},
+ {h:"Non è magia", p:[
+  "Molti considerano il disegno un'abilità quasi magica, e spesso gli artisti non aiutano: alla domanda «come fai?» rispondono «guardo e disegno quello che vedo». È vero, ma non spiega niente. Il libro vuole togliere il mistero: chi sa firmare o scrivere un messaggio ha già la coordinazione sufficiente. Il problema non è la mano, è l'occhio, o meglio il modo in cui il cervello interpreta ciò che l'occhio vede.",
+  "Per questo l'insegnamento punta più a sbloccare che ad aggiungere: le capacità ci sono, ma vecchie abitudini di visione le coprono."]},
+ {h:"Uno stato mentale diverso", p:[
+  "Chi disegna bene entra in uno stato particolare: concentrazione intensa, il tempo che sparisce, le voci intorno che diventano rumore di fondo, una sensazione di calma e di sicurezza. È simile a ciò che succede guidando a lungo in autostrada, leggendo un romanzo che ci assorbe o praticando uno sport.",
+  "Questo stato è fragile: basta una domanda, un telefono che squilla, e si torna al modo di pensare abituale. Imparare a disegnare significa anche imparare a creare le condizioni per entrarci, e a riconoscerlo quando ci si è dentro."]},
+ {h:"Perché soggetti difficili", p:[
+  "Gli esercizi usano di proposito i soggetti considerati più ardui: una mano, una sedia, una stanza in prospettiva, un ritratto, un autoritratto. Il motivo è che disegnare è sempre lo stesso compito, qualunque sia il soggetto; tanto vale dimostrare a sé stessi di saper affrontare quelli che spaventano di più.",
+  "I volti hanno un vantaggio in più: chiunque si accorge subito se un ritratto è sbagliato, quindi la verifica è immediata, e riuscire a ottenere una somiglianza dà una grande fiducia. In più il riconoscimento dei volti è una specialità della parte visiva del cervello, quella che vogliamo allenare."]}
+],
+c2:[
+ {h:"Gli strumenti e perché servono", p:[
+  "Il materiale è semplice: carta, un paio di matite, una grafite in stick, tre gomme, nastro, una tavola. Due strumenti però sono speciali: il piano trasparente con la croce disegnata sopra e i mirini di cartoncino nero. Sembrano accessori, ma il libro li considera essenziali per capire che cosa sia davvero il disegno dal vero.",
+  "Il piano trasparente rende concreto un concetto che di solito resta astratto: guardare il mondo attraverso una finestra e copiare ciò che si vede «appiattito» sul vetro. I mirini servono a inquadrare e a scegliere la composizione. Tutti hanno la stessa proporzione tra larghezza e altezza, così ciò che si vede nel mirino si può riportare sul foglio cambiando solo la scala. Quando le abilità saranno interiorizzate, si potranno abbandonare."]},
+ {h:"I disegni prima del corso", p:[
+  "Prima di imparare qualunque cosa, si fanno tre disegni: una persona a memoria, un autoritratto allo specchio, la propria mano. È un momento scomodo, ma importante: con il progresso arriva una curiosa amnesia, si dimentica come si disegnava, e si diventa sempre più critici. Avere un punto di partenza datato e firmato permette di misurare davvero la strada fatta.",
+  "Quando si guardano questi disegni conviene cercare non i difetti ma i piccoli punti in cui si è osservato davvero: una curva del sopracciglio, il risvolto di un colletto. Sono il segno che la capacità di vedere c'è già."]},
+ {h:"La tirannia dei simboli", p:[
+  "Il disegno a memoria fa emergere qualcosa di prezioso: il sistema di simboli che ognuno ha costruito da bambino. Occhi a mandorla con il cerchietto, naso a uncino, unghie come piccoli archi. Spesso gli stessi simboli ricompaiono identici anche nell'autoritratto, cioè anche quando si sta guardando un volto vero: la mano traccia ciò che «sa» invece di ciò che vede.",
+  "Il livello di questi disegni corrisponde in genere all'età in cui si è smesso di disegnare, spesso tra i nove e i dodici anni. Non dice nulla sul potenziale: indica solo dove ci si è fermati. Il corso non insegna trucchi tecnici, ma a vedere in modo diverso, ed è questo che trasforma i risultati."]},
+ {h:"Lo stile è già tuo", p:[
+  "Il libro non insegna uno stile. La firma lo dimostra: è un disegno fatto con una linea, unico e riconoscibile, che esprime velocità, pressione, ritmo, carattere. Già oggi, scrivendo il proprio nome, si usa la linea in modo espressivo.",
+  "Lo stile personale emerge da solo man mano che si impara a vedere meglio: due persone che disegnano lo stesso modello con gli stessi materiali ottengono due ritratti somiglianti ma diversissimi. Esistono molti tipi di linea, decisa, spezzata, sottile e precisa, che scompare e riappare, e nessuno è migliore degli altri. Più si vede chiaramente, più il disegno rivela anche chi lo ha fatto."]}
+],
+c3:[
+ {h:"Un cervello doppio", p:[
+  "Visti dall'alto, i due emisferi sembrano le due metà di una noce, collegate da un fascio di fibre, il corpo calloso. Ognuno controlla il lato opposto del corpo: la mano destra dipende dall'emisfero sinistro e viceversa. Per molto tempo si è pensato che il sinistro, sede del linguaggio nella grande maggioranza delle persone, fosse quello «principale», e il destro un fratello minore muto.",
+  "Gli studi di Roger Sperry e del suo gruppo sui pazienti a cui era stato separato il corpo calloso hanno cambiato questa visione: entrambi gli emisferi svolgono funzioni complesse, ma in modi diversi. A volte collaborano, a volte uno prende il comando, a volte entrano in conflitto. Per evitare discussioni sulla localizzazione precisa, il libro parla di «modalità L» e «modalità R»."]},
+ {h:"Modalità L e modalità R", p:[
+  "La modalità L è verbale e analitica: nomina, scompone, conta, segue una sequenza, usa simboli, ragiona per passaggi logici, tiene il tempo. È perfetta per un teorema o una scaletta, ma tende a semplificare: le basta riconoscere una cosa per categorizzarla e passare oltre.",
+  "La modalità R è visiva e globale: vede come le parti stanno insieme, coglie i rapporti nello spazio, lavora per analogie e intuizioni, non sente il tempo che passa e accetta ciò che è ambiguo o contraddittorio. È quella che serve per disegnare ciò che si ha davanti, perché non sostituisce la realtà con un concetto. Per descrivere una scala a chiocciola senza fare il gesto della spirale, ci si accorge di quanto le parole possano essere insufficienti."]},
+ {h:"Un vecchio pregiudizio", p:[
+  "Molte lingue tradiscono un pregiudizio contro la sinistra, e quindi indirettamente contro l'emisfero destro che la controlla: «sinistro» significa anche minaccioso, «destro» abile; in francese gauche vuol dire goffo. Un tempo si costringevano i bambini mancini a usare la destra, con conseguenze spesso pesanti. Come nota l'autrice, le parole le ha inventate la metà verbale del cervello, che si è tenuta quelle migliori.",
+  "Anche le intuizioni improvvise, il classico «eureka» di Archimede nella vasca, sono momenti in cui la modalità R vede un collegamento che il ragionamento passo passo non aveva trovato."]},
+ {h:"Mancini, destrimani e chi prende il compito", p:[
+  "Mancini e destrimani imparano a disegnare allo stesso modo: non serve passare all'altra mano, che rende solo il tratto più goffo. Si disegna con la mano che si usa di solito.",
+  "Il punto chiave per il resto del libro è come i due emisferi si spartiscono il lavoro. Sembra contino due cose: chi arriva prima e chi ci tiene di più. La parte verbale è veloce e dominante, e cede solo se il compito le pare troppo lento, troppo dettagliato o impossibile per lei. Gli esercizi sono costruiti esattamente così, per far sì che sia lei a rinunciare."]}
+],
+c4:[
+ {h:"Vaso/Volti: sentire il conflitto", p:[
+  "Il primo esercizio è costruito apposta per creare un inceppo. Si copia mezzo profilo, poi lo si ripassa dicendo ad alta voce i nomi delle parti: fronte, naso, labbra, mento. Così si accende la parte verbale. Poi si chiede di disegnare l'altro profilo per ottenere un vaso simmetrico, un compito che si risolve solo guardando forme, curve e distanze.",
+  "A metà strada quasi tutti avvertono confusione, a volte una vera paralisi della mano: non si sa più se la linea deve andare a destra o a sinistra. È esattamente lo scopo: rendere percepibile lo scontro tra due modi di pensare. Ognuno trova la sua via d'uscita, guardare lo spazio tra i profili, tracciare una griglia, partire dal basso, smettere di pensare a un volto, ed è utile annotarla."]},
+ {h:"Pensare come un navigatore delle isole", p:[
+  "Il libro usa il paragone tra due navigatori. Quello europeo parte con un piano scritto, rotte e coordinate, e lo esegue tappa per tappa. Quello delle isole Truk tiene in mente la meta in rapporto alle altre isole e corregge di continuo la direzione osservando sole, vento, onde: sa navigare benissimo ma non saprebbe spiegarlo a parole.",
+  "Il secondo profilo va disegnato come il secondo navigatore. Le domande giuste sono solo spaziali: dove comincia questa curva? quanto è profonda? che angolo fa rispetto al bordo del foglio? quanto è lunga rispetto alla linea appena fatta? Niente nomi, niente regole del tipo «il mento sporge quanto le labbra»."]},
+ {h:"Il disegno capovolto", p:[
+  "Le cose capovolte sono difficili da riconoscere e da nominare: un volto famoso a testa in giù diventa irriconoscibile, la propria calligrafia illeggibile. La parte verbale, che vive di riconoscimento, trova il compito fastidioso e inutile e si ritira. La parte visiva invece non fa differenza tra diritto e rovescio: vede solo linee e forme interessanti.",
+  "Copiando il ritratto di Stravinsky di Picasso a testa in giù, quasi tutti ottengono un risultato sorprendente. Spesso le parti più riuscite sono proprio le più difficili, come le gambe accavallate viste di scorcio, perché non si sapeva che cosa si stava disegnando. Dove invece il cervello riconosce qualcosa, le mani e il volto, tornano i dubbi e le cancellature. La lezione è semplice: se lo vedi, disegnalo così com'è."]},
+ {h:"Riconoscere lo stato R", p:[
+  "Il passaggio da una modalità all'altra non si percepisce nel momento in cui avviene, ma lo si riconosce dopo. Si perde la nozione del tempo, le parole degli altri diventano suoni, ci si sente attenti ma rilassati, sicuri, e il disegno comincia a sembrare un puzzle affascinante.",
+  "Ripetere l'esperienza con altri disegni capovolti aiuta a familiarizzare con questa sensazione. L'obiettivo del corso è riuscire a provocarla anche quando il soggetto è dritto, cercando sempre informazioni visive che la parte verbale non vuole o non sa trattare."]}
+],
+c5:[
+ {h:"Come disegnano i bambini", p:[
+  "Verso un anno e mezzo arriva lo scarabocchio: il piacere puro di vedere una linea uscire dalla matita. Poi la grande scoperta: un segno può stare al posto di qualcosa. Un cerchio con due puntini diventa la mamma, il cane, il sole. Da lì i bambini costruiscono un vocabolario di simboli, li perfezionano e li ripetono finché diventano stabilissimi.",
+  "Verso i quattro-cinque anni i disegni raccontano storie ed esprimono emozioni: un braccio enorme perché è quello che regge l'ombrello, una sorella con i denti in bella vista. Poi arriva il paesaggio simbolico, quasi uguale per tutti: terra in basso, cielo in alto, la casa con la maniglia, il sole in un angolo, gli alberi, le montagne a cono. Colpisce il senso di composizione dei bambini piccoli: ogni elemento sta esattamente dove deve stare dentro i bordi del foglio."]},
+ {h:"La crisi dei dieci anni", p:[
+  "Tra i nove e gli undici anni le cose cambiano. Il linguaggio prende il sopravvento, i bambini si concentrano sugli oggetti singoli e perdono il senso della composizione. Soprattutto vogliono il realismo: che le cose sembrino vere, che vadano indietro nello spazio. E i simboli che conoscono non bastano più.",
+  "Senza un insegnamento adatto il disegno «non torna», arrivano frustrazione e imbarazzo, spesso aggravati da una battuta sarcastica di un adulto o di un compagno. Molti smettono per sempre. Diventano gli adulti che dicono di non saper tracciare una linea dritta e che, se costretti a disegnare una persona, producono ancora la figura che facevano a dieci anni."]},
+ {h:"Il paradosso del cubo", p:[
+  "Per capire il nodo del problema basta un cubo visto d'angolo. Sappiamo che è fatto di quadrati e angoli retti, ma per farlo sembrare un cubo bisogna disegnare forme che non sono quadrate, con angoli acuti e ottusi, esattamente come appaiono all'occhio. Chi parte da ciò che sa, angolo retto in basso, base dritta, accumula errori e si confonde.",
+  "Non è un problema di mano: i ragazzi tracciano benissimo le linee. È la conoscenza, utile in mille altre situazioni, che impedisce di vedere la cosa così com'è. Picasso diceva che l'arte è una bugia che ci fa vedere la verità: qui la «bugia» è disegnare forme storte per ottenere un'immagine vera."]},
+ {h:"Mettere da parte i simboli", p:[
+  "Davanti a un volto la mente verbale tira fuori il suo repertorio: ecco l'occhio, ecco il naso, ecco i capelli. Lo stesso vale per mani, alberi, erba. Non serve combattere questi simboli: basta proporre compiti per cui non esistono simboli, così la parte visiva può guardare con calma.",
+  "Ridisegnare il paesaggio d'infanzia serve a riportarli alla luce e a ricordare quanto fossero «perfetti» nel loro genere. Ma il disegno dal vero chiede altro: guardare a lungo, raccogliere moltissime informazioni e vedere come stanno insieme, come fece Dürer con la sua lepre."]}
+],
+c6:[
+ {h:"Che cos'è un bordo", p:[
+  "Nel linguaggio comune il bordo è un contorno, un confine. Nel disegno ha un significato più preciso: è il punto in cui due cose si toccano, e la linea che lo rappresenta, la linea di contorno, appartiene a entrambe. Il profilo del Vaso/Volti era insieme il bordo del volto e del vaso; in un puzzle il bordo della barca è anche il bordo dell'acqua.",
+  "Anche il formato, cioè il bordo del foglio, è un bordo condiviso: è il limite esterno del cielo, del terreno, di tutte le forme che lo toccano. Questo concetto apparentemente banale è la base del capitolo successivo sugli spazi negativi."]},
+ {h:"Il contorno puro e il suo paradosso", p:[
+  "L'esercizio chiave del capitolo deriva dal metodo di Kimon Nicolaides, che chiedeva di disegnare immaginando di toccare il bordo con la matita e guardando il modello invece del foglio. La versione del libro è più drastica: girati dall'altra parte, si disegnano per cinque minuti le pieghe del palmo, lentissimamente, senza mai guardare il foglio.",
+  "Il risultato non somiglia affatto a una mano: è un groviglio di segni. Eppure è l'esercizio più efficace del corso: quando lo si salta, gli studenti progrediscono di meno. La lentezza estrema e la minuzia annoiano la parte verbale («è una piega, l'ho già detto»), che se ne va; la parte visiva scopre che ogni piega è fatta di dettagli e ogni dettaglio di dettagli più piccoli, quasi come un frattale. Torna la meraviglia infantile per le cose comuni."]},
+ {h:"Il piano pittorico", p:[
+  "Il concetto più importante del capitolo è il piano pittorico: una finestra immaginaria, sempre parallela al viso, attraverso cui l'artista guarda. Ciò che sta dietro, anche se va in profondità, appare schiacciato sul vetro come in una fotografia. Disegnare dal vero significa copiare quell'immagine piatta sul foglio.",
+  "Alberti descrisse questa idea nel Rinascimento, Dürer costruì veri strumenti, Van Gogh si fece fare dal fabbro un telaio pesantissimo che trascinava fino alla spiaggia, e anche Holbein disegnava su vetro per andare più veloce. Con il piano trasparente si fa la stessa cosa: si appoggia sulla mano vista di scorcio, si chiude un occhio, si tiene ferma la testa e si ricalcano i bordi. Il risultato stupisce: una vista difficilissima resa con facilità."]},
+ {h:"Un occhio chiuso, una sola vista", p:[
+  "Chiudere un occhio elimina la visione binoculare, quella che dà la profondità: l'immagine diventa piatta e quindi copiabile. Tenere ferma la testa garantisce di disegnare una sola vista: se un dito non si vede, non lo si disegna. Più l'oggetto è vicino, più conviene chiudere un occhio.",
+  "Il paradosso è che l'immagine piatta, copiata sul foglio, sembra tridimensionale a chi guarda. A domande come «come faccio a far venire il dito verso di me?» la risposta è sempre la stessa: disegna esattamente ciò che vedi sul piano. Il contorno modificato su fondo tonale mette insieme tutto: si guarda la mano quasi sempre, si controllano gli angoli con la croce, si disegnano le forme intorno alle unghie invece delle unghie, e il risultato è il primo vero disegno del corso."]}
+],
+c7:[
+ {h:"Spazi negativi e forme positive", p:[
+  "Gli oggetti sono le forme positive; gli spazi tra e intorno a essi sono gli spazi negativi. Il nome non è felice, ma l'idea è potente: nel disegno questi spazi sono reali quanto gli oggetti. L'esempio del libro è un personaggio dei cartoni che sfonda una porta lasciando un buco con la sua sagoma: ciò che resta della porta è lo spazio negativo, solido e con una forma precisa.",
+  "Siccome forme e spazi condividono i bordi, disegnare uno spazio significa disegnare anche la forma accanto. E gli spazi non hanno nome, non hanno simboli memorizzati, non c'è niente da «sapere» su di loro: per questo li si vede come sono davvero. Le corna di un muflone viste di scorcio o le gambe di un animale diventano facili se si disegna lo spazio tra di esse."]},
+ {h:"A cosa servono", p:[
+  "Gli spazi negativi hanno tre funzioni. Rendono facili le parti difficili, come scorci e forme complicate, perché si disegnano «gratis» guardando ciò che le circonda. Unificano il disegno e rafforzano la composizione: quando spazi e forme ricevono la stessa attenzione, tutto il foglio diventa interessante. E allenano la percezione: dopo questa lezione si cominciano a vedere spazi ovunque, tra i rami, tra i palazzi, nella freccia nascosta di un logo famoso.",
+  "Anche la parte verbale c'entra: non vuole occuparsi del «niente», quindi davanti a uno spazio vuoto si ritira. Per la parte visiva invece forme e spazi sono ugualmente affascinanti."]},
+ {h:"Formato e composizione", p:[
+  "La composizione è il modo in cui forme e spazi sono disposti dentro il formato, cioè dentro i bordi del disegno. I bambini piccoli ne hanno un senso istintivo, poi lo perdono concentrandosi sugli oggetti. Molti principianti trattano il foglio come se non avesse bordi e poi «riempiono lo sfondo».",
+  "Per questo ogni disegno comincia scegliendo l'inquadratura con il mirino e tracciando il formato sul foglio. Il formato comanda: la stessa sagoma sta bene in un rettangolo verticale e male in uno orizzontale. E se si curano gli spazi negativi, molti problemi di composizione si risolvono da soli."]},
+ {h:"L'unità base", p:[
+  "Uno dei dubbi più comuni è da dove cominciare. Se la prima forma è troppo grande, ciò che interessava finisce fuori dal foglio; se è troppo piccola, bisogna riempire con cose inutili. L'unità base risolve il problema: si sceglie una forma o uno spazio di media grandezza, lo si chiama «Uno», lo si posiziona e dimensiona con cura rispetto al formato e alla croce, e tutto il resto si misura in rapporto a lui: uno a tre quarti, uno a due, e così via.",
+  "Gli artisti esperti lo fanno in un attimo, quasi senza accorgersene; Matisse, rivedendosi al rallentatore, si stupì di vedere la sua mano che misurava nell'aria prima di disegnare la testa della modella. La sedia è il soggetto ideale per esercitarsi: sappiamo troppo sulle sedie (gambe uguali, sedile largo) e quello che sappiamo contraddice ciò che vediamo. Disegnando solo gli spazi, la sedia appare giusta da sola."]}
+],
+c8:[
+ {h:"Prospettiva senza paura", p:[
+  "La prospettiva spaventa molti studenti, anche Van Gogh ci ha lottato a lungo. Il libro la affronta in due tempi: prima pochi concetti di prospettiva formale, poi il metodo che usano davvero quasi tutti gli artisti, la prospettiva intuitiva o «traguardo». È come le regole della strada: all'inizio sembrano troppe, poi diventano automatiche e guidare è un piacere.",
+  "La difficoltà vera è il paradosso. Un corridoio ha soffitto e pavimento orizzontali e altezza costante, ma per disegnarlo bisogna tracciare linee inclinate che si avvicinano. La parte verbale protesta («non può essere!»), quella visiva accetta ciò che vede. Una studentessa, dopo aver misurato tre volte lo stesso angolo dicendo che era impossibile, alla fine lo disegnò e scoprì che funzionava."]},
+ {h:"I concetti della prospettiva formale", p:[
+  "Il punto di vista è fisso: non ci si sposta e non si gira la testa. Il piano pittorico resta parallelo agli occhi. La linea d'orizzonte è sempre all'altezza degli occhi di chi guarda: se si sale su una scogliera sale con noi, se ci si siede si abbassa, anche quando non è visibile. Dove metterla nel foglio è una scelta di composizione.",
+  "Nella prospettiva a un punto, i bordi orizzontali che vanno in profondità convergono verso un unico punto di fuga sull'orizzonte. Quelli sopra l'orizzonte scendono verso di esso, quelli sotto salgono, quelli all'altezza degli occhi restano orizzontali. Le verticali degli edifici restano verticali, salvo nella rara prospettiva a tre punti, guardando grattacieli dal basso o dall'alto."]},
+ {h:"Due punti di fuga e il traguardo", p:[
+  "Nella realtà la vista più comune è a due punti di fuga, e spesso con molti oggetti orientati in modo diverso, ciascuno con i suoi punti. Quasi sempre questi punti cadono fuori dal foglio, a volte lontanissimi: nessuno vuole lavorare con spaghi e righelli lunghi un metro.",
+  "Per questo si traguarda. Le regole formali restano come aspettativa: so che questo bordo sopra i miei occhi deve scendere, quindi lo cerco. Poi misuro l'angolo reale confrontandolo con la verticale o l'orizzontale, le due costanti a cui l'artista si aggrappa come a un salvagente. Conviene ricordare la «fetta di torta» che l'angolo forma invece dei gradi, e scegliere il riferimento che dà l'angolo più piccolo. Sempre restando sul piano: la matita non deve «bucarlo» puntando verso il fondo della stanza."]},
+ {h:"Misurare le proporzioni", p:[
+  "La seconda metà del traguardo riguarda le proporzioni. Il gesto è formale: un occhio chiuso, braccio teso, gomito bloccato perché la scala resti costante, matita sul piano immaginario. Si misura l'unità base segnandola con il pollice sulla matita, la si confronta con un'altra misura e si ricava un rapporto semplice, ad esempio uno a due e due terzi.",
+  "Poi viene la regola che gli studenti hanno sintetizzato con «pulisci la misura dalla matita»: il disegno ha una scala diversa dalla realtà, quindi non si porta la misura sul foglio, si porta il rapporto. Si rimisura l'unità nel disegno e si riporta lo stesso rapporto. La parte più difficile non è tecnica: è credere alle proprie misure senza ricontrollarle all'infinito. Chi impara a traguardare può disegnare qualunque cosa veda, scorci compresi."]}
+],
+c9:[
+ {h:"Il cervello ritocca ciò che vedi", p:[
+  "Uno dei fenomeni più sorprendenti per chi impara a disegnare è la costanza percettiva. Il cervello sa che le teste hanno più o meno la stessa grandezza e che un tavolo è rettangolare, e corregge l'immagine che arriva dall'occhio per farla combaciare con ciò che sa. Non ci avverte di averlo fatto.",
+  "Gli esempi del libro sono spiazzanti: quattro figure identiche in un paesaggio sembrano di grandezza diversa; due piani di tavolo identici sembrano uno lungo e stretto e l'altro quasi quadrato; la propria testa allo specchio sembra a grandezza naturale ma è metà del vero. Anche dopo aver misurato, l'illusione resta. L'unico rimedio è introdurre un «intoppo», una misura, e poi fidarsi di essa più che della sensazione."]},
+ {h:"Il cranio mozzato", p:[
+  "L'errore più comune nei ritratti dei principianti riguarda la posizione degli occhi. Quasi tutti li vedono a un terzo dall'alto, mentre negli adulti la linea degli occhi sta a metà della testa, tra la sommità del cranio (o dei capelli) e il fondo del mento. Siccome i lineamenti sono la parte interessante, il cervello li ingrandisce e rimpicciolisce la fronte e il cranio, e nel disegno la testa risulta tagliata in alto.",
+  "Gli studenti di un corso dell'autrice, pur misurando, dicevano sinceramente di non riuscire a vederlo: «lo vedremo quando ci crederemo». Misurare sulla propria testa, allo specchio, sulle foto, persino sullo schermo della tv, serve a convincere la parte logica. I lineamenti in realtà occupano una porzione piccola della testa, e un cranio intero cambia completamente la somiglianza."]},
+ {h:"Orecchio, collo e altre misure", p:[
+  "Nel profilo il secondo errore tipico è l'orecchio troppo vicino ai lineamenti, che porta a tagliare anche il retro del cranio. La regola da ricordare: la distanza dalla linea degli occhi al mento è uguale a quella dal retro dell'occhio al retro dell'orecchio. Unendo i tre punti si visualizza un triangolo isoscele direttamente sul modello.",
+  "Il fondo dell'orecchio cade circa tra naso e bocca, ma varia da persona a persona e va controllato. Il collo si attacca al cranio più in alto di quanto si creda, all'incirca all'altezza del naso o della bocca, ed è largo: niente collo sottile piantato sotto un ovale come nei disegni dei bambini."]},
+ {h:"Dal Sargent al modello vero", p:[
+  "Copiare un disegno di un maestro è un vecchio metodo tornato di moda: costringe a rallentare e a vedere ciò che vedeva l'artista, e le immagini copiate restano impresse a lungo. Il profilo di Madame X di Sargent permette di allenare tutti i passaggi: unità base, spazi negativi davanti al viso e al collo, angoli rispetto alla croce, posizione dell'orecchio.",
+  "Poi il ritratto vero. Alcuni accorgimenti aiutano a scavalcare i simboli: disegnare il bianco dell'occhio come spazio negativo invece dell'iride; guardare gli spazi intorno agli occhiali, che di profilo hanno forme diverse da come le conosciamo; disegnare il colletto attraverso gli spazi intorno; rendere i capelli per masse, direzioni e zone scure invece di tracciare singoli capelli. E soprattutto evitare giudizi verbali sul modello: chi pensa «ha la faccia lunga» finisce per disegnarla più lunga di quella vera."]}
+],
+c10:[
+ {h:"La logica della luce", p:[
+  "Il chiaroscuro, che gli studenti chiamano «ombreggiare», nel libro diventa logica della luce: la luce cade sulle forme e produce luci e ombre in modo prevedibile. Ci sono quattro elementi. La luce piena, dove la sorgente colpisce più direttamente. L'ombra portata, la più scura, dove l'oggetto blocca la luce. La luce riflessa, più debole, rimbalzata dalle superfici vicine. L'ombra di cresta, sul colmo della forma tra luce piena e luce riflessa.",
+  "Le ultime due sono le più difficili da vedere ma sono quelle che «arrotondano» le forme. Il tutto si misura in valori, dal bianco della carta al nero più fitto della grafite: chiari = valori alti, scuri = valori bassi. Il percorso ideale va dalla linea alle forme, ai rapporti, ai valori, e da lì al colore e alla pittura."]},
+ {h:"Perché funziona: forme senza nome", p:[
+  "Le forme delle ombre non hanno nome e cambiano a ogni minimo movimento del modello: la parte verbale non sa che farsene e lascia il campo. Usiamo continuamente queste informazioni per capire il volume delle cose, ma senza accorgercene. Capovolgendo un autoritratto a chiaroscuro si vede solo un mosaico di macchie; raddrizzato, le macchie spariscono e resta una testa in rilievo.",
+  "Qui sta un altro paradosso: se si disegnano le forme di luce e ombra esattamente come appaiono, chi guarda non le nota, vede solo un volto «vero». La parte visiva del cervello è bravissima a completare le informazioni mancanti, e su questo si basa la magia: dando pochi indizi giusti, lo spettatore vede cose che non sono disegnate, come l'occhio in ombra nell'autoritratto di Hopper o nella fotografia di Steichen. Il difficile è sapersi fermare."]},
+ {h:"Le proporzioni del volto", p:[
+  "Il ritratto si fa in tre pose: frontale, profilo, tre quarti. Nella vista frontale valgono alcune regole generali, da adattare a ogni volto: l'asse centrale e la linea degli occhi restano sempre ad angolo retto anche se la testa è inclinata; tra gli occhi c'è lo spazio di un occhio; la base del naso si trova con un triangolo rovesciato che parte dagli angoli esterni degli occhi; la bocca sta a circa un terzo tra naso e mento; le narici cadono sotto gli angoli interni degli occhi, gli angoli della bocca sotto le pupille; le orecchie vanno dagli occhi a naso-bocca; il collo è largo quasi quanto la mandibola. Nasi, bocche, orecchie e colli sono quasi sempre più grandi di quanto ci si aspetti.",
+  "Il tre quarti è il più espressivo e il più insidioso: le due metà del viso hanno larghezze diverse, l'occhio e la bocca dal lato girato sono più corti e cambiano forma, del naso si vedono lato e base. Tutto questo contraddice i simboli simmetrici dell'infanzia. L'errore classico è avvicinare l'occhio vicino al naso: la distanza è circa la larghezza di un occhio. Per l'orecchio la regola diventa: dall'angolo anteriore dell'occhio al retro dell'orecchio = occhi-mento."]},
+ {h:"Tratteggio, autoritratto e gestalt", p:[
+  "Per i toni ci sono due tecniche. Il tratteggio: gruppi di segni paralleli fatti muovendo la mano dal polso, incrociati con un angolo appena diverso o più marcato, sovrapposti per scurire; ogni artista sviluppa il suo, quasi una firma. E il tono continuo, ottenuto con piccoli movimenti sovrapposti. Entrambi si imparano solo con la pratica.",
+  "L'autoritratto finale riunisce tutto: lo specchio fa da piano pittorico, una lampada di lato crea luci e ombre nette, si parte dalle grandi masse cancellando le luci sul fondo grigio e scurendo le ombre, e i lineamenti si lasciano emergere invece di disegnarli per primi. Ogni tanto ci si alza per guardare da lontano con occhio critico e poi si torna a lavorare. Alla fine, accanto all'autoritratto iniziale, la differenza è evidente: non più simboli, ma osservazione. La somiglianza, la gestalt, arriva da sola come risultato di tutte le parti viste bene."]}
+],
+c11:[
+ {h:"Continuare a disegnare", p:[
+  "Le nuove connessioni nel cervello si consolidano solo con la ripetizione. Il consiglio è semplice: un piccolo taccuino sempre con sé e un disegno di qualunque cosa capiti a portata di mano nei momenti morti. Copiare foto di giornale capovolte è il modo più rapido per cambiare modalità; disegnare dal vero e copiare i maestri sono la pratica migliore.",
+  "Anche quando non si può disegnare si può allenare l'occhio: cercare spazi negativi, individuare la propria linea d'orizzonte, valutare un angolo rispetto alla verticale, controllare le proporzioni dei volti in tv."]},
+ {h:"Computer e mente visiva", p:[
+  "I computer imitano benissimo il modo di pensare verbale e sequenziale: contano, ordinano, seguono procedure meglio di noi. Molto più lento è stato il progresso nelle capacità visive: riconoscere un volto di tre quarti o distinguere un sorriso cordiale da uno beffardo resta difficile per le macchine e facilissimo per un bambino.",
+  "Per questo l'autrice trova paradossale che la scuola insista sempre di più proprio sulle abilità in cui le macchine ci superano, trascurando quelle percettive. Riprende una proposta: insegnare ai ragazzi come funziona il loro cervello, quale modalità serve per ogni problema e come accedervi."]},
+ {h:"Le cinque fasi della creatività", p:[
+  "Il processo creativo viene descritto in cinque fasi, ognuna con una modalità prevalente. La prima intuizione (R): guardandosi intorno si nota qualcosa che non torna e nasce una domanda, «chissà perché…». La saturazione (L): si raccoglie tutto ciò che si sa sul problema, finché le informazioni non si incastrano e arriva la frustrazione. L'incubazione (R): si smette di pensarci e la mente lavora per conto suo, cercando lo schema in cui tutto si tiene.",
+  "Poi l'illuminazione, l'«aha» improvviso che arriva spesso facendo altro, con un senso di gioia e di cose che vanno al loro posto. Infine la verifica (L guidata da R): la parte faticosa di trasformare l'intuizione in qualcosa di concreto, che molti non portano a termine. Si può persino «programmare» l'incubazione: dire a sé stessi che serve una soluzione entro una certa data, e poi staccare."]},
+ {h:"Vedere un problema come un disegno", p:[
+  "L'esempio del designer che deve decidere se accettare un cliente mostra come usare le cinque abilità come metafore. I bordi: dove i miei interessi toccano quelli dell'altro, e com'è quel confine, morbido o netto? Gli spazi negativi: che cosa non so, chi altro decide? I rapporti: qual è l'orizzonte di ciascuno, qual è l'unità base su cui misurare tutto, tempo, soldi, qualità? Luci e ombre: che cosa è chiaro e che cosa resta al buio? La gestalt: guardare il tutto, magari capovolgendolo mentalmente.",
+  "Il capitolo chiude con esempi reali, come due inventori che ripensano un divaricatore chirurgico usato da quasi un secolo, e con l'arte delle caverne, prova di una capacità di immaginare e visualizzare straordinaria già decine di migliaia di anni fa. La domanda finale è se possiamo recuperare quella forza visiva per vedere in anticipo i pericoli e le opportunità del futuro."]}
+],
+c12:[
+ {h:"Il disegno ti rivela", p:[
+  "Ogni disegno, qualunque sia il soggetto, mostra anche chi lo ha fatto: come vede le cose e che cosa prova. Si disegna in modalità visiva, in silenzio, e poi si può tornare alle parole per interpretare ciò che è emerso; se le parole non bastano, si torna di nuovo all'intuizione. Gli esercizi del libro sono solo i primi passi di questo viaggio.",
+  "Imparare a disegnare non finisce mai: c'è sempre la sensazione che nel prossimo disegno si vedrà un po' più a fondo."]},
+ {h:"Consigli per andare avanti", p:[
+  "Disegnare tutto: nessun soggetto è troppo difficile o troppo banale, anche un ciuffo d'erba o un carciofo. Studiare i maestri copiandone i disegni, non per imitarne lo stile ma per capire come guardavano. Proteggere il proprio stile e dargli il tempo di crescere. Se un disegno va male, fermarsi, calmarsi e ricordare che tutto ciò che serve è lì davanti agli occhi.",
+  "Non aspettare l'ispirazione: bisogna predisporre le condizioni per entrare nello stato giusto, ogni giorno, altrimenti le strade appena aperte si richiudono. E insegnare a qualcun altro, perché spiegare le lezioni le fissa anche in chi le spiega. Infine usare le stesse abilità per i problemi della vita: guardarli da più punti di vista, vederne le parti nelle giuste proporzioni, lasciarli maturare mentre si fa altro."]}
+]
+};
+CH.forEach(c => { c.long = LONG[c.id] || []; });
 
 const GREET = ["Ciao!", "Matita pronta?", "Si disegna!", "Occhio aperto!", "Guarda bene!"];
 const EXS = [];   // tutti gli esercizi in ordine, con il capitolo di appartenenza
@@ -650,7 +840,7 @@ CH.forEach((c, i) => { c.k = "var(--k" + (i % 6 + 1) + ")"; c.ex.forEach(e => { 
 /* ---------- stato salvato ---------- */
 const KEY = "matitina.v1";     // non cambiarla mai dopo la prima pubblicazione: è dove stanno i dati dell'utente
 const app = document.getElementById("app");
-function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, palette:"pastelli"}; }
+function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, view:"breve", palette:"laguna"}; }
 function load(){ try{ const r = localStorage.getItem(KEY); if(r) return Object.assign(fresh(), JSON.parse(r)); }catch(e){} return fresh(); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 let S = load();
@@ -732,10 +922,11 @@ const scribble = (k) => `<svg class="scribble" viewBox="0 0 120 12" aria-hidden=
 
 /* ---------- la mascotte: Matitina, una matita gialla a pastello con la gomma rosa ---------- */
 // mood: wave · happy · sad · cheer · squint (un occhio chiuso, traguarda con la matita)
+// matita celeste a pastello con la gomma rosa
 let mid = 0;
 function mascot(mood, size){
   const id = "m" + (++mid);
-  const K = "#2E2A26", Y = "#F2C230", YS = "#DE9A12", W = "#F3D7AE", P = "#F08DA3", PS = "#D9637F", M = "#B9C0C8";
+  const K = "#2E2A26", Y = "#7CC6EA", YS = "#4C9FCB", W = "#F3D7AE", P = "#F08DA3", PS = "#D9637F", M = "#B9C0C8";
   const armPaths = {
     wave:   ["M48 100 Q36 104 30 116", "M92 96 Q106 88 110 68"],
     happy:  ["M48 100 Q36 106 32 118", "M92 100 Q104 106 108 118"],
@@ -756,9 +947,9 @@ function mascot(mood, size){
   const cheeks = mood === "sad" ? "" : `<ellipse cx="55" cy="90" rx="4.5" ry="3" fill="${P}"/><ellipse cx="85" cy="90" rx="4.5" ry="3" fill="${P}"/>`;
   const star = (x, y, s, c) => `<path d="M${x} ${y-s} Q${x} ${y} ${x+s} ${y} Q${x} ${y} ${x} ${y+s} Q${x} ${y} ${x-s} ${y} Q${x} ${y} ${x} ${y-s} Z" fill="${c}" stroke="${K}" stroke-width="1.6"/>`;
   let extras = "";
-  if(mood === "cheer") extras = star(20, 40, 8, "#F2C230") + star(120, 34, 7, "#2F6FC4") + star(26, 18, 5, "#D93A2E");
-  else if(mood === "wave") extras = star(122, 40, 7, "#3F9D4A");
-  else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="#2F6FC4" stroke-width="3.4" stroke-linecap="round"/>`;
+  if(mood === "cheer") extras = star(20, 40, 8, "#6CC3E8") + star(120, 34, 7, "#3E9A57") + star(26, 18, 5, "#1F6FB2");
+  else if(mood === "wave") extras = star(122, 40, 7, "#2BA39A");
+  else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="#3E9A57" stroke-width="3.4" stroke-linecap="round"/>`;
   else if(mood === "sad") extras = `<path d="M100 60 Q96 68 100 72 Q104 68 100 60 Z" fill="#7FC0EA" stroke="${K}" stroke-width="1.8"/>`;
   const body = "M48 44 L92 44 L92 120 L48 120 Z";
   return `<svg class="mascot" viewBox="0 0 140 160" width="${size}" height="${Math.round(size*160/140)}" role="img" aria-label="Matitina, la mascotte">
@@ -787,7 +978,7 @@ function mascot(mood, size){
     <path d="${body}" fill="none" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
     <rect x="46" y="32" width="48" height="15" rx="3" fill="${M}" stroke="${K}" stroke-width="2.8"/>
     <path d="M47 39.5 L93 39.5" stroke="${K}" stroke-width="1.6"/>
-    <path d="M54 52 L54 112" stroke="#FFF3C4" stroke-width="4" stroke-linecap="round"/>
+    <path d="M54 52 L54 112" stroke="#E6F6FD" stroke-width="4" stroke-linecap="round"/>
     ${cheeks}${face}
     </g>
   </svg>`;
@@ -796,12 +987,12 @@ function mascot(mood, size){
 /* ---------- palette di colori ---------- */
 // ks: i sei pastelli mostrati nel campione
 const PALETTES = [
+  {id:"laguna",     name:"Laguna",     sub:"Blu, verde e celeste",                bg:"#F0F3EE", deep:"#1D5E99", ks:["#1F6FB2","#2BA39A","#6CC3E8","#3E9A57","#1D4E89","#7FCBA8"]},
   {id:"pastelli",   name:"Pastelli",   sub:"La scatola completa, tutti i colori", bg:"#F6F0E3", deep:"#C7362B", ks:["#D93A2E","#EE8A1D","#F2C230","#3F9D4A","#2F6FC4","#8A4FB5"]},
   {id:"sanguigna",  name:"Sanguigna",  sub:"Terre, ocra e gesso rosso",          bg:"#F5E8DA", deep:"#9C2F1F", ks:["#A8321F","#C9662F","#D9A441","#7C8B3E","#6E4A35","#B85A6B"]},
-  {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]},
-  {id:"acquerello", name:"Acquerello", sub:"Blu, verdi e un tocco di rosa",       bg:"#EDF3F0", deep:"#1F5D7A", ks:["#2E7FA8","#3FA58C","#9CC45B","#5A6FC9","#C2669B","#E09A4A"]}
+  {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]}
 ];
-if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "pastelli"; save(); }   // palette della prima versione
+if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "laguna"; save(); }   // palette delle versioni precedenti
 function applyPalette(){
   try{
     document.documentElement.setAttribute("data-palette", S.palette);
@@ -925,7 +1116,7 @@ function home(){
 /* ---------- CAPITOLO: riassunto ed esercizi ---------- */
 function chapter(id){
   screen({s:"chapter", id});
-  const c = chById(id), i = CH.indexOf(c), prev = CH[i - 1], nxt = CH[i + 1];
+  const c = chById(id), i = CH.indexOf(c), prev = CH[i - 1], nxt = CH[i + 1], long = S.view === "esteso";
   const v = $(`<div class="pop" style="--k:${c.k}">
     <button class="back" id="bk">${ICON.back} Libro</button>
     <div class="page-h">
@@ -933,8 +1124,13 @@ function chapter(id){
       <h2>${esc(c.it)}</h2>${scribble(c.k)}
       <p class="en">${esc(c.en)}</p>
     </div>
-    <div class="card cr idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
-    <div class="card cr"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>
+    <div class="seg cr" role="tablist" aria-label="Come leggere il capitolo">
+      <button class="cr ${long ? "" : "on"}" role="tab" aria-selected="${!long}" data-v="breve">In breve</button>
+      <button class="cr ${long ? "on" : ""}" role="tab" aria-selected="${long}" data-v="esteso">Approfondito</button>
+    </div>
+    ${long ? `<div class="long">${c.long.map(s => `<section class="card cr"><h3>${esc(s.h)}</h3>${s.p.map(p => `<p>${esc(p)}</p>`).join("")}</section>`).join("")}</div>`
+    : `<div class="card cr idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
+    <div class="card cr"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>`}
     ${c.ex.length ? `<div class="sec-h"><h3>Esercizi</h3><span class="label">${c.ex.filter(e => S.done[e.id]).length} di ${c.ex.length} fatti</span></div>
       <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>` : ""}
     <div class="sec-h"><h3>Lettura</h3></div>
@@ -945,6 +1141,7 @@ function chapter(id){
     </div>
   </div>`);
   v.querySelector("#bk").onclick = home;
+  v.querySelectorAll(".seg button").forEach(b => b.onclick = () => { if(S.view === b.dataset.v) return; S.view = b.dataset.v; save(); chapter(id); });
   v.querySelector("#read").onclick = () => { if(S.read[c.id]) delete S.read[c.id]; else S.read[c.id] = today(); save(); chapter(id); };
   if(prev) v.querySelector("#prev").onclick = () => chapter(prev.id);
   if(nxt) v.querySelector("#nxt").onclick = () => chapter(nxt.id);
