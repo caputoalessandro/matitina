@@ -1,0 +1,1004 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Matitina</title>
+<meta name="description" content="Matitina: compagna di studio per Drawing on the Right Side of the Brain, con riassunti dei capitoli ed esercizi con le pagine del PDF.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#F3C6A5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Matitina">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Stile fumetto piatto: colori pieni, contorni neri spessi, ombre piatte senza sfumature */
+:root{
+  --bg:#F3C6A5; --bg-shade:#D99A73; --surface:#FFFFFF; --ink:#1A1A1A; --muted:#6B3A26; --hair:rgba(26,26,26,.16);
+  --deep:#9C2F1F; --deep-shade:#6A1D12; --on-deep:#FFFFFF; --soft:#FBE3D2;
+  --good:#17703F; --good-bg:#C6EED3; --bad:#B0122C; --bad-bg:#FFD4D4;
+  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme:light;
+}
+/* palette selezionabili (testo sempre nero su sfondi chiari, contrasto verificato) */
+:root[data-palette="girasoli"]{--bg:#F6D867;--bg-shade:#D4B13C;--deep:#1F3C88;--deep-shade:#12255A;--soft:#FCEFB8;--muted:#5A4C17}
+:root[data-palette="grafite"]{--bg:#E4E1D8;--bg-shade:#BDB8AA;--deep:#33414A;--deep-shade:#1E272D;--soft:#F3F1EA;--muted:#4F4B42}
+:root[data-palette="salvia"]{--bg:#CFE3C6;--bg-shade:#9DBF8F;--deep:#2C5B3F;--deep-shade:#1A3826;--soft:#E8F2E3;--muted:#3D5634}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-tap-highlight-color:transparent}
+#app{max-width:560px;margin:0 auto;padding-block:max(20px,env(safe-area-inset-top,0px)) 120px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+h2{overflow-wrap:anywhere;hyphens:auto}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pop{animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.97);opacity:.6}to{transform:none;opacity:1}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}10%{transform:rotate(-5deg)}20%{transform:rotate(4deg)}30%{transform:rotate(0)}}
+@keyframes hop{0%{transform:translateY(12px) scale(.92)}60%{transform:translateY(-6px)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* barra superiore */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;row-gap:12px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:6px}
+.logo{font-size:32px;font-weight:800;letter-spacing:-.01em;color:#fff;-webkit-text-stroke:6px var(--ink);paint-order:stroke fill;white-space:nowrap}
+.stats{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--surface);border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--bg-shade);font-family:var(--f-mono);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
+.chip svg{width:15px;height:15px}
+
+/* card principale con la mascotte */
+.hero{position:relative;overflow:hidden;background:var(--deep);color:var(--on-deep);border:3px solid var(--ink);border-radius:24px;box-shadow:0 7px 0 var(--bg-shade);padding:12px 22px 22px;display:grid;gap:10px;margin-bottom:16px}
+.hero .label{color:rgba(255,255,255,.88)}
+.hero h2{font-size:26px;font-weight:800;color:#fff}
+.hero p{margin:0;opacity:.92}
+.hero-art{position:relative;height:118px}
+.hero-art .mascot{position:absolute;right:16px;bottom:0;animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.bubble{position:absolute;right:130px;top:18px;white-space:nowrap;background:#fff;color:var(--ink);border:2.5px solid var(--ink);font-family:var(--f-display);font-weight:700;font-size:15px;padding:5px 11px;border-radius:14px 14px 2px 14px}
+.pg{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:14px;background:#fff;color:var(--ink);border:2.5px solid var(--ink);border-radius:10px;padding:3px 9px;width:max-content}
+
+/* pulsanti che si schiacciano */
+.btn{border:3px solid var(--ink);border-radius:14px;padding:15px 18px;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center}
+.btn-main{background:var(--bg);color:var(--ink);box-shadow:0 5px 0 var(--ink)}
+.btn-deep{background:var(--deep);color:#fff;box-shadow:0 5px 0 var(--ink)}
+.btn-ghost{background:var(--surface);box-shadow:0 4px 0 var(--bg-shade)}
+.btn-main:active,.btn-deep:active,.btn-ghost:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn:disabled{opacity:.45;box-shadow:0 2px 0 var(--ink)}
+.btn-sm{padding:10px 12px;font-size:15px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* elenco */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 10px}
+.sec-h:first-child{margin-top:6px}
+.list{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--bg-shade);padding:10px 14px}
+.row:active{transform:translateY(3px);box-shadow:0 2px 0 var(--bg-shade)}
+.num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:15px;border:2.5px solid var(--ink);background:var(--soft)}
+.row.done .num{background:var(--deep);color:#fff}
+.row .t{min-width:0}
+.row b{font-family:var(--f-display);font-size:17px;display:block;line-height:1.2;overflow-wrap:anywhere}
+.row .sub{color:var(--muted);font-size:14px}
+.meter{width:54px;height:8px;border-radius:4px;background:var(--surface);border:1.5px solid var(--ink);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--deep)}
+.go{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.foot{margin-top:28px;color:var(--muted);font-size:13px;display:grid;gap:6px}
+
+/* pagine interne */
+.back{background:none;border:0;padding:8px 0;color:var(--ink);font-weight:700;display:flex;align-items:center;gap:6px;font-size:15px;margin-bottom:10px}
+.page-h{margin-bottom:18px;display:grid;gap:6px}
+.page-h h2{font-size:30px;font-weight:800}
+.page-h .en{margin:0;color:var(--muted);font-style:italic}
+.card{background:var(--surface);border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--bg-shade);padding:16px;margin-bottom:16px}
+.card h3{font-size:19px;margin-bottom:8px}
+.idea{background:var(--soft);font-size:18px;font-weight:700;font-family:var(--f-display);line-height:1.3}
+.idea .label{display:block;margin-bottom:6px;font-family:var(--f-mono);font-weight:500}
+.points{margin:0;padding-left:22px;display:grid;gap:10px}
+.points li::marker{font-family:var(--f-mono);font-weight:500;color:var(--deep)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.kv{display:grid;gap:4px;margin:0 0 12px}
+.kv:last-child{margin-bottom:0}
+.kv p{margin:0}
+.why{border-left:5px solid var(--deep);padding-left:12px;margin:0}
+.react{display:flex;justify-content:center;margin:-4px 0 6px}
+.react .mascot{animation:hop .4s ease}
+.donebar{display:grid;gap:10px;margin-bottom:16px}
+.ok{background:var(--good-bg);border:3px solid var(--ink);border-radius:14px;padding:10px 14px;font-weight:700;color:var(--good)}
+textarea{width:100%;min-height:110px;font:inherit;font-size:16px;border:2.5px solid var(--ink);border-radius:12px;padding:10px 12px;background:var(--surface);color:var(--ink);resize:vertical}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.nav2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+
+/* promemoria */
+details.card{padding:0}
+details.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--f-display);font-weight:700;font-size:18px}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";font-family:var(--f-mono);font-size:22px;line-height:1}
+details.card[open] summary::after{content:"–"}
+details.card .in{padding:0 16px 16px}
+.tick{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1.5px solid var(--hair);padding:10px 2px}
+.tick:first-child{border-top:0}
+.tick .bx{width:28px;height:28px;border:2.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;background:var(--surface);font-weight:800}
+.tick.on .bx{background:var(--deep);color:#fff}
+.tick .sub{display:block;color:var(--muted);font-size:14px}
+
+/* impostazioni */
+.pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:10px}
+.pal{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--surface);border:2.5px solid var(--ink);border-radius:16px;padding:10px;box-shadow:0 4px 0 var(--bg-shade)}
+.pal.on{outline:3px solid var(--deep);outline-offset:2px}
+.sw{position:relative;height:62px;border-radius:10px;border:2.5px solid var(--ink);display:flex;align-items:center;padding:0 12px;overflow:hidden}
+.sw i{position:absolute;right:0;top:0;bottom:0;width:38%;border-left:2.5px solid var(--ink)}
+.sw b{font-family:var(--f-display);font-size:24px;color:#1A1A1A;position:relative}
+.pt2{display:flex;flex-direction:column;min-width:0}
+.pt2 b{font-family:var(--f-display);font-size:17px}
+.pt2 span{color:var(--muted);font-size:13px}
+.stack{display:grid;gap:12px;margin-bottom:10px}
+.msg{min-height:1.5em;color:var(--muted);font-size:14px}
+.stepper{display:grid;grid-template-columns:60px 1fr 60px;align-items:center;gap:10px}
+.stepper .btn{padding:10px 0;font-size:24px}
+.stepper output{text-align:center;font-family:var(--f-display);font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* barra delle sezioni */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--surface);border-top:3px solid var(--ink);
+  padding:8px max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:2.5px solid transparent;border-radius:14px;padding:6px 2px 5px;font-size:12px;font-weight:700;color:var(--muted);max-width:150px;width:100%;justify-self:center}
+.tab.on{color:var(--ink);background:var(--bg);border-color:var(--ink);box-shadow:0 3px 0 var(--ink)}
+</style>
+</head><body>
+<main id="app"></main>
+<script>
+(function(){
+/* ---------- contenuti: riassunti e schede esercizi (testi originali, pagine del PDF) ---------- */
+// p = pagina del PDF da cui partire; pp = intervallo; img = pagina con l'immagine da copiare (se c'è)
+const CH = [
+{id:"intro", n:"In", it:"Introduzione", en:"Introduction", from:10, to:32,
+ idea:"Disegnare è un'abilità che si impara come leggere: non serve talento, servono le componenti giuste insegnate nell'ordine giusto.",
+ points:[
+  "Il libro insegna soprattutto a vedere: le stesse abilità percettive servono anche per pensare e risolvere problemi.",
+  "Il disegno si scompone in cinque abilità di base: bordi, spazi, rapporti (prospettiva e proporzioni), luci e ombre, la forma d'insieme (gestalt). Le prime quattro si insegnano, la quinta arriva da sola.",
+  "Strategia di tutto il corso: per far lavorare la parte visiva del cervello, dai a quella verbale un compito che rifiuta (immagini capovolte, dettagli lentissimi, spazi vuoti, paradossi, ombre).",
+  "Il cervello è plastico: imparare a disegnare crea nuovi collegamenti e l'abilità resta per sempre, come la lettura.",
+  "Il «grande sabotatore»: la parte verbale troverà mille scuse per non farti disegnare. Il rimedio è lo stesso trucco: inizia con un compito che lei scarta.",
+  "Le pp. 27–31 mostrano i 5 giorni del workshop: autoritratto iniziale, disegno capovolto, mano, spazi negativi, prospettiva, profilo, autoritratto finale."
+ ], ex:[]},
+
+{id:"c1", n:"1", it:"Il disegno e l'arte di andare in bicicletta", en:"Drawing and the Art of Bicycle Riding", from:33, to:41,
+ idea:"Disegnare dipende dal vedere come vede un artista. Come andare in bici, si spiega male a parole e si capisce facendolo.",
+ points:[
+  "Disegnare e vedere sono quasi inseparabili; il modo di vedere dell'artista è diverso da quello che usiamo per muoverci nella vita di tutti i giorni.",
+  "Le esortazioni («guarda meglio», «controlla i rapporti») non aiutano: serve una dimostrazione e un metodo.",
+  "Chi ha vista e coordinazione normali (sa firmare o scrivere un messaggio) può imparare a disegnare.",
+  "Disegnando si entra in uno stato diverso: attento, assorbito, senza senso del tempo, simile alla guida in autostrada. È fragile: una domanda o un telefono lo interrompono.",
+  "Si scelgono apposta soggetti «difficili» (mano, sedia, interni, profilo, autoritratto): disegnare è sempre lo stesso compito, cambia solo il soggetto.",
+  "I ritratti motivano molto e sfruttano una specialità dell'emisfero destro: riconoscere i volti."
+ ], ex:[]},
+
+{id:"c2", n:"2", it:"Primi passi nel disegno", en:"First Steps in Drawing", from:42, to:60,
+ idea:"Procurati i materiali, costruisci gli strumenti e fissa il tuo punto di partenza con tre disegni «prima del corso».",
+ points:[
+  "Materiali essenziali (pp. 44–46): carta, matite, grafite in stick, gomme, piano trasparente, due mirini, uno specchio. Piano e mirini servono finché non li avrai interiorizzati.",
+  "Piano trasparente, mirini e formato sul foglio hanno tutti le stesse proporzioni: così ciò che vedi nel mirino si riporta sul foglio.",
+  "I disegni prima del corso sono la prova dei tuoi progressi: con il miglioramento arriva una specie di amnesia di come disegnavi prima.",
+  "Il disegno a memoria fa emergere il «sistema di simboli» dell'infanzia: occhi, nasi e unghie tutti uguali, che la mano traccia quasi da sola.",
+  "Il livello iniziale indica solo l'età in cui hai smesso di disegnare, non il tuo potenziale.",
+  "Lo stile è tuo come la calligrafia: il corso non lo insegna, ti insegna a vedere. Esistono molti tipi di linea (decisa, spezzata, pura, «perduta e ritrovata»), tutti validi (p. 59)."
+ ], ex:[
+  {id:"strumenti", t:"Costruisci piano trasparente e mirini", p:46, pp:"46–47", min:"20 min",
+   mat:"Plastica trasparente 20×25 cm, cartoncino nero, pennarello permanente, forbici",
+   steps:["Sul piano trasparente traccia col pennarello permanente una linea verticale e una orizzontale che si incrociano al centro.",
+     "Taglia due rettangoli di cartoncino nero grandi quanto il piano (20×25 cm) e traccia le diagonali.",
+     "Mirino piccolo: segna un rettangolo interno a 5 cm dai bordi (gli angoli cadono sulle diagonali) e ritaglialo.",
+     "Mirino grande: stessa cosa a 2,5 cm dai bordi.",
+     "Si usano fissando l'uno o l'altro al piano con le clip."],
+   why:"Finestre, piano e formato hanno le stesse proporzioni: cambia la scala, non la forma."},
+  {id:"pre1", t:"Prima del corso 1: una persona a memoria", p:49, pp:"49–50", min:"15–20 min",
+   mat:"Carta comune, matita HB, nastro, tavola",
+   steps:["Fissa 3–4 fogli sovrapposti alla tavola (fanno da cuscinetto).",
+     "Richiama alla mente una persona (anche una foto o un tuo vecchio disegno).",
+     "Disegnala come riesci: solo testa, mezzo busto o figura intera.",
+     "Titolo, firma e data in basso a destra."],
+   why:"Mostra quanto i simboli dell'infanzia guidano la mano."},
+  {id:"pre2", t:"Prima del corso 2: autoritratto allo specchio", p:50, pp:"50", min:"20–30 min",
+   mat:"Specchietto, matita HB, tavola appoggiata al muro",
+   steps:["Fissa lo specchio al muro e siediti a un braccio di distanza; devi vedere tutta la testa.",
+     "Appoggia la tavola al muro con il bordo inferiore in grembo.",
+     "Guarda il tuo riflesso e disegnati.",
+     "Titolo, firma e data."],
+   why:"Sarà il termine di confronto con l'autoritratto finale (cap. 10)."},
+  {id:"pre3", t:"Prima del corso 3: la mia mano", p:50, pp:"50–51", min:"15–20 min",
+   mat:"Matita HB, carta",
+   steps:["Siediti a un tavolo.",
+     "Disegna la mano che non usi per disegnare, nella posa che preferisci.",
+     "Titolo, firma e data.",
+     "Confronta i tre disegni: cerca simboli ripetuti (occhi uguali, unghie uguali) e annotali sul retro. Poi mettili via fino alla fine del corso."],
+   why:"Il retro dei fogli diventa il diario del tuo punto di partenza."},
+  {id:"firma", t:"La firma come disegno", p:55, pp:"55–58", min:"10 min",
+   mat:"Carta comune, matita HB",
+   steps:["Scrivi la tua firma come sempre e guardala come un disegno: è unica e solo tua.",
+     "Osserva le cinque firme a margine (p. 56): stesso nome, personalità diverse. Che cosa ti comunicano?",
+     "Riscrivi il tuo nome in almeno tre stili di linea diversi e nota cosa cambia (velocità, pressione, ritmo, dimensioni)."],
+   why:"Esprimi già te stesso con la linea: il corso si concentra sul vedere, lo stile arriva da sé."}
+ ]},
+
+{id:"c3", n:"3", it:"Il cervello, destro e sinistro", en:"Your Brain, the Right and Left of It", from:61, to:79,
+ idea:"I due emisferi elaborano le informazioni in modi diversi: per disegnare serve la modalità visiva (R), di solito schiacciata da quella verbale (L).",
+ points:[
+  "Gli emisferi sono collegati dal corpo calloso e controllano il lato opposto del corpo. Gli studi sul «cervello diviso» di Sperry mostrano che ognuno ha un proprio modo di conoscere.",
+  "Modalità L: verbale, analitica, simbolica, astratta, temporale, logica, lineare. Modalità R: non verbale, sintetica, concreta, analogica, senza tempo, spaziale, intuitiva, globale (elenco alle pp. 75–76).",
+  "Le lingue rivelano un antico pregiudizio contro la sinistra (sinistro, gauche) e quindi contro l'emisfero destro.",
+  "Il momento «eureka» è il segno della modalità R: collegamenti improvvisi tra cose apparentemente scollegate.",
+  "Mancini e destrimani imparano allo stesso modo: disegna con la mano che usi di solito.",
+  "Chi prende un compito lo decidono velocità e motivazione: la parte verbale lo cede solo se le sembra troppo lento, troppo dettagliato o impossibile. Gli esercizi sfruttano proprio questo."
+ ], ex:[]},
+
+{id:"c4", n:"4", it:"Passare da sinistra a destra", en:"Crossing Over from Left to Right", from:80, to:102,
+ idea:"Due esercizi per sentire il cambio di modalità: prima il conflitto (Vasi/Volti), poi la via d'uscita (disegno capovolto).",
+ points:[
+  "Nel Vaso/Volti, dare un nome alle parti del profilo attiva la parte verbale; completare il vaso simmetrico richiede quella visiva: ne nasce un «inceppo».",
+  "Disegnare in modalità R significa farsi solo domande spaziali: dove inizia la curva? quanto è profonda? che angolo fa rispetto al bordo del foglio?",
+  "Il navigatore europeo segue un piano; quello delle isole Truk si orienta di continuo sui rapporti tra le cose: il secondo è il modo dell'artista.",
+  "Le immagini capovolte non si lasciano nominare: la parte verbale rinuncia e quella visiva lavora indisturbata. Le parti più difficili (come gli scorci) vengono meglio proprio perché non sai cosa stai disegnando.",
+  "Lo stato R si riconosce dopo: niente senso del tempo, parole altrui che non si decodificano, calma attenta, sensazione di puzzle affascinante.",
+  "Obiettivo del corso: provocare quel passaggio a comando, anche con soggetti diritti."
+ ], ex:[
+  {id:"vasi", t:"Vaso/Volti", p:82, pp:"82–86", img:83, min:"5–10 min",
+   mat:"Carta, matita HB",
+   steps:["Copia mezzo vaso/volto: profilo a sinistra se sei destrimane, a destra se sei mancino (figure a p. 83).",
+     "Chiudi il vaso con due linee orizzontali in alto e in basso.",
+     "Ripassa il profilo nominando le parti ad alta voce: fronte, naso, labbra, mento, collo.",
+     "Ora disegna il profilo opposto per completare un vaso simmetrico e osserva la confusione che arriva.",
+     "Nota come l'hai risolta (griglia, spazio tra i profili, partire dal basso…) e scrivilo sul retro."],
+   why:"Fa sentire il conflitto tra le due modalità."},
+  {id:"stravinsky", t:"Disegno capovolto: Stravinsky di Picasso", p:90, pp:"90–96", img:93, min:"40–60 min",
+   mat:"L'immagine capovolta di p. 93, matita HB, carta, un'ora tranquilla",
+   steps:["Isolati per un'ora; musica senza parole o silenzio.",
+     "Non girare mai né il modello né il tuo disegno finché non hai finito.",
+     "Parti da dove vuoi e passa da una linea a quella vicina, da uno spazio alla forma accanto, come in un puzzle. Non fare prima il contorno.",
+     "Se parli tra te, usa solo il linguaggio visivo: questa linea piega così, rispetto al bordo del foglio va con questo angolo.",
+     "Mani e volto cercheranno di farsi nominare: coprili con un dito o un foglio e scopri una linea alla volta.",
+     "Alla fine gira tutto e guarda il risultato."],
+   why:"La parte verbale non «legge» le immagini capovolte e si fa da parte."},
+  {id:"capovolti", t:"Altri disegni capovolti", p:98, pp:"98–101", img:99, min:"30–60 min",
+   mat:"Immagini alle pp. 99–101 o foto e disegni capovolti a tua scelta",
+   steps:["Scegli l'Uomo Ragno di p. 99 o il cavaliere tedesco di p. 100 (versione a linee a p. 101).",
+     "Disegna un formato con le stesse proporzioni dell'immagine: il formato governa forme e spazi.",
+     "Procedi come per Stravinsky, sempre capovolto.",
+     "Dopo ogni disegno ripensa a come ti sei sentito: impara a riconoscere lo stato R."],
+   why:"Ripetere il passaggio lo rende familiare."}
+ ]},
+
+{id:"c5", n:"5", it:"Il bambino artista che è in te", en:"Drawing on Your Childhood Artistry", from:103, to:124,
+ idea:"Verso i 9–10 anni quasi tutti smettono di disegnare: il sistema di simboli imparato da piccoli prende il posto della percezione.",
+ points:[
+  "Tappe del disegno infantile: scarabocchio (da circa un anno e mezzo), simboli (il cerchio con occhi che diventa mamma, sole, gatto), disegni che raccontano storie, il paesaggio simbolico ripetuto.",
+  "I bambini piccoli hanno un senso quasi perfetto della composizione dentro i quattro bordi del foglio; poi lo perdono concentrandosi sui singoli oggetti.",
+  "Verso i 10 anni la lateralizzazione è completa e il linguaggio domina: i ragazzi vogliono il realismo, ma il disegno non torna e molti abbandonano (spesso anche per una critica sarcastica).",
+  "Il paradosso del cubo: per farlo sembrare cubico bisogna disegnare forme non quadrate, esattamente come appaiono. La conoscenza («gli angoli sono retti») sabota la vista.",
+  "I simboli memorizzati (occhio, naso, mano, albero) sono pronti a scattare: la soluzione è sempre la strategia principale, un compito che la parte verbale rifiuta.",
+  "In modalità R si rallenta, si perde il tempo, non si decodificano le parole, ci si sente calmi e capaci: è lo stato da rendere controllabile."
+ ], ex:[
+  {id:"paesaggio", t:"Il paesaggio d'infanzia ricordato", p:114, pp:"113–115", min:"15 min",
+   mat:"Carta, matita HB",
+   steps:["Prima di leggere oltre, disegna il paesaggio che facevi da bambino (casa, sole, alberi, montagne, strada…).",
+     "Intitolalo «Paesaggio d'infanzia ricordato».",
+     "Mentre lo fai, ricorda il piacere e la sicurezza con cui mettevi ogni simbolo al suo posto.",
+     "Copri un elemento con la mano e osserva come cambia l'equilibrio della composizione (esempio a p. 115)."],
+   why:"Riporta alla luce i tuoi simboli e il senso innato della composizione."}
+ ]},
+
+{id:"c6", n:"6", it:"Percepire i bordi", en:"Perceiving Edges", from:125, to:161,
+ idea:"Prima abilità: in disegno un bordo è sempre condiviso tra due cose, e la linea di contorno li disegna entrambi.",
+ points:[
+  "Un bordo è dove due cose si incontrano; la linea di contorno è il confine condiviso (come i pezzi di un puzzle). Anche il formato è un bordo.",
+  "Il Contorno puro (lentissimo, senza mai guardare il foglio) non dà un «bel» disegno, ma è l'esercizio più efficace del corso: la parte verbale si annoia e se ne va.",
+  "Ogni dettaglio diventa un insieme fatto di dettagli più piccoli, quasi frattale: si riscopre la meraviglia per le cose comuni.",
+  "Il piano pittorico è una finestra immaginaria sempre parallela agli occhi: disegnare dal vero significa copiare ciò che si vede «schiacciato» su quel piano (Alberti, Dürer, il telaio di Van Gogh).",
+  "Chiudi un occhio e tieni ferma la testa: un'unica vista, piatta come una foto. Copiata sul foglio, quell'immagine piatta sembra tridimensionale.",
+  "Il fondo tonale (grafite sfumata) toglie la paura del foglio bianco e perdona le cancellature."
+ ], ex:[
+  {id:"contpuro", t:"Contorno puro del palmo", p:129, pp:"129–134", min:"5 min (+ ripetizioni)",
+   mat:"Carta fissata alla tavola, matita HB, timer",
+   steps:["Chiudi un po' la mano che non usi per disegnare: disegnerai tutte le pieghe del palmo.",
+     "Imposta il timer a 5 minuti.",
+     "Girati completamente dall'altra parte: guardi solo il palmo, mai il foglio.",
+     "Segui una piega millimetro per millimetro: occhio e matita alla stessa velocità lenta, come un sismografo.",
+     "Non fermarti e non girarti finché non suona il timer; le proteste interiori passano in un minuto.",
+     "Se non è scattato il cambio, riprova con un foglio accartocciato, un fiore, una piuma (p. 134)."],
+   why:"Il compito è troppo lento e minuzioso per la parte verbale, che lascia il campo."},
+  {id:"pianomano", t:"La mano disegnata sul piano trasparente", p:135, pp:"135–137", min:"15–20 min",
+   mat:"Piano trasparente, mirino, clip, pennarello non permanente, fazzoletto umido",
+   steps:["Appoggia la mano sul tavolo con le dita piegate verso il viso (vista di scorcio).",
+     "Scegli il mirino che inquadra meglio la mano, fissalo al piano e traccia col pennarello il bordo interno (il formato).",
+     "Appoggia il piano sulla punta delle dita, chiudi un occhio e non muovere la testa.",
+     "Traccia sul piano i bordi esattamente come li vedi, senza nominare le parti; correggi col fazzoletto umido.",
+     "Ripeti con pose più complicate (pugno, dita incrociate, un oggetto in mano) e tieni il disegno migliore."],
+   why:"Fa capire con le mani che disegnare è copiare ciò che sta sul piano."},
+  {id:"pianostanza", t:"Guarda il mondo attraverso il piano", p:143, pp:"143–145", min:"5 min",
+   mat:"Piano trasparente con il mirino grande",
+   steps:["Tieni il piano davanti al viso, parallelo agli occhi, e chiudi un occhio.",
+     "Avvicinalo e allontanalo per cambiare inquadratura.",
+     "Confronta gli angoli del soffitto o di un tavolo con la croce: verticale e orizzontale.",
+     "Immagina di ricalcarli; poi metti giù il piano e prova a «vederlo» lo stesso."],
+   why:"Prepara il piano pittorico immaginario che userai sempre."},
+  {id:"contmod", t:"Contorno modificato della mano su fondo tonale", p:147, pp:"147–160", min:"1 ora",
+   mat:"Album da disegno, stick di grafite, carta assorbente, HB e 4B, tre gomme, il piano con la mano disegnata",
+   steps:["Fissa i fogli ai quattro angoli e disegna il formato usando il mirino come sagoma.",
+     "Tona il foglio: grafite leggera, poi strofina in cerchio fino a un grigio argento uniforme. Aggiungi la croce, leggera.",
+     "Riporta sul foglio i punti principali del disegno sul piano usando la croce (stessa scala).",
+     "Rimetti la mano in posa, chiudi un occhio e disegna lentamente ogni ondulazione dei bordi, guardando la mano il 90% del tempo.",
+     "Per le unghie disegna le forme della pelle intorno; se una parte ti blocca passa alla forma accanto.",
+     "Rifinisci: cancella le luci, scurisci le ombre, eventualmente schiarisci lo sfondo."],
+   why:"È il primo disegno «vero»: tridimensionale perché copiato da una vista piatta."}
+ ]},
+
+{id:"c7", n:"7", it:"Percepire gli spazi", en:"Perceiving Spaces", from:162, to:190,
+ idea:"Seconda abilità: gli spazi negativi intorno alle cose sono reali quanto gli oggetti, e disegnarli rende facili le parti difficili.",
+ points:[
+  "Forme positive (gli oggetti) e spazi negativi condividono i bordi: se disegni uno, hai disegnato anche l'altro. Gli spazi non hanno nome, quindi li vedi come sono.",
+  "Tre funzioni degli spazi negativi: rendono facili scorci e forme complicate; unificano il disegno e rafforzano la composizione; allenano la percezione.",
+  "La composizione è la disposizione di forme e spazi dentro il formato; il formato comanda. Inizia sempre scegliendo l'inquadratura col mirino e disegnando il formato.",
+  "Unità base: una forma o uno spazio di media grandezza da cui partire, chiamata «Uno». Tutte le proporzioni si misurano rispetto a lei (1:¾, 1:2…), così la composizione scelta non «esce dal foglio».",
+  "La sedia è il soggetto ideale: sai troppo delle sedie (gambe uguali, sedile largo) e quello che sai non coincide con ciò che vedi.",
+  "Procedura di partenza per ogni esercizio (pp. 179–180): formato, tono, croce, inquadratura col mirino, unità base sul piano, trasferimento sul foglio, poi si disegna."
+ ], ex:[
+  {id:"sedia", t:"Spazi negativi di una sedia", p:179, pp:"179–185", min:"1 ora o più",
+   mat:"Mirino grande, piano, pennarello, album, matite, gomme, grafite, carta assorbente",
+   steps:["Formato con il bordo esterno del piano, fondo tonale, croce leggera.",
+     "Metti una sedia (meglio con pioli e listelli) davanti a un muro semplice, a 2–2,5 metri da te. Una lampada può aggiungere un'ombra interessante.",
+     "Componi con mirino e piano, un occhio chiuso; immagina che la sedia sparisca e restino solo gli spazi.",
+     "Scegli come unità base uno spazio semplice (es. tra due listelli), disegnalo sul piano e riportalo sul foglio controllando posizione e angoli rispetto alla croce.",
+     "Da lì disegna uno spazio dopo l'altro come tessere di un puzzle, chiedendoti solo larghezze e angoli rispetto all'unità e alla verticale/orizzontale.",
+     "Alla fine schiarisci gli spazi o la sedia con la gomma e aggiungi le ombre."],
+   why:"La parte verbale non si occupa del «niente»: la sedia emerge giusta da sola."},
+  {id:"copiespazi", t:"Copia Homer e Rubens con gli spazi negativi", p:189, pp:"189–190", min:"30–45 min",
+   mat:"Immagini alle pp. 189 e 190, matita, carta",
+   steps:["Copia il bambino sulla sedia di vimini di Winslow Homer (p. 189) concentrandoti sugli spazi negativi.",
+     "Capovolgi gli studi di braccia e gambe di Rubens (p. 190) e disegna prima gli spazi intorno alle forme.",
+     "Poi raddrizza il disegno e completa i dettagli interni."],
+   why:"Gli scorci «difficili» diventano facili guardando intorno alle forme."},
+  {id:"spaziovunque", t:"Caccia agli spazi negativi", p:185, pp:"185–186", min:"ogni giorno",
+   mat:"Solo gli occhi",
+   steps:["Durante la giornata cerca spazi negativi: tra i rami, tra i palazzi, la freccia nel logo FedEx.",
+     "Immagina di disegnarli bordo per bordo.",
+     "Fai lo stesso con un cestello, una scala, una frusta: oggetti banali che diventano belli."],
+   why:"La pratica mentale rende automatica la nuova percezione."}
+ ]},
+
+{id:"c8", n:"8", it:"Percepire i rapporti", en:"Perceiving Relationships", from:191, to:224,
+ idea:"Terza abilità: prospettiva e proporzioni. Si capiscono i concetti formali e poi si «traguarda» con la matita.",
+ points:[
+  "La prospettiva chiede di accettare paradossi: un cubo si disegna con angoli non retti e lati diversi, eppure sembra un cubo.",
+  "Concetti chiave: punto di vista fisso, piano pittorico, linea d'orizzonte (sempre all'altezza dei tuoi occhi, si alza e si abbassa con te), punti di fuga, linee convergenti.",
+  "Bordi orizzontali sopra l'orizzonte scendono verso il punto di fuga, quelli sotto salgono, quelli all'altezza degli occhi restano orizzontali; le verticali restano verticali.",
+  "La prospettiva a due punti ha punti di fuga quasi sempre fuori dal foglio: per questo gli artisti usano il traguardo (sighting) invece dei righelli.",
+  "Angoli: si valutano rispetto a verticale e orizzontale, sul piano, senza «bucarlo» con la matita. Memorizza la «fetta di torta» dell'angolo invece dei gradi.",
+  "Proporzioni: braccio teso e gomito bloccato, un occhio chiuso, misura l'unità base col pollice sulla matita, confrontala, poi «pulisci la misura» e rimisura l'unità nel disegno, che ha un'altra scala.",
+  "La difficoltà più grande è credere alle proprie misure: se lo vedi, disegnalo."
+ ], ex:[
+  {id:"corridoio", t:"Prospettiva a un punto: il corridoio", p:202, pp:"202–206", min:"10 min + disegno",
+   mat:"Un corridoio lungo, piano trasparente, matita",
+   steps:["Mettiti in piedi in fondo al corridoio, al centro. Trova sulla parete di fondo la tua linea d'orizzonte e fissa un punto: il punto di fuga.",
+     "Alza il piano parallelo agli occhi, allinea la linea orizzontale della croce all'orizzonte e chiudi un occhio.",
+     "Allinea la matita sul piano con lo spigolo parete-soffitto: scende verso il punto di fuga. Ripeti dall'altro lato e con le porte.",
+     "Gli spigoli col pavimento invece salgono verso lo stesso punto; le verticali restano verticali.",
+     "Siediti (orizzonte più basso) e nota come cambiano gli angoli.",
+     "Disegna il corridoio in prospettiva a un punto."],
+   why:"Costruisce la «mentalità prospettica» da usare poi a occhio."},
+  {id:"angolo", t:"Traguardare gli angoli di un angolo della stanza", p:210, pp:"210–212", min:"20 min",
+   mat:"Piano con mirino, pennarello, matita, carta",
+   steps:["Siediti a 3–4 metri da un angolo della stanza, meglio sgombro.",
+     "Componi col piano, allinea la croce all'altezza degli occhi e traccia lo spigolo verticale, poi gli spigoli soffitto-pareti e pavimento-pareti.",
+     "Riporta le linee su carta: prolungandole convergerebbero in due punti di fuga fuori dal foglio.",
+     "Ora rifallo con la sola matita: verticale per lo spigolo, orizzontale in cima, e «fotografa» il triangolo che forma ogni angolo.",
+     "Confronta sempre con l'orizzontale o la verticale, scegliendo quella che dà l'angolo più piccolo."],
+   why:"Gli angoli si vedono solo confrontandoli con le due costanti."},
+  {id:"gesto", t:"Il gesto per misurare le proporzioni", p:212, pp:"212–214", min:"10 min",
+   mat:"Matita",
+   steps:["Chiudi un occhio, braccio teso e gomito bloccato, matita sul piano immaginario.",
+     "Segna col pollice la larghezza dell'unità base (es. la parte alta di una porta).",
+     "Confrontala con un'altra misura: 1:1, 1:2, 1:2⅔…",
+     "Ricorda il rapporto e «pulisci la misura dalla matita».",
+     "Nel disegno rimisura l'unità e riporta lo stesso rapporto: uno… due…"],
+   why:"Evita l'errore più comune: portare la misura reale direttamente sul foglio."},
+  {id:"duepunti", t:"Disegno in prospettiva a due punti", p:214, pp:"214–219", min:"1–2 ore",
+   mat:"Album tonato, matite, gomme, piano con mirino grande, due sedie",
+   steps:["Procedura di partenza come per la sedia; formato col bordo esterno del piano.",
+     "Scegli un luogo interessante (angolo della cucina, porta aperta, balcone, un incrocio): non per forza facile.",
+     "Componi col mirino, scegli un'unità base media (finestra, porta, quadro) e disegnala sul piano.",
+     "Riportala sul foglio usando i quattro quadranti della croce (ingrandendo un po').",
+     "Procedi da parte a parte adiacente, traguardando angoli e proporzioni; usa gli spazi negativi per oggetti piccoli e fogliame.",
+     "Strizza gli occhi per vedere le grandi masse di luce e ombra: cancella le luci, scurisci le ombre. Controlla col piano le parti «fuori disegno»."],
+   why:"Con bordi, spazi e rapporti puoi disegnare qualunque cosa tu veda."}
+ ]},
+
+{id:"c9", n:"9", it:"Disegnare un ritratto di profilo", en:"Drawing a Profile Portrait", from:225, to:264,
+ idea:"Bordi, spazi e rapporti insieme in un ritratto di profilo, battendo i trucchi della «costanza di grandezza».",
+ points:[
+  "Il cervello cambia le dimensioni di ciò che vedi per farle combaciare con ciò che sa (costanza di grandezza e di forma) e non te lo dice. Per scoprirlo serve misurare.",
+  "Errore del «cranio mozzato»: le persone vedono gli occhi a un terzo dall'alto, invece la linea degli occhi è a metà testa (dall'apice del cranio/capelli al mento).",
+  "I lineamenti sono piccoli rispetto al cranio: il cervello li ingrandisce perché sono la parte importante.",
+  "Orecchio: da linea degli occhi al mento = dal retro dell'occhio al retro dell'orecchio (un triangolo isoscele). Il fondo dell'orecchio è circa all'altezza tra naso e bocca.",
+  "Il collo si attacca al cranio più in alto del previsto ed è largo: niente collo sottile sotto un ovale.",
+  "Trucchi: per l'iride disegna il bianco dell'occhio come spazio negativo; per occhiali e colletti disegna gli spazi intorno; dei capelli rendi masse, direzioni e scuri, non i singoli capelli.",
+  "Copiare i maestri è un ottimo allenamento: obbliga a rallentare e a vedere ciò che ha visto l'artista."
+ ], ex:[
+  {id:"costanza", t:"Mettere alla prova la costanza di grandezza", p:230, pp:"230–234", min:"15 min",
+   mat:"Un pezzo di carta da intagliare, piano trasparente, pennarello, uno specchio",
+   steps:["I quattro uomini (p. 230): intaglia una tacca alta come una figura e verifica che siano tutti uguali; poi capovolgi il libro.",
+     "I due tavoli (p. 232): ricalca un piano sul piano trasparente e sovrapponilo all'altro.",
+     "In un luogo affollato guarda le teste vicine e lontane attraverso un tubo di carta.",
+     "Allo specchio, a un braccio di distanza, segna col pennarello cima della testa e mento: l'immagine è circa metà del vero."],
+   why:"Il cervello va «colto in fallo» per credere alle misure."},
+  {id:"misuretesta", t:"Le misure della testa (frontale e profilo)", p:241, pp:"241–247", min:"20 min",
+   mat:"Carta, matita, specchio, foto di volti",
+   steps:["Disegna un ovale frontale con l'asse centrale e la linea degli occhi a metà.",
+     "Sulla tua testa: misura con la matita dall'angolo interno dell'occhio al mento, poi dagli occhi alla cima della testa. Sono uguali.",
+     "Verifica su foto, allo specchio e sullo schermo della TV.",
+     "Disegna la sagoma di profilo (p. 244) con la linea degli occhi a metà.",
+     "Misura il retro dell'orecchio con la regola del triangolo isoscele, poi il fondo dell'orecchio e il punto dove collo e cranio si piegano; segnali sulla sagoma."],
+   why:"Memorizzare queste costanti evita gli errori più comuni."},
+  {id:"sargent", t:"Copia del profilo di Madame X (Sargent)", p:249, pp:"249–253", img:249, min:"1 ora",
+   mat:"Album, matite HB e 4B, gomme, piano trasparente come sagoma",
+   steps:["Disegna il formato col piano e una croce leggera; niente fondo tonale (è un disegno a linea).",
+     "Appoggia il piano sul disegno di p. 249 per vedere dove cade la croce e scegli l'unità base (orecchio, naso, occhio-mento).",
+     "Segui i controlli di p. 251–252: attaccatura dei capelli, punta del naso, angolo naso-mento, spazi negativi davanti a viso e collo, posizione dell'orecchio.",
+     "Monta il disegno come un puzzle, confrontando tutto con l'unità base.",
+     "Alla fine capovolgi originale e copia: gli errori saltano all'occhio."],
+   why:"Prova generale prima del modello vero."},
+  {id:"profilo", t:"Ritratto di profilo dal vero", p:253, pp:"253–262", min:"1 ora o più",
+   mat:"Un modello (anche chi guarda la TV o legge), piano, pennarello, album, matite, gomme, due sedie",
+   steps:["Formato, fondo tonale leggero (o niente, per un disegno a linea) e croce.",
+     "Modello girato a sinistra se sei destrimane; siediti a 60–120 cm.",
+     "Componi col piano lasciando spazio per collo e spalle (il mento non tocchi il bordo).",
+     "Unità base occhi-mento: segnala sul piano e riportala sul foglio, con cima dei capelli e retro della testa.",
+     "Parti dallo spazio negativo davanti al profilo; controlla l'angolo naso-mento, lo spazio sotto la narice, l'angolo della palpebra e della linea della bocca.",
+     "Posiziona l'orecchio col triangolo, misura il retro della testa, rendi i capelli per masse e direzioni, poi collo e colletto tramite gli spazi negativi."],
+   why:"Qui le prime tre abilità diventano un'unica abilità."}
+ ]},
+
+{id:"c10", n:"10", it:"Luci, ombre e gestalt", en:"Perceiving Lights, Shadows, and the Gestalt", from:265, to:305,
+ idea:"Quarta abilità: la «logica della luce» dà volume. La quinta, la gestalt, arriva da sola come un «aha».",
+ points:[
+  "Quattro aspetti della luce: luce piena (dove la luce colpisce direttamente), ombra portata (la più scura, dove l'oggetto blocca la luce), luce riflessa (rimbalzata dalle superfici vicine), ombra di cresta (sul colmo della forma, tra luce e luce riflessa).",
+  "I valori vanno dal bianco della carta al nero più fitto; «alto» = chiaro, «basso» = scuro.",
+  "Le forme di luce e ombra non hanno nome e cambiano a ogni movimento: la parte verbale le rifiuta. Capovolte si vedono come macchie (Courbet, p. 270–271).",
+  "Chi guarda completa le forme partendo da pochi indizi: basta suggerire, e bisogna sapere quando fermarsi.",
+  "Tre pose: frontale, profilo, tre quarti. Frontale: tra gli occhi c'è la larghezza di un occhio; narici sotto gli angoli interni degli occhi; angoli della bocca sotto le pupille; orecchie dagli occhi a naso-bocca; collo largo quasi quanto la mandibola.",
+  "Tre quarti: il lato girato è più stretto, occhio e bocca cambiano forma; dall'angolo anteriore dell'occhio al retro dell'orecchio = occhi-mento. Errore tipico: occhio vicino troppo attaccato al naso.",
+  "Tratteggio e tratteggio incrociato si imparano con la pratica e diventano una firma personale."
+ ], ex:[
+  {id:"courbet", t:"Guarda Courbet capovolto", p:269, pp:"269–271", img:270, min:"5 min",
+   mat:"Solo il libro",
+   steps:["Guarda l'autoritratto di Courbet capovolto: vedi solo macchie chiare e scure.",
+     "Raddrizzalo: le stesse macchie diventano una testa in rilievo.",
+     "Guarda le immagini a macchie di p. 272: prima vedi lo schema, poi capisci cosa rappresenta."],
+   why:"Capire che le ombre vanno disegnate come forme, non interpretate."},
+  {id:"frontale", t:"Le proporzioni del viso allo specchio", p:279, pp:"279–281", min:"20 min",
+   mat:"Specchio, carta, matita",
+   steps:["Davanti allo specchio (che fa da piano pittorico) disegna un ovale con asse centrale e linea degli occhi a metà.",
+     "Inclina la testa: asse e linea degli occhi restano ad angolo retto.",
+     "Dividi la linea degli occhi in quinti (un occhio di spazio tra gli occhi).",
+     "Trova la base del naso col triangolo rovesciato dagli angoli esterni degli occhi, poi la bocca a un terzo tra naso e mento.",
+     "Segna narici, angoli della bocca, orecchie e larghezza del collo; poi verifica su altre persone e foto."],
+   why:"Una guida generale da adattare a ogni volto."},
+  {id:"tretquarti", t:"La vista di tre quarti allo specchio", p:283, pp:"283–287", min:"30 min",
+   mat:"Specchio, carta, matita",
+   steps:["Gira la testa finché la punta del naso quasi tocca il contorno della guancia lontana.",
+     "Individua l'asse centrale (centro del ponte del naso e del labbro superiore) e la sua inclinazione; la linea degli occhi è perpendicolare.",
+     "Parti dalla forma chiusa tra naso e guancia girata; disegna l'occhio lontano tramite le forme intorno (sopra, accanto, il bianco, sotto).",
+     "Occhio vicino: dal bordo del naso dista circa la larghezza di un occhio.",
+     "Linee parallele all'asse per narici e angoli della bocca; orecchio con la regola occhio anteriore → retro dell'orecchio."],
+   why:"Prepara l'autoritratto finale, preferibilmente di tre quarti."},
+  {id:"steichen", t:"Copia del dettaglio di Steichen", p:287, pp:"287–292", img:288, min:"1 ora",
+   mat:"Matita 4B (o 6B), gomme (una tagliata a punta), piano trasparente, grafite, carta assorbente",
+   steps:["Formato con un mirino; tona il foglio al grigio più scuro che riesci.",
+     "Appoggia il piano sull'immagine di p. 288; fai la croce sul foglio con la gomma lungo un righello.",
+     "Scegli l'unità base (es. lunghezza del naso) e riportala.",
+     "«Disegna» con la gomma: prima le grandi forme di luce, poi le luci più chiare (fronte, sciarpa, punta del naso).",
+     "Scurisci con la 4B le zone d'ombra, mantenendo toni lisci.",
+     "Allontanati, strizza gli occhi e fermati appena il volto «appare». Non disegnare gli occhi."],
+   why:"Insegna quanto poco serve perché chi guarda veda tutto."},
+  {id:"tratteggio", t:"Tratteggio e tratteggio incrociato", p:292, pp:"292–294", min:"15 min + pratica",
+   mat:"Carta, matita HB o 4B ben appuntita",
+   steps:["Fai un gruppo di 8–10 segni paralleli muovendo la mano dal polso: è un «set».",
+     "Prova direzione, velocità, distanza e lunghezza finché trovi la tua.",
+     "Incrocia un secondo set con un angolo appena diverso (effetto vibrante) o più marcato.",
+     "Sovrapponi più set per scurire; prova anche tratti curvi che seguono la forma.",
+     "Esercitati su sfere e cilindri, anche mentre sei al telefono."],
+   why:"Il tratteggio diventa il tuo modo personale di fare i toni."},
+  {id:"autoritratto", t:"Autoritratto con luci e ombre", p:295, pp:"295–304", min:"1–2 ore",
+   mat:"Album, matite, gomme, specchio a un braccio di distanza, lampada orientabile, grafite, eventualmente un cappello",
+   steps:["Formato e fondo tonale (chiaro, medio o scuro: scelta tua), croce.",
+     "Specchio a un braccio di distanza (è il tuo piano), tavola appoggiata al muro, lampada di lato. Scegli posa frontale o tre quarti e non spostare più nulla.",
+     "Scegli l'unità base (es. occhi-mento) e segnane gli estremi sullo specchio col pennarello; riportali sul foglio.",
+     "Strizza gli occhi e cancella le grandi forme di luce; poi scurisci il lato in ombra con la 4B.",
+     "Non disegnare subito i lineamenti: falli emergere dalle ombre (per gli occhi basta un dito sporco di grafite).",
+     "Aggiungi le ombre più piccole; alzati ogni tanto per guardare da lontano e correggere."],
+   why:"Riunisce le quattro abilità: la quinta, la somiglianza, emerge da sola."},
+  {id:"confronto", t:"Confronto prima e dopo", p:304, pp:"304–305", min:"10 min",
+   mat:"I tre disegni prima del corso e l'autoritratto finale",
+   steps:["Metti accanto l'autoritratto iniziale e quello finale.",
+     "Nota cosa è cambiato: meno simboli, più osservazione.",
+     "Misura le proporzioni degli autoritratti di fine corso nel cap. 2.",
+     "Bonus: autoritratto nei panni di un personaggio della storia dell'arte."],
+   why:"Rende visibile il progresso che tendiamo a dimenticare."}
+ ]},
+
+{id:"c11", n:"11", it:"Le nuove abilità per risolvere problemi", en:"Using Your New Perceptual Skills for Creative Problem Solving", from:306, to:328,
+ idea:"Le cinque abilità del disegno si trasferiscono al pensiero: si può «vedere» un problema con bordi, spazi, rapporti, luci e ombre.",
+ points:[
+  "Disegna un po' ogni giorno: un taccuino sempre con te, copie capovolte di foto, copie di maestri, anche solo pratica mentale.",
+  "I computer eccellono nelle funzioni L; quelle R (riconoscere un'espressione, intuire) restano molto più difficili da imitare, eppure la scuola insiste sulle prime.",
+  "Cinque fasi della creatività: Prima intuizione (R, vedere il problema), Saturazione (L, ricerca), Incubazione (R, lavora da sola mentre fai altro), Illuminazione (l'«aha»), Verifica (L guidata da R, il lavoro duro).",
+  "Si può «programmare» il cervello: chiedergli di trovare la soluzione entro una data e poi staccare.",
+  "Esempio del designer: bordi condivisi con il cliente, spazi bianchi da scoprire, orizzonte e punti di fuga, unità base, luci e ombre del progetto, gestalt.",
+  "La creatività vera richiede anche valore sociale; l'arte delle caverne mostra quanto fosse potente la capacità di visualizzare."
+ ], ex:[
+  {id:"taccuino", t:"Un disegno al giorno", p:308, pp:"308", min:"10 min al giorno",
+   mat:"Un taccuino piccolo, una matita",
+   steps:["Porta sempre un taccuino.",
+     "Nei momenti morti disegna qualcosa lì vicino: una tazza, le forbici, una foglia.",
+     "Oppure copia una foto di giornale capovolta (sport e danza hanno spazi negativi bellissimi).",
+     "Quando non puoi disegnare, cerca spazi negativi, linea degli occhi e angoli intorno a te.",
+     "Segna in home «Ho disegnato oggi» per tenere il conto dei giorni di fila."],
+   why:"Le nuove vie nel cervello si consolidano solo con la ripetizione."},
+  {id:"problema", t:"Disegna un tuo problema", p:316, pp:"316–321", min:"30 min",
+   mat:"Un foglio e un problema reale",
+   steps:["Scegli un problema o una decisione reale.",
+     "Prima intuizione: quali sono i bordi condivisi (con chi? morbidi o netti)? Cosa c'è negli spazi negativi? Dov'è l'orizzonte, qual è l'unità base? Cosa è in luce e cosa in ombra?",
+     "Capovolgi mentalmente il quadro per cercare ciò che ti sfugge.",
+     "Saturazione: raccogli le informazioni che servono.",
+     "Incubazione: dai una scadenza al tuo cervello e fai altro.",
+     "Quando arriva l'«aha», verifica e metti in pratica passo per passo."],
+   why:"Il trasferimento si impara meglio se lo si esercita apposta."}
+ ]},
+
+{id:"c12", n:"12", it:"L'artista che è in te", en:"Drawing on the Artist in You", from:329, to:333,
+ idea:"Il corso è solo l'inizio: disegnare non finisce mai, e ogni disegno mostra anche chi lo ha fatto.",
+ points:[
+  "Si disegna in modalità R e poi si interpreta in modalità L: il disegno rivela come vedi e senti le cose.",
+  "Nessun soggetto è troppo difficile o troppo banale: tutto merita di essere disegnato.",
+  "Copia i maestri non per imitarne lo stile ma per capire come vedevano.",
+  "Proteggi e coltiva il tuo stile; se un disegno va male, calmati e torna a guardare.",
+  "Non aspettare l'ispirazione: prepara le condizioni per il cambio di modalità, ogni giorno.",
+  "Insegna a qualcun altro: ripassare le lezioni le fissa anche in te."
+ ], ex:[
+  {id:"insegna", t:"Insegna a disegnare a qualcuno", p:332, pp:"332", min:"un pomeriggio",
+   mat:"I tuoi materiali, il libro",
+   steps:["Scegli un amico o un familiare che «non sa disegnare».",
+     "Fagli fare i disegni prima del corso.",
+     "Guidalo nel Vaso/Volti, nel disegno capovolto e nel contorno puro.",
+     "Confrontate i risultati e raccontagli le cinque abilità."],
+   why:"Spiegare il processo approfondisce la tua comprensione."}
+ ]}
+];
+
+const MATS = [
+  {id:"bond", t:"Carta comune (da fotocopie)", s:"per esercizi e prove"},
+  {id:"album", t:"Album da disegno ~28×35 cm", s:"carta da 120 g circa (80 lb)"},
+  {id:"hb", t:"Matita da scrittura HB con gommino", s:"la #2 americana"},
+  {id:"4b", t:"Matita da disegno 4B", s:"per scuri e ombre"},
+  {id:"penna1", t:"Pennarello nero a punta fine non permanente", s:"per disegnare sul piano trasparente"},
+  {id:"penna2", t:"Pennarello nero a punta fine permanente", s:"per la croce sul piano"},
+  {id:"grafite", t:"Stick di grafite 4B", s:"per il fondo tonale"},
+  {id:"tempera", t:"Temperamatite", s:"uno piccolo va benissimo"},
+  {id:"gomma1", t:"Gomma rosa morbida", s:"tipo Pink Pearl"},
+  {id:"gomma2", t:"Gomma bianca in plastica", s:"tipo Staedtler Mars, da tagliare a punta"},
+  {id:"gomma3", t:"Gomma pane", s:"per schiarire senza strofinare"},
+  {id:"nastro", t:"Nastro di carta a bassa adesività", s:"per fissare i fogli"},
+  {id:"clip", t:"Due clip nere da 2,5 cm", s:"per unire mirino e piano"},
+  {id:"tavola", t:"Tavola da disegno ~38×46 cm", s:"anche un tagliere o un cartone rigido"},
+  {id:"piano", t:"Piano trasparente 20×25 cm", s:"plastica di 1,5 mm o vetro con i bordi nastrati"},
+  {id:"mirini", t:"Due mirini di cartoncino nero", s:"da costruire (pp. 46–47)"},
+  {id:"specchio", t:"Specchietto ~13×18 cm", s:"o uno specchio a parete"},
+  {id:"timer", t:"Timer o sveglia", s:"per il contorno puro"},
+  {id:"lampada", t:"Lampada orientabile", s:"per l'autoritratto (cap. 10)"}
+];
+
+const MEMO = [
+  {t:"Le cinque abilità", p:22, items:["Bordi: il contorno condiviso tra due cose.","Spazi: gli spazi negativi che condividono i bordi con le forme.","Rapporti: angoli rispetto a verticale/orizzontale e proporzioni rispetto all'unità base.","Luci e ombre: la logica della luce, i valori.","Gestalt: l'insieme, che emerge da solo."]},
+  {t:"Routine prima di ogni disegno", p:179, items:["Disegna il formato (bordo del mirino o del piano).","Tona il foglio, se vuoi lavorare su fondo grigio.","Traccia la croce leggera.","Componi con mirino e piano, un occhio chiuso.","Scegli l'unità base («Uno») e disegnala sul piano.","Riportala sul foglio con l'aiuto della croce.","Poi disegna, da parte adiacente a parte adiacente."]},
+  {t:"Prospettiva in tasca", p:205, items:["L'orizzonte è sempre all'altezza dei tuoi occhi.","Bordi orizzontali sopra l'orizzonte: scendono verso il punto di fuga.","All'altezza degli occhi: restano orizzontali.","Sotto l'orizzonte: salgono verso il punto di fuga.","Le verticali restano verticali (salvo edifici altissimi).","Resta sul piano: non «bucarlo» con la matita."]},
+  {t:"Traguardare con la matita", p:212, items:["Un occhio chiuso, braccio teso, gomito bloccato.","Angoli: confrontali con verticale o orizzontale (la più vicina).","Proporzioni: sempre rispetto all'unità base, come rapporto 1:x.","Pulisci la misura dalla matita e rimisura nel disegno.","Credi alle tue misure: se lo vedi, disegnalo."]},
+  {t:"La testa di profilo", p:241, items:["Linea degli occhi a metà testa (cima di cranio/capelli – mento).","Occhi-mento = retro dell'occhio – retro dell'orecchio (triangolo isoscele).","Fondo dell'orecchio circa all'altezza tra naso e bocca.","Collo attaccato al cranio in alto, circa a livello di naso o bocca.","I lineamenti occupano una parte piccola della testa."]},
+  {t:"La testa frontale e di tre quarti", p:279, items:["Asse centrale e linea degli occhi sempre ad angolo retto.","Tra gli occhi c'è un occhio di spazio (linea degli occhi in quinti).","Base del naso: triangolo rovesciato dagli angoli esterni degli occhi.","Bocca a circa un terzo tra naso e mento; angoli sotto le pupille.","Narici sotto gli angoli interni degli occhi; orecchie da occhi a naso-bocca.","Tre quarti: angolo anteriore dell'occhio – retro dell'orecchio = occhi-mento; occhio vicino a un occhio di distanza dal naso."]},
+  {t:"Logica della luce", p:267, items:["Luce piena: dove la luce colpisce direttamente.","Ombra portata: la più scura, dove la luce è bloccata.","Luce riflessa: luce rimbalzata dalle superfici vicine.","Ombra di cresta: sul colmo della forma, tra luce e luce riflessa.","Strizza gli occhi per vedere le grandi masse; fermati quando la forma «appare»."]},
+  {t:"Quando sei bloccato", p:294, items:["Fai due minuti di contorno puro su un oggetto complesso.","Capovolgi il modello (o il disegno) e continua.","Disegna lo spazio o la forma accanto, non la parte «difficile».","Smetti di nominare le parti: chiediti solo angoli, larghezze, curve.","Togliti dalle distrazioni: il cambio di modalità è fragile."]}
+];
+
+const GREET = ["Ciao!", "Matita pronta?", "Si disegna!", "Occhio aperto!", "Guarda bene!"];
+const EXS = [];   // tutti gli esercizi in ordine, con il capitolo di appartenenza
+CH.forEach(c => c.ex.forEach(e => { e.ch = c.id; EXS.push(e); }));
+
+/* ---------- stato salvato ---------- */
+const KEY = "matitina.v1";     // non cambiarla mai dopo la prima pubblicazione: è dove stanno i dati dell'utente
+const app = document.getElementById("app");
+function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, palette:"sanguigna"}; }
+function load(){ try{ const r = localStorage.getItem(KEY); if(r) return Object.assign(fresh(), JSON.parse(r)); }catch(e){} return fresh(); }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+let S = load();
+
+/* ---------- utilità ---------- */
+const $ = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstElementChild; };
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
+function today(d){ d = d || new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function niceDate(s){ const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("it-IT", {day:"numeric", month:"long"}); }
+const chById = (id) => CH.find(c => c.id === id);
+const exById = (id) => EXS.find(e => e.id === id);
+// pagine del PDF, con l'eventuale scarto impostato dall'utente
+const pg = (n) => n + (S.off || 0);
+const pgs = (s) => String(s).replace(/\d+/g, n => pg(+n));
+function bumpDay(){
+  const t = today(); S.days[t] = 1; if(S.last === t) return;
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  S.streak = S.last === today(y) ? S.streak + 1 : 1; S.last = t;
+}
+function streakNow(){   // la serie si interrompe se ieri non hai disegnato
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  return S.last === today() || S.last === today(y) ? S.streak : 0;
+}
+function chProgress(c){
+  if(!c.ex.length) return S.read[c.id] ? 1 : 0;
+  return c.ex.filter(e => S.done[e.id]).length / c.ex.length;
+}
+const doneCount = () => EXS.filter(e => S.done[e.id]).length;
+
+const ICON = {
+  flame:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5Z" fill="var(--deep)"/></svg>',
+  check:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--deep)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>',
+  back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+  page:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v4h4"/></svg>',
+  book:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M3 5c3-1 6-1 9 1v14c-3-2-6-2-9-1Z"/><path d="M21 5c-3-1-6-1-9 1v14c3-2 6-2 9-1Z"/></svg>',
+  pencil:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19Z"/><path d="M13.5 6.5l4 4"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>',
+  gear:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>'
+};
+
+/* ---------- la mascotte: Matitina, una matita gialla con la gomma rosa ---------- */
+// mood: wave · happy · sad · cheer · squint (un occhio chiuso, traguarda con la matita)
+let mid = 0;
+function mascot(mood, size){
+  const id = "m" + (++mid);
+  const K = "#1A1A1A", Y = "#F2C230", YS = "#D39A14", W = "#F3D7AE", P = "#F08DA3", PS = "#D86A82", M = "#C3C8CE";
+  const armPaths = {
+    wave:   ["M48 100 Q36 104 30 116", "M92 96 Q106 88 110 68"],
+    happy:  ["M48 100 Q36 106 32 118", "M92 100 Q104 106 108 118"],
+    cheer:  ["M48 96 Q34 86 30 64", "M92 96 Q106 86 110 64"],
+    sad:    ["M48 102 Q42 114 40 126", "M92 102 Q98 114 100 126"],
+    squint: ["M48 102 Q38 110 34 120", "M92 92 Q108 90 122 88"]
+  }[mood] || [];
+  const arms = armPaths.map(d => `<path d="${d}" stroke="${K}" stroke-width="11" stroke-linecap="round" fill="none"/><path d="${d}" stroke="${Y}" stroke-width="5" stroke-linecap="round" fill="none"/>`).join("");
+  const eye = (x, y, lid) => `<ellipse cx="${x}" cy="${y}" rx="6.5" ry="7.5" fill="#fff" stroke="${K}" stroke-width="2.6"/><circle cx="${x+1}" cy="${y+2}" r="3.2" fill="${K}"/>` +
+    (lid ? `<path d="M${x-6.5} ${y-1} Q${x} ${y-8} ${x+6.5} ${y-1}" fill="${Y}" stroke="${K}" stroke-width="2.4"/>` : "");
+  const shut = (x, y) => `<path d="M${x-6} ${y+1} Q${x} ${y-5} ${x+6} ${y+1}" fill="none" stroke="${K}" stroke-width="3" stroke-linecap="round"/>`;
+  let face;
+  if(mood === "cheer") face = shut(61, 78) + shut(79, 78) + `<path d="M62 90 Q70 104 78 90 Z" fill="#7A1027" stroke="${K}" stroke-width="2.6" stroke-linejoin="round"/>`;
+  else if(mood === "sad") face = eye(61, 78, 1) + eye(79, 78, 1) + `<path d="M64 97 Q70 91 76 97" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
+  else if(mood === "squint") face = `<path d="M55 78 L67 78" stroke="${K}" stroke-width="3" stroke-linecap="round"/>` + eye(79, 78, 0) + `<path d="M64 93 Q71 97 77 92" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
+  else face = eye(61, 78, 0) + eye(79, 78, 0) + `<path d="M63 91 Q70 99 77 91" fill="none" stroke="${K}" stroke-width="2.8" stroke-linecap="round"/>`;
+  const spark = (x, y, s) => `<path d="M${x} ${y-s} Q${x} ${y} ${x+s} ${y} Q${x} ${y} ${x} ${y+s} Q${x} ${y} ${x-s} ${y} Q${x} ${y} ${x} ${y-s} Z" fill="#fff" stroke="${K}" stroke-width="2"/>`;
+  let extras = "";
+  if(mood === "cheer") extras = spark(20, 40, 7) + spark(120, 34, 6);
+  else if(mood === "wave") extras = spark(122, 40, 6);
+  else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="${Y}" stroke-width="3" stroke-linecap="round"/>`;
+  else if(mood === "sad") extras = `<path d="M100 60 Q96 68 100 72 Q104 68 100 60 Z" fill="#9BD3F2" stroke="${K}" stroke-width="2"/>`;
+  const body = "M48 44 L92 44 L92 120 L48 120 Z";
+  return `<svg class="mascot" viewBox="0 0 140 160" width="${size}" height="${Math.round(size*160/140)}" role="img" aria-label="Matitina, la mascotte">
+    <defs><clipPath id="${id}"><path d="${body}"/></clipPath><clipPath id="${id}e"><path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z"/></clipPath></defs>
+    ${extras}${arms}
+    <path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z" fill="${P}"/>
+    <g clip-path="url(#${id}e)"><rect x="78" y="8" width="14" height="30" fill="${PS}"/></g>
+    <path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z" fill="none" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M48 120 L92 120 L70 155 Z" fill="${W}" stroke="${K}" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M63.3 144.3 L76.7 144.3 L70 155 Z" fill="${K}" stroke="${K}" stroke-width="2" stroke-linejoin="round"/>
+    <path d="${body}" fill="${Y}"/>
+    <g clip-path="url(#${id})"><rect x="80" y="40" width="14" height="84" fill="${YS}"/></g>
+    <path d="M62 46 L62 118 M78 46 L78 118" stroke="${YS}" stroke-width="1.6"/>
+    <path d="M48 120 Q55 127 62 120 Q70 127 78 120 Q85 127 92 120" fill="${Y}" stroke="${K}" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="${body}" fill="none" stroke="${K}" stroke-width="3.4" stroke-linejoin="round"/>
+    <rect x="46" y="32" width="48" height="15" rx="3" fill="${M}" stroke="${K}" stroke-width="3"/>
+    <path d="M47 39.5 L93 39.5" stroke="${K}" stroke-width="1.8"/>
+    <path d="M54 52 L54 112" stroke="#FFF3C4" stroke-width="4" stroke-linecap="round"/>
+    ${face}
+  </svg>`;
+}
+
+/* ---------- palette di colori ---------- */
+const PALETTES = [
+  {id:"sanguigna", name:"Sanguigna", sub:"Pesca e gesso rosso, come i maestri", bg:"#F3C6A5", deep:"#9C2F1F"},
+  {id:"girasoli",  name:"Girasoli",  sub:"Giallo Van Gogh e blu notte",        bg:"#F6D867", deep:"#1F3C88"},
+  {id:"grafite",   name:"Carta e grafite", sub:"Grigio caldo, la più sobria",  bg:"#E4E1D8", deep:"#33414A"},
+  {id:"salvia",    name:"Salvia",    sub:"Verde salvia e bosco",              bg:"#CFE3C6", deep:"#2C5B3F"}
+];
+function applyPalette(){
+  try{
+    document.documentElement.setAttribute("data-palette", S.palette);
+    const p = PALETTES.find(p => p.id === S.palette) || PALETTES[0];
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", p.bg);
+  }catch(e){}
+}
+
+/* ---------- navigazione: il gesto "indietro" del telefono segue le schermate ---------- */
+// profondità: home 0 · tab e capitolo 1 · esercizio 2
+const DEPTH = {home:0, chapter:1, list:1, memo:1, settings:1, ex:2};
+let curDepth = 0, fromPop = false, skipPop = null;
+function screen(st){
+  if(fromPop) return;
+  const d = DEPTH[st.s];
+  try{
+    if(d > curDepth) history.pushState(st, "");
+    else if(d === curDepth) history.replaceState(st, "");
+    else { skipPop = st; history.go(d - curDepth); }
+  }catch(e){}
+  curDepth = d;
+}
+function showState(st){
+  st = st || {s:"home"};
+  if(st.s === "chapter" && chById(st.id)) chapter(st.id);
+  else if(st.s === "ex" && exById(st.id)) exercise(st.id, st.from);
+  else if(st.s === "list") list();
+  else if(st.s === "memo") memo();
+  else if(st.s === "settings") settings();
+  else home();
+}
+window.addEventListener("popstate", (e) => {
+  if(skipPop){ const st = skipPop; skipPop = null; try{ history.replaceState(st, ""); }catch(err){} return; }
+  const st = e.state || {s:"home"};
+  fromPop = true;
+  try{ showState(st); } finally { fromPop = false; }
+  curDepth = DEPTH[st.s] || 0;
+});
+
+function mount(v){
+  app.innerHTML = ""; app.appendChild(v);
+  // barre fisse fuori dal contenitore animato, così non si spostano durante l'animazione
+  v.querySelectorAll(".pop .tabbar").forEach(el => app.appendChild(el));
+  window.scrollTo(0, 0);
+}
+
+// iPhone, app installata: nessun gesto di sistema → swipe dal bordo sinistro per tornare indietro
+(function(){
+  let x0 = null, y0 = 0;
+  addEventListener("touchstart", e => { const t = e.touches[0]; x0 = t.clientX < 24 && curDepth > 0 ? t.clientX : null; y0 = t.clientY; }, {passive:true});
+  addEventListener("touchend", e => {
+    if(x0 === null) return; const t = e.changedTouches[0];
+    if(t.clientX - x0 > 70 && Math.abs(t.clientY - y0) < 60) history.back();
+    x0 = null;
+  }, {passive:true});
+})();
+
+/* ---------- barra delle sezioni in basso ---------- */
+function tabBar(active){
+  const tabs = [["home","Libro",ICON.book,home],["list","Esercizi",ICON.pencil,list],["memo","Promemoria",ICON.pin,memo],["settings","Opzioni",ICON.gear,settings]];
+  const bar = $(`<nav class="tabbar" aria-label="Sezioni">${tabs.map(([id, l, ic]) => `<button class="tab ${id === active ? "on" : ""}" data-t="${id}" ${id === active ? 'aria-current="page"' : ""}>${ic}<span>${l}</span></button>`).join("")}</nav>`);
+  bar.querySelectorAll(".tab").forEach(b => b.onclick = () => { if(b.dataset.t !== active) tabs.find(t => t[0] === b.dataset.t)[3](); else window.scrollTo({top:0, behavior:"smooth"}); });
+  return bar;
+}
+
+function exRow(e, i, showCh){
+  const c = chById(e.ch), done = !!S.done[e.id];
+  return `<button class="row ${done ? "done" : ""}" data-ex="${e.id}">
+    <span class="num">${done ? "✓" : esc(i)}</span>
+    <span class="t"><b>${esc(e.t)}</b><span class="sub">PDF p. ${esc(pgs(e.pp))} · ${esc(e.min)}${showCh ? " · cap. " + esc(c.n) : ""}</span></span>
+    <span class="go" aria-hidden="true">›</span>
+  </button>`;
+}
+
+/* ---------- HOME: il libro capitolo per capitolo ---------- */
+function home(){
+  screen({s:"home"});
+  const next = EXS.find(e => !S.done[e.id]);
+  const n = doneCount(), drew = S.days[today()];
+  const hero = next ? `
+    <section class="hero">
+      <div class="hero-art"><span class="bubble">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
+      <span class="label">Prossimo esercizio · cap. ${esc(chById(next.ch).n)}</span>
+      <h2>${esc(next.t)}</h2>
+      <span class="pg">${ICON.page} PDF p. ${esc(pgs(next.pp))}</span>
+      <button class="btn btn-main" id="go">Apri l'esercizio</button>
+    </section>` : `
+    <section class="hero">
+      <div class="hero-art"><span class="bubble">Bravissimo!</span>${mascot("cheer", 100)}</div>
+      <span class="label">Corso completato</span>
+      <h2>Hai fatto tutti gli esercizi</h2>
+      <p>Ora un disegno al giorno, e copia i maestri.</p>
+    </section>`;
+  const v = $(`<div class="pop">
+    <header class="top">
+      <div class="brand">${mascot("happy", 40)}<h1 class="logo">Matitina</h1></div>
+      <div class="stats">
+        <span class="chip" title="Esercizi fatti">${ICON.check}${n}/${EXS.length}</span>
+        <span class="chip" title="Giorni di fila">${ICON.flame}${streakNow()}</span>
+      </div>
+    </header>
+    ${hero}
+    <button class="btn btn-ghost" id="drew">${drew ? "✓ Oggi hai disegnato" : "Ho disegnato oggi"}</button>
+    <div class="sec-h"><h3>Capitoli</h3><span class="label">${CH.length - 1} + intro</span></div>
+    <div class="list">${CH.map(c => { const pr = chProgress(c); return `
+      <button class="row ${pr >= 1 ? "done" : ""}" data-ch="${c.id}">
+        <span class="num">${pr >= 1 ? "✓" : esc(c.n)}</span>
+        <span class="t"><b>${esc(c.it)}</b><span class="sub">PDF pp. ${pg(c.from)}–${pg(c.to)} · ${c.ex.length ? c.ex.length + (c.ex.length > 1 ? " esercizi" : " esercizio") : "solo lettura"}</span></span>
+        <span class="meter" aria-label="${Math.round(pr * 100)}%"><i style="width:${Math.round(pr * 100)}%"></i></span>
+      </button>`; }).join("")}</div>
+    <footer class="foot"><span>Compagna di studio per <i>Drawing on the Right Side of the Brain</i> di Betty Edwards (4ª ed., 2012). Le pagine sono quelle del PDF.</span><span>I dati sono salvati solo su questo dispositivo.</span></footer>
+  </div>`);
+  if(next) v.querySelector("#go").onclick = () => exercise(next.id, "home");
+  v.querySelector("#drew").onclick = () => { if(drew) return; bumpDay(); save(); home(); };
+  v.querySelectorAll("[data-ch]").forEach(b => b.onclick = () => chapter(b.dataset.ch));
+  v.appendChild(tabBar("home"));
+  mount(v);
+}
+
+/* ---------- CAPITOLO: riassunto ed esercizi ---------- */
+function chapter(id){
+  screen({s:"chapter", id});
+  const c = chById(id), i = CH.indexOf(c), prev = CH[i - 1], nxt = CH[i + 1];
+  const v = $(`<div class="pop">
+    <button class="back" id="bk">${ICON.back} Libro</button>
+    <div class="page-h">
+      <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · PDF pp. ${pg(c.from)}–${pg(c.to)}</span>
+      <h2>${esc(c.it)}</h2>
+      <p class="en">${esc(c.en)}</p>
+    </div>
+    <div class="card idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
+    <div class="card"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>
+    ${c.ex.length ? `<div class="sec-h"><h3>Esercizi</h3><span class="label">${c.ex.filter(e => S.done[e.id]).length} di ${c.ex.length} fatti</span></div>
+      <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>` : ""}
+    <div class="sec-h"><h3>Lettura</h3></div>
+    <button class="btn ${S.read[c.id] ? "btn-ghost" : "btn-deep"}" id="read">${S.read[c.id] ? "✓ Capitolo letto · annulla" : "Ho letto il capitolo"}</button>
+    <div class="nav2" style="margin-top:16px">
+      ${prev ? `<button class="btn btn-ghost btn-sm" id="prev">‹ ${prev.id === "intro" ? "Intro" : "Cap. " + esc(prev.n)}</button>` : "<span></span>"}
+      ${nxt ? `<button class="btn btn-ghost btn-sm" id="nxt">Cap. ${esc(nxt.n)} ›</button>` : "<span></span>"}
+    </div>
+  </div>`);
+  v.querySelector("#bk").onclick = home;
+  v.querySelector("#read").onclick = () => { if(S.read[c.id]) delete S.read[c.id]; else S.read[c.id] = today(); save(); chapter(id); };
+  if(prev) v.querySelector("#prev").onclick = () => chapter(prev.id);
+  if(nxt) v.querySelector("#nxt").onclick = () => chapter(nxt.id);
+  v.querySelectorAll("[data-ex]").forEach(b => b.onclick = () => exercise(b.dataset.ex, "chapter"));
+  mount(v);
+}
+
+/* ---------- ESERCIZIO ---------- */
+function exercise(id, from, mood){
+  screen({s:"ex", id, from});
+  const e = exById(id), c = chById(e.ch), done = S.done[id];
+  const v = $(`<div class="pop">
+    <button class="back" id="bk">${ICON.back} ${from === "list" ? "Esercizi" : from === "home" ? "Libro" : "Capitolo " + esc(c.n)}</button>
+    <div class="page-h">
+      <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · esercizio</span>
+      <h2>${esc(e.t)}</h2>
+    </div>
+    <div class="meta">
+      <span class="pg">${ICON.page} PDF p. ${esc(pgs(e.pp))}</span>
+      ${e.img ? `<span class="pg">Immagine a p. ${pg(e.img)}</span>` : ""}
+      <span class="chip">${esc(e.min)}</span>
+    </div>
+    <div class="react">${mascot(mood || (done ? "cheer" : "squint"), 96)}</div>
+    <div class="card">
+      <div class="kv"><span class="label">Ti serve</span><p>${esc(e.mat)}</p></div>
+      <div class="kv"><span class="label">In breve</span><ol class="points">${e.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
+      <div class="kv"><span class="label">Perché</span><p class="why">${esc(e.why)}</p></div>
+      <p class="hint">Le istruzioni complete sono nel libro, da p. ${pg(e.p)}: leggile prima di iniziare.</p>
+    </div>
+    <div class="donebar">
+      ${done ? `<div class="ok">✓ Fatto il ${esc(niceDate(done))}</div>
+        <button class="btn btn-ghost btn-sm" id="undo">Segna come da fare</button>`
+      : `<button class="btn btn-deep" id="do">Segna come fatto</button>`}
+    </div>
+    <div class="card">
+      <label class="label" for="note">I tuoi appunti</label>
+      <textarea id="note" placeholder="Com'è andata? Cosa hai notato? Quanto tempo ci hai messo?">${esc(S.notes[id] || "")}</textarea>
+      <p class="hint" id="saved">Si salvano da soli.</p>
+    </div>
+  </div>`);
+  v.querySelector("#bk").onclick = () => from === "list" ? list() : from === "home" ? home() : chapter(c.id);
+  const d = v.querySelector("#do"), u = v.querySelector("#undo");
+  if(d) d.onclick = () => { S.done[id] = today(); bumpDay(); save(); exercise(id, from, "cheer"); };
+  if(u) u.onclick = () => { delete S.done[id]; save(); exercise(id, from, "sad"); };
+  let tm;
+  v.querySelector("#note").oninput = (ev) => {
+    const t = ev.target.value; clearTimeout(tm);
+    tm = setTimeout(() => { if(t.trim()) S.notes[id] = t; else delete S.notes[id]; save(); const s = document.getElementById("saved"); if(s) s.textContent = "Salvato."; }, 400);
+  };
+  mount(v);
+}
+
+/* ---------- TUTTI GLI ESERCIZI ---------- */
+function list(){
+  screen({s:"list"});
+  const n = doneCount();
+  const v = $(`<div class="pop">
+    <div class="page-h"><span class="label">Esercizi</span><h2>${n} di ${EXS.length} fatti</h2></div>
+    <div class="react">${mascot(n >= EXS.length ? "cheer" : n ? "happy" : "wave", 90)}</div>
+    ${CH.filter(c => c.ex.length).map(c => `
+      <div class="sec-h"><h3>${c.id === "intro" ? "" : "Cap. " + esc(c.n) + " · "}${esc(c.it)}</h3></div>
+      <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>`).join("")}
+  </div>`);
+  v.querySelectorAll("[data-ex]").forEach(b => b.onclick = () => exercise(b.dataset.ex, "list"));
+  v.appendChild(tabBar("list"));
+  mount(v);
+}
+
+/* ---------- PROMEMORIA: materiali e regole da tenere sottomano ---------- */
+function memo(){
+  screen({s:"memo"});
+  const have = MATS.filter(m => S.mats[m.id]).length;
+  const v = $(`<div class="pop">
+    <div class="page-h"><span class="label">Promemoria</span><h2>Da tenere sottomano</h2></div>
+    <details class="card" ${have < MATS.length ? "open" : ""}><summary>Materiali · ${have}/${MATS.length}</summary>
+      <div class="in">
+        <p class="hint" style="margin:0 0 6px">Elenco completo alle pp. ${pg(44)}–${pg(46)}. Tocca ciò che hai già.</p>
+        ${MATS.map(m => `<button class="tick ${S.mats[m.id] ? "on" : ""}" data-m="${m.id}" aria-pressed="${!!S.mats[m.id]}"><span class="bx">${S.mats[m.id] ? "✓" : ""}</span><span>${esc(m.t)}<span class="sub">${esc(m.s)}</span></span></button>`).join("")}
+      </div>
+    </details>
+    ${MEMO.map(x => `<details class="card"><summary>${esc(x.t)}</summary>
+      <div class="in"><ol class="points">${x.items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
+      <p class="hint">Nel libro: PDF p. ${pg(x.p)}</p></div></details>`).join("")}
+  </div>`);
+  v.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
+    const id = b.dataset.m; if(S.mats[id]) delete S.mats[id]; else S.mats[id] = 1; save();
+    const on = !!S.mats[id]; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.querySelector(".bx").textContent = on ? "✓" : "";
+    v.querySelector("details summary").textContent = "Materiali · " + MATS.filter(m => S.mats[m.id]).length + "/" + MATS.length;
+  });
+  v.appendChild(tabBar("memo"));
+  mount(v);
+}
+
+/* ---------- IMPOSTAZIONI ---------- */
+function settings(note){
+  screen({s:"settings"});
+  const v = $(`<div class="pop">
+    <div class="page-h"><span class="label">Opzioni</span><h2>Colori, pagine e dati</h2></div>
+    <div class="sec-h"><h3>Colori</h3><span class="label">Tocca per provarli</span></div>
+    <div class="pals">${PALETTES.map(p => `<button class="pal ${p.id === S.palette ? "on" : ""}" data-id="${p.id}">
+        <span class="sw" style="background:${p.bg}"><i style="background:${p.deep}"></i><b>Aa</b></span>
+        <span class="pt2"><b>${esc(p.name)}</b><span>${esc(p.sub)}</span></span>
+      </button>`).join("")}</div>
+    <div class="sec-h"><h3>Numeri di pagina</h3></div>
+    <div class="card">
+      <p style="margin:0 0 10px">Le pagine sono quelle del PDF della 4ª edizione (2012). Se il tuo file ha pagine in più o in meno, correggi qui lo scarto: tutte le pagine dell'app si spostano.</p>
+      <div class="stepper"><button class="btn btn-ghost" id="minus" aria-label="Meno">−</button><output id="off">${S.off > 0 ? "+" + S.off : S.off}</output><button class="btn btn-deep" id="plus" aria-label="Più">+</button></div>
+      <p class="hint">Prova: il capitolo 1 dovrebbe iniziare a p. ${pg(33)}.</p>
+    </div>
+    <div class="sec-h"><h3>Backup</h3></div>
+    <div class="stack">
+      <button class="btn btn-ghost" id="exp">Esporta backup</button>
+      <label class="btn btn-ghost" for="imp">Ripristina backup</label><input type="file" id="imp" accept="application/json,.json" hidden>
+      <span class="msg" id="msg">${esc(note || "")}</span>
+    </div>
+    <footer class="foot"><span>Matitina non è affiliata all'autrice né all'editore: riassunti e schede sono scritti apposta per l'app, il libro resta indispensabile.</span></footer>
+  </div>`);
+  v.querySelectorAll(".pal").forEach(b => b.onclick = () => { S.palette = b.dataset.id; save(); applyPalette(); settings(); });
+  const setOff = (k) => { S.off = Math.max(-50, Math.min(50, k)); save(); settings(); };
+  v.querySelector("#minus").onclick = () => setOff((S.off || 0) - 1);
+  v.querySelector("#plus").onclick = () => setOff((S.off || 0) + 1);
+  v.querySelector("#exp").onclick = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 1)], {type:"application/json"}));
+    a.download = "matitina-backup-" + today() + ".json"; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+  v.querySelector("#imp").onchange = (e) => {
+    const f = e.target.files[0]; if(!f) return;
+    f.text().then(t => { const d = JSON.parse(t); if(!d || typeof d !== "object" || !d.done) throw 0; S = Object.assign(fresh(), d); save(); applyPalette(); settings("Backup ripristinato."); })
+      .catch(() => settings("File non valido: nessun dato modificato."));
+  };
+  v.appendChild(tabBar("settings"));
+  mount(v);
+}
+
+applyPalette();
+try{ history.replaceState({s:"home"}, ""); }catch(e){}
+home();
+window.APP = {mascot, PALETTES, CH, EXS};   // usato da scripts/icone.mjs e scripts/verifica.mjs
+})();
+</script>
+<script>if("serviceWorker" in navigator && location.protocol.indexOf("http") === 0){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
+</body></html>
