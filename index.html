@@ -5,7 +5,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#F0F3EE">
+<meta name="theme-color" content="#9CC3EC">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -28,6 +28,9 @@
   color-scheme:light;
 }
 /* palette selezionabili: sempre carta chiara e testo nero, cambiano i pastelli */
+/* Fauve: pastelli a olio saturi, cielo cobalto, sole vermiglio, prato turchese */
+:root[data-palette="fauve"]{--bg:#9CC3EC;--bg-shade:#6E9CD8;--surface:#FFF5EE;--soft:#FDE6DF;--line:#1B2370;--muted:#2A3160;--hair:rgba(27,35,112,.22);
+  --deep:#1E2FA0;--deep-shade:#111A66;--k1:#D9262B;--k2:#EE9A2C;--k3:#3FC2AE;--k4:#1F5C3C;--k5:#2433A8;--k6:#EE97AE}
 :root[data-palette="sanguigna"]{--bg:#F5E8DA;--bg-shade:#E2CBB2;--deep:#9C2F1F;--deep-shade:#6A1D12;--soft:#FBF2E8;--muted:#6B3A26;
   --k1:#A8321F;--k2:#C9662F;--k3:#D9A441;--k4:#7C8B3E;--k5:#6E4A35;--k6:#B85A6B}
 :root[data-palette="carboncino"]{--bg:#EEEBE4;--bg-shade:#D5D0C4;--deep:#33414A;--deep-shade:#1E272D;--soft:#F7F5F0;--muted:#4F4B42;
@@ -73,14 +76,15 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 .chip svg{width:17px;height:17px}
 
 /* card principale: cornice arcobaleno a pastello */
-.hero{--fill:conic-gradient(from 210deg,var(--k5),var(--k4),var(--k3),var(--k2),var(--k1),var(--k1),var(--k6),var(--k5));--edge:transparent;padding:13px;margin-bottom:16px;--r:30px 38px 28px 40px / 38px 28px 40px 30px}
-.hero-in{--fill:var(--soft);--edge:transparent;--r:22px 28px 20px 30px / 28px 20px 30px 22px;padding:10px 20px 20px;display:grid;gap:10px}
+.hero{--fill:var(--soft);--bw:3.5px;padding:10px;margin-bottom:16px;--r:30px 38px 28px 40px / 38px 28px 40px 30px}
+.hero-in{--fill:transparent;--edge:transparent;padding:14px 10px 10px;display:grid;gap:10px}
 .hero h2{font-size:27px}
 .hero p{margin:0;color:var(--muted)}
 .hero-in::before{-webkit-mask-image:none;mask-image:none}
-.hero-art{position:relative;height:118px}
-.hero-art .mascot{position:absolute;right:10px;bottom:0;animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 100%}
-.bubble{position:absolute;right:122px;top:16px;white-space:nowrap;font-family:var(--f-display);font-weight:700;font-size:18px;padding:3px 12px;--fill:#fff;--bw:2.5px;--r:16px 18px 4px 16px}
+.hero-art{position:relative;height:156px;overflow:hidden;border:3px solid var(--line);border-radius:22px 28px 18px 26px / 26px 18px 28px 22px;background:color-mix(in srgb,var(--k5) 30%,#fff)}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-art .mascot{position:absolute;right:14px;bottom:-6px;animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.bubble{position:absolute;right:118px;bottom:16px;z-index:1;white-space:nowrap;font-family:var(--f-display);font-weight:700;font-size:18px;padding:3px 12px;--fill:#fff;--bw:2.5px;--r:16px 18px 4px 16px}
 .pg{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:14px;padding:4px 10px;width:max-content;--fill:color-mix(in srgb,var(--k3) 35%,#fff);--bw:2.5px;--r:10px 13px 9px 12px}
 
 /* pulsanti */
@@ -96,7 +100,7 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 .sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:24px 0 10px}
 .sec-h h3{font-size:24px}
 .list{display:grid;gap:12px}
-.row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 14px;--fill:var(--surface);--edge:color-mix(in srgb,var(--k) 75%,#3B3631)}
+.row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 14px;--fill:linear-gradient(100deg,color-mix(in srgb,var(--k) 32%,var(--surface)) 0 66px,var(--surface) 70px);--edge:color-mix(in srgb,var(--k) 75%,#3B3631)}
 .row:active{transform:translateY(2px) rotate(.4deg)}
 .num{width:46px;height:46px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:19px;--r:52% 48% 50% 50% / 48% 52% 48% 52%;--bw:2.5px;--fill:color-mix(in srgb,var(--k) 28%,#fff);--edge:var(--k)}
 .row.done .num{--fill:var(--k);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35)}
@@ -174,8 +178,8 @@ details.card .in{padding:0 18px 16px}
 /* barra delle sezioni */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background-color:var(--bg);background-image:var(--paper,none);background-size:240px;
   padding:9px max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
-.tabbar::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--k1),var(--k2),var(--k3),var(--k4),var(--k5),var(--k6));
-  -webkit-mask-image:var(--tex2,none);mask-image:var(--tex2,none);-webkit-mask-size:180px;mask-size:180px}
+.tabbar::before{content:"";position:absolute;left:0;right:0;top:-9px;height:10px;background:linear-gradient(90deg,var(--k5),var(--k1),var(--k2),var(--k3),var(--k4),var(--k6),var(--k5));
+  -webkit-mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% / 18px 100%;mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% / 18px 100%}
 .tab{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 2px 4px;font-size:14px;font-weight:700;color:var(--muted);max-width:150px;width:100%;justify-self:center;font-family:var(--f-display);--edge:transparent;--fill:transparent}
 .tab svg{width:28px;height:28px}
 .tab.on{color:var(--ink);--fill:var(--surface);--edge:var(--line);--bw:2.5px}
@@ -840,7 +844,7 @@ CH.forEach((c, i) => { c.k = "var(--k" + (i % 6 + 1) + ")"; c.ex.forEach(e => { 
 /* ---------- stato salvato ---------- */
 const KEY = "matitina.v1";     // non cambiarla mai dopo la prima pubblicazione: è dove stanno i dati dell'utente
 const app = document.getElementById("app");
-function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, view:"breve", palette:"laguna"}; }
+function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, view:"breve", palette:"fauve"}; }
 function load(){ try{ const r = localStorage.getItem(KEY); if(r) return Object.assign(fresh(), JSON.parse(r)); }catch(e){} return fresh(); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 let S = load();
@@ -987,12 +991,14 @@ function mascot(mood, size){
 /* ---------- palette di colori ---------- */
 // ks: i sei pastelli mostrati nel campione
 const PALETTES = [
+  {id:"fauve",      name:"Fauve",      sub:"Pastelli a olio: cobalto, vermiglio, turchese", bg:"#9CC3EC", deep:"#1E2FA0", ks:["#D9262B","#EE9A2C","#3FC2AE","#1F5C3C","#2433A8","#EE97AE"]},
   {id:"laguna",     name:"Laguna",     sub:"Blu, verde e celeste",                bg:"#F0F3EE", deep:"#1D5E99", ks:["#1F6FB2","#2BA39A","#6CC3E8","#3E9A57","#1D4E89","#7FCBA8"]},
   {id:"pastelli",   name:"Pastelli",   sub:"La scatola completa, tutti i colori", bg:"#F6F0E3", deep:"#C7362B", ks:["#D93A2E","#EE8A1D","#F2C230","#3F9D4A","#2F6FC4","#8A4FB5"]},
   {id:"sanguigna",  name:"Sanguigna",  sub:"Terre, ocra e gesso rosso",          bg:"#F5E8DA", deep:"#9C2F1F", ks:["#A8321F","#C9662F","#D9A441","#7C8B3E","#6E4A35","#B85A6B"]},
   {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]}
 ];
-if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "laguna"; save(); }   // palette delle versioni precedenti
+if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "fauve"; save(); }   // palette delle versioni precedenti
+if((S.ui || 0) < 2){ S.palette = "fauve"; S.ui = 2; save(); }                   // nuova grafica: una volta sola si passa a Fauve
 function applyPalette(){
   try{
     document.documentElement.setAttribute("data-palette", S.palette);
@@ -1066,6 +1072,21 @@ function exRow(e, i, showCh){
     <span class="go" aria-hidden="true">›</span>
   </button>`;
 }
+// paesaggio a pastello dietro la mascotte: cielo, crinale a zig-zag, sole, alberi e prato, coi colori della palette
+const f = (v) => `style="fill:${v}"`;
+const scene = () => `<svg class="scene" viewBox="0 0 320 156" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g filter="url(#fx-line)">
+  <rect width="320" height="156" ${f("color-mix(in srgb,var(--k5) 38%,#fff)")}/>
+  <circle cx="128" cy="40" r="44" ${f("var(--k1)")}/>
+  <path d="M0 30 L20 22 L32 32 L50 18 L66 30 L84 20 L98 36 L110 28 L120 54 L132 44 L142 72 L0 78 Z" ${f("var(--k5)")}/>
+  <path d="M0 74 L150 70 Q240 66 320 72 L320 104 L0 104 Z" ${f("color-mix(in srgb,var(--k5) 55%,#fff)")}/>
+  <path d="M0 98 Q90 90 180 96 T320 94 L320 156 L0 156 Z" ${f("color-mix(in srgb,var(--k1) 80%,#000)")}/>
+  <path d="M176 64 Q170 30 198 22 Q232 16 244 40 Q252 62 236 80 L232 128 L226 128 L222 86 L214 128 L208 128 L206 88 L196 126 L190 126 L190 86 Q178 80 176 64 Z" ${f("var(--k6)")}/>
+  <path d="M36 70 Q30 54 48 50 Q66 50 66 70 Q74 96 62 124 L30 126 Q22 98 36 70 Z" ${f("var(--k2)")}/>
+  <path d="M0 132 Q60 118 120 128 T250 124 T320 126 L320 156 L0 156 Z" ${f("var(--k3)")}/>
+  <g fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"><path d="M50 156 L48 64"/><path d="M40 150 L52 80 L64 58"/><path d="M60 156 L56 92 L76 70"/><path d="M34 156 L42 108"/></g>
+  <path d="M286 0 L320 0 L320 156 L282 156 L290 90 Q270 84 262 70 L282 74 Q264 56 256 40 L284 54 Z" ${f("var(--k4)")}/>
+  <path d="M298 0 L312 0 L314 156 L292 156 Z" ${f("var(--k1)")}/>
+</g></svg>`;
 const logo = () => `<h1 class="logo" aria-label="Matitina">${[..."Matitina"].map(ch => `<span aria-hidden="true">${ch}</span>`).join("")}</h1>`;
 
 /* ---------- HOME: il libro capitolo per capitolo ---------- */
@@ -1075,14 +1096,14 @@ function home(){
   const n = doneCount(), drew = S.days[today()];
   const hero = next ? `
     <section class="hero cr"><div class="hero-in cr">
-      <div class="hero-art"><span class="bubble cr">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
+      <div class="hero-art">${scene()}<span class="bubble cr">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
       <span class="label">Prossimo esercizio · cap. ${esc(chById(next.ch).n)}</span>
       <h2>${esc(next.t)}</h2>
       <span class="pg cr">${ICON.page} PDF p. ${esc(pgs(next.pp))}</span>
       <button class="btn btn-deep cr" id="go">Apri l'esercizio</button>
     </div></section>` : `
     <section class="hero cr"><div class="hero-in cr">
-      <div class="hero-art"><span class="bubble cr">Bravissimo!</span>${mascot("cheer", 100)}</div>
+      <div class="hero-art">${scene()}<span class="bubble cr">Bravissimo!</span>${mascot("cheer", 100)}</div>
       <span class="label">Corso completato</span>
       <h2>Hai fatto tutti gli esercizi</h2>
       <p>Ora un disegno al giorno, e copia i maestri.</p>
