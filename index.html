@@ -1,7 +1,7 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Matitina</title>
-<meta name="description" content="Matitina: compagna di studio per Drawing on the Right Side of the Brain, con riassunti dei capitoli ed esercizi con le pagine del PDF.">
+<meta name="description" content="Matitina: a study companion for Drawing on the Right Side of the Brain, with chapter summaries and exercises with their PDF pages.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -837,24 +837,683 @@ c12:[
 };
 CH.forEach(c => { c.long = LONG[c.id] || []; });
 
-const GREET = ["Ciao!", "Matita pronta?", "Si disegna!", "Occhio aperto!", "Guarda bene!"];
+/* ---------- English: gli stessi contenuti tradotti (stessi id) ---------- */
+const EN = {
+ch:{
+intro:{idea:"Drawing is a skill you learn like reading: it takes no talent, just the right component skills taught in the right order.",
+ points:[
+  "The book mainly teaches you to see: the same perceptual skills also help you think and solve problems.",
+  "Drawing breaks down into five basic skills: edges, spaces, relationships (perspective and proportion), lights and shadows, and the whole (the gestalt). The first four are taught; the fifth comes by itself.",
+  "The strategy of the whole course: to get the visual part of the brain working, give the verbal part a task it turns down (upside-down images, very slow detail, empty spaces, paradoxes, shadows).",
+  "The brain is plastic: learning to draw builds new connections, and the skill stays for life, like reading.",
+  "The “great saboteur”: the verbal part will find a thousand excuses to keep you from drawing. The remedy is the same trick: start with a task it rejects.",
+  "Pages 27–31 show the 5-day workshop: initial self-portrait, upside-down drawing, hand, negative spaces, perspective, profile, final self-portrait."]},
+c1:{idea:"Drawing depends on seeing the way an artist sees. Like riding a bike, it's hard to explain in words and you understand it by doing it.",
+ points:[
+  "Drawing and seeing are almost inseparable; the artist's way of seeing differs from the one we use to get around in everyday life.",
+  "Exhortations (“look harder”, “check the relationships”) don't help: you need a demonstration and a method.",
+  "Anyone with normal eyesight and coordination (who can sign their name or write a text message) can learn to draw.",
+  "Drawing puts you in a different state: alert, absorbed, timeless, similar to highway driving. It's fragile: a question or a phone call breaks it.",
+  "Deliberately “hard” subjects are chosen (hand, chair, interiors, profile, self-portrait): drawing is always the same task, only the subject changes.",
+  "Portraits are highly motivating and use a specialty of the right hemisphere: recognizing faces."]},
+c2:{idea:"Get your materials, build your tools and record your starting point with three “pre-instruction” drawings.",
+ points:[
+  "Essential materials (pp. 44–46): paper, pencils, graphite stick, erasers, picture plane, two viewfinders, a mirror. The picture plane and viewfinders are needed until you've internalized them.",
+  "Picture plane, viewfinders and the format on the paper all share the same proportions: so what you see in the viewfinder transfers to the paper.",
+  "The pre-instruction drawings are the proof of your progress: improvement brings a kind of amnesia about how you used to draw.",
+  "Drawing from memory brings out the childhood “symbol system”: identical eyes, noses and fingernails that the hand draws almost on its own.",
+  "Your starting level only shows the age at which you stopped drawing, not your potential.",
+  "Style is yours like handwriting: the course doesn't teach it, it teaches you to see. There are many kinds of line (bold, broken, pure, “lost and found”), all valid (p. 59)."]},
+c3:{idea:"The two hemispheres process information in different ways: drawing needs the visual mode (R), usually overridden by the verbal one (L).",
+ points:[
+  "The hemispheres are joined by the corpus callosum and control the opposite side of the body. Sperry's “split-brain” studies show that each has its own way of knowing.",
+  "L-mode: verbal, analytic, symbolic, abstract, temporal, rational, linear. R-mode: nonverbal, synthetic, concrete, analogic, nontemporal, spatial, intuitive, holistic (list on pp. 75–76).",
+  "Languages reveal an ancient bias against the left (sinister, gauche) and therefore against the right hemisphere.",
+  "The “eureka” moment is the sign of R-mode: sudden connections between seemingly unrelated things.",
+  "Left- and right-handers learn the same way: draw with the hand you normally use.",
+  "Which side takes on a task is decided by speed and motivation: the verbal part only gives it up if it seems too slow, too detailed or impossible. The exercises exploit exactly this."]},
+c4:{idea:"Two exercises to feel the shift in mode: first the conflict (Vase/Faces), then the way out (upside-down drawing).",
+ points:[
+  "In Vase/Faces, naming the parts of the profile activates the verbal part; completing the symmetrical vase requires the visual one: the result is a “glitch”.",
+  "Drawing in R-mode means asking only spatial questions: where does the curve begin? how deep is it? what angle does it make with the edge of the paper?",
+  "The European navigator follows a plan; the Trukese navigator steers by constantly reading the relationships between things: the second is the artist's way.",
+  "Upside-down images resist naming: the verbal part gives up and the visual one works undisturbed. The hardest parts (like foreshortening) come out better precisely because you don't know what you're drawing.",
+  "You recognize the R-state afterwards: no sense of time, other people's words not decoded, calm alertness, the feeling of a fascinating puzzle.",
+  "Goal of the course: to bring on that shift at will, even with right-side-up subjects."]},
+c5:{idea:"Around age 9–10 almost everyone stops drawing: the symbol system learned as a child takes the place of perception.",
+ points:[
+  "Stages of children's drawing: scribbling (from about a year and a half), symbols (the circle with eyes that becomes mom, the sun, a cat), drawings that tell stories, the repeated symbolic landscape.",
+  "Young children have an almost perfect sense of composition within the four edges of the paper; they later lose it by focusing on individual objects.",
+  "Around age 10 lateralization is complete and language dominates: kids want realism, but the drawing doesn't come out right and many give up (often also because of a sarcastic remark).",
+  "The cube paradox: to make it look like a cube you have to draw non-square shapes, exactly as they appear. Knowledge (“the corners are right angles”) sabotages sight.",
+  "Memorized symbols (eye, nose, hand, tree) are ready to fire: the solution is always the main strategy, a task the verbal part rejects.",
+  "In R-mode you slow down, lose track of time, don't decode words, feel calm and capable: this is the state to bring under control."]},
+c6:{idea:"First skill: in drawing, an edge is always shared between two things, and the contour line draws both.",
+ points:[
+  "An edge is where two things meet; the contour line is the shared boundary (like jigsaw puzzle pieces). The format is an edge too.",
+  "Pure contour drawing (very slow, never looking at the paper) doesn't produce a “nice” drawing, but it's the most effective exercise in the course: the verbal part gets bored and leaves.",
+  "Every detail becomes a whole made of smaller details, almost fractal: you rediscover wonder at ordinary things.",
+  "The picture plane is an imaginary window always parallel to your face: drawing from life means copying what you see “flattened” on that plane (Alberti, Dürer, Van Gogh's frame).",
+  "Close one eye and keep your head still: a single view, flat as a photograph. Copied onto paper, that flat image looks three-dimensional.",
+  "A toned ground (smudged graphite) removes the fear of the blank page and forgives erasures."]},
+c7:{idea:"Second skill: the negative spaces around things are as real as the objects, and drawing them makes hard parts easy.",
+ points:[
+  "Positive forms (objects) and negative spaces share edges: draw one and you've drawn the other. Spaces have no names, so you see them as they are.",
+  "Three functions of negative spaces: they make foreshortening and complicated shapes easy; they unify the drawing and strengthen the composition; they train perception.",
+  "Composition is the arrangement of shapes and spaces within the format; the format rules. Always start by choosing the framing with the viewfinder and drawing the format.",
+  "Basic unit: a medium-sized shape or space to start from, called “One”. All proportions are measured against it (1:¾, 1:2…), so your chosen composition doesn't “run off the page”.",
+  "The chair is the ideal subject: you know too much about chairs (equal legs, wide seat) and what you know doesn't match what you see.",
+  "Starting procedure for every exercise (pp. 179–180): format, tone, crosshairs, framing with the viewfinder, basic unit on the plane, transfer to the paper, then draw."]},
+c8:{idea:"Third skill: perspective and proportion. Understand the formal concepts, then “sight” with your pencil.",
+ points:[
+  "Perspective asks you to accept paradoxes: a cube is drawn with non-right angles and unequal sides, yet it looks like a cube.",
+  "Key concepts: fixed point of view, picture plane, horizon line (always at your eye level, it rises and falls with you), vanishing points, converging lines.",
+  "Horizontal edges above the horizon slant down toward the vanishing point, those below slant up, those at eye level stay horizontal; verticals stay vertical.",
+  "Two-point perspective has vanishing points almost always off the page: that's why artists use sighting instead of rulers.",
+  "Angles: judge them against vertical and horizontal, on the plane, without “poking through” it with the pencil. Memorize the “pie slice” of the angle rather than the degrees.",
+  "Proportions: arm extended and elbow locked, one eye closed, measure the basic unit with your thumb on the pencil, compare it, then “erase the measurement” and remeasure the unit in the drawing, which has a different scale.",
+  "The biggest difficulty is believing your own measurements: if you see it, draw it."]},
+c9:{idea:"Edges, spaces and relationships together in a profile portrait, beating the tricks of “size constancy”.",
+ points:[
+  "The brain changes the sizes of what you see to match what it knows (size and shape constancy) and doesn't tell you. Measuring is the only way to catch it.",
+  "The “chopped-off skull” error: people see the eyes a third of the way down, but the eye-level line is at half the head (from the top of the skull/hair to the chin).",
+  "The features are small relative to the skull: the brain enlarges them because they're the important part.",
+  "Ear: eye level to chin = back of the eye to back of the ear (an isosceles triangle). The bottom of the ear is about level with the space between nose and mouth.",
+  "The neck joins the skull higher than you'd expect and is wide: no thin neck under an oval.",
+  "Tricks: for the iris draw the white of the eye as a negative space; for glasses and collars draw the spaces around them; for hair render masses, directions and darks, not individual hairs.",
+  "Copying master drawings is excellent training: it forces you to slow down and see what the artist saw."]},
+c10:{idea:"Fourth skill: the “logic of light” gives volume. The fifth, the gestalt, comes on its own as an “aha”.",
+ points:[
+  "Four aspects of light: highlight (where light hits directly), cast shadow (the darkest, where the object blocks the light), reflected light (bounced off nearby surfaces), crest shadow (on the ridge of the form, between light and reflected light).",
+  "Values range from the white of the paper to the densest black; “high” = light, “low” = dark.",
+  "Shapes of light and shadow have no names and change with every movement: the verbal part rejects them. Upside down they look like blotches (Courbet, pp. 270–271).",
+  "Viewers complete forms from just a few clues: suggesting is enough, and you have to know when to stop.",
+  "Three poses: frontal, profile, three-quarter. Frontal: the space between the eyes is one eye-width; nostrils under the inner corners of the eyes; corners of the mouth under the pupils; ears from the eyes to the nose-mouth area; neck nearly as wide as the jaw.",
+  "Three-quarter: the turned side is narrower, eye and mouth change shape; from the front corner of the eye to the back of the ear = eye-to-chin. Typical mistake: near eye too close to the nose.",
+  "Hatching and crosshatching are learned with practice and become a personal signature."]},
+c11:{idea:"The five drawing skills transfer to thinking: you can “see” a problem in terms of edges, spaces, relationships, lights and shadows.",
+ points:[
+  "Draw a little every day: a sketchbook always with you, upside-down copies of photos, copies of the masters, even just mental practice.",
+  "Computers excel at L-functions; R-functions (recognizing an expression, intuiting) remain much harder to imitate, yet schools keep stressing the former.",
+  "Five stages of creativity: First Insight (R, seeing the problem), Saturation (L, research), Incubation (R, it works by itself while you do other things), Illumination (the “aha”), Verification (L guided by R, the hard work).",
+  "You can “program” your brain: ask it to find the solution by a certain date and then let go.",
+  "The designer example: edges shared with the client, blank spaces to discover, horizon and vanishing points, basic unit, lights and shadows of the project, gestalt.",
+  "True creativity also requires social value; cave art shows how powerful the ability to visualize was."]},
+c12:{idea:"The course is only the beginning: drawing never ends, and every drawing also shows who made it.",
+ points:[
+  "You draw in R-mode and then interpret in L-mode: the drawing reveals how you see and feel things.",
+  "No subject is too hard or too ordinary: everything deserves to be drawn.",
+  "Copy the masters not to imitate their style but to understand how they saw.",
+  "Protect and nurture your style; if a drawing goes wrong, calm down and go back to looking.",
+  "Don't wait for inspiration: set up the conditions for the shift in mode, every day.",
+  "Teach someone else: going over the lessons fixes them in you too."]}
+},
+ex:{
+ strumenti:{t:"Build the picture plane and viewfinders", min:"20 min",
+  mat:"Clear plastic 8×10 in (20×25 cm), black cardboard, permanent marker, scissors",
+  steps:["On the picture plane, draw with the permanent marker a vertical and a horizontal line crossing at the center.",
+   "Cut two rectangles of black cardboard the size of the plane (8×10 in) and draw the diagonals.",
+   "Small viewfinder: mark an inner rectangle 2 in (5 cm) from the edges (the corners fall on the diagonals) and cut it out.",
+   "Large viewfinder: same thing, 1 in (2.5 cm) from the edges.",
+   "To use them, clip one or the other to the plane."],
+  why:"Windows, plane and format share the same proportions: the scale changes, not the shape."},
+ pre1:{t:"Pre-instruction 1: a person from memory", min:"15–20 min",
+  mat:"Plain paper, HB pencil, tape, drawing board",
+  steps:["Tape 3–4 stacked sheets to the board (they act as padding).",
+   "Call a person to mind (a photo or one of your old drawings works too).",
+   "Draw them as best you can: head only, half-figure or full figure.",
+   "Title, signature and date at the bottom right."],
+  why:"Shows how much the childhood symbols guide your hand."},
+ pre2:{t:"Pre-instruction 2: self-portrait in a mirror", min:"20–30 min",
+  mat:"Small mirror, HB pencil, board leaning against the wall",
+  steps:["Tape the mirror to the wall and sit an arm's length away; you must see your whole head.",
+   "Lean the board against the wall with its bottom edge in your lap.",
+   "Look at your reflection and draw yourself.",
+   "Title, signature and date."],
+  why:"It will be the benchmark for the final self-portrait (ch. 10)."},
+ pre3:{t:"Pre-instruction 3: my hand", min:"15–20 min",
+  mat:"HB pencil, paper",
+  steps:["Sit at a table.",
+   "Draw your non-drawing hand, in whatever pose you like.",
+   "Title, signature and date.",
+   "Compare the three drawings: look for repeated symbols (identical eyes, identical nails) and note them on the back. Then put them away until the end of the course."],
+  why:"The backs of the sheets become the diary of your starting point."},
+ firma:{t:"Your signature as a drawing", min:"10 min",
+  mat:"Plain paper, HB pencil",
+  steps:["Write your signature as usual and look at it as a drawing: it's unique and yours alone.",
+   "Look at the five signatures in the margin (p. 56): same name, different personalities. What do they tell you?",
+   "Rewrite your name in at least three different line styles and notice what changes (speed, pressure, rhythm, size)."],
+  why:"You already express yourself with line: the course focuses on seeing, style comes on its own."},
+ vasi:{t:"Vase/Faces", min:"5–10 min",
+  mat:"Paper, HB pencil",
+  steps:["Copy half the vase/faces: profile on the left if you're right-handed, on the right if you're left-handed (figures on p. 83).",
+   "Close the vase with two horizontal lines at the top and bottom.",
+   "Trace over the profile naming the parts out loud: forehead, nose, lips, chin, neck.",
+   "Now draw the opposite profile to complete a symmetrical vase and notice the confusion that sets in.",
+   "Note how you resolved it (grid, space between the profiles, starting from the bottom…) and write it on the back."],
+  why:"Lets you feel the conflict between the two modes."},
+ stravinsky:{t:"Upside-down drawing: Picasso's Stravinsky", min:"40–60 min",
+  mat:"The upside-down image on p. 93, HB pencil, paper, a quiet hour",
+  steps:["Set aside an hour; music without words, or silence.",
+   "Never turn the model or your drawing right side up until you're done.",
+   "Start wherever you like and move from one line to the next, from one space to the adjacent shape, like a puzzle. Don't do the outline first.",
+   "If you talk to yourself, use only visual language: this line curves like this, it goes at this angle relative to the edge of the paper.",
+   "Hands and face will try to get themselves named: cover them with a finger or a sheet of paper and uncover one line at a time.",
+   "At the end turn everything around and look at the result."],
+  why:"The verbal part can't “read” upside-down images and steps aside."},
+ capovolti:{t:"More upside-down drawings", min:"30–60 min",
+  mat:"Images on pp. 99–101 or upside-down photos and drawings of your choice",
+  steps:["Pick Spider-Man on p. 99 or the German knight on p. 100 (line version on p. 101).",
+   "Draw a format with the same proportions as the image: the format governs shapes and spaces.",
+   "Proceed as with Stravinsky, always upside down.",
+   "After each drawing think back on how you felt: learn to recognize the R-state."],
+  why:"Repeating the shift makes it familiar."},
+ paesaggio:{t:"The remembered childhood landscape", min:"15 min",
+  mat:"Paper, HB pencil",
+  steps:["Before reading further, draw the landscape you used to draw as a child (house, sun, trees, mountains, road…).",
+   "Title it “Remembered Childhood Landscape”.",
+   "As you draw, recall the pleasure and confidence with which you put each symbol in its place.",
+   "Cover one element with your hand and see how the balance of the composition changes (example on p. 115)."],
+  why:"Brings back your symbols and your innate sense of composition."},
+ contpuro:{t:"Pure contour drawing of your palm", min:"5 min (+ repeats)",
+  mat:"Paper taped to the board, HB pencil, timer",
+  steps:["Cup your non-drawing hand a little: you'll draw all the creases of the palm.",
+   "Set the timer for 5 minutes.",
+   "Turn completely away: you look only at your palm, never at the paper.",
+   "Follow a crease millimeter by millimeter: eye and pencil moving at the same slow pace, like a seismograph.",
+   "Don't stop or turn around until the timer goes off; the inner protests pass within a minute.",
+   "If the shift didn't happen, try again with a crumpled piece of paper, a flower, a feather (p. 134)."],
+  why:"The task is too slow and minute for the verbal part, which leaves the field."},
+ pianomano:{t:"Drawing your hand on the picture plane", min:"15–20 min",
+  mat:"Picture plane, viewfinder, clips, non-permanent marker, damp tissue",
+  steps:["Rest your hand on the table with the fingers pointing toward your face (foreshortened view).",
+   "Pick the viewfinder that best frames the hand, clip it to the plane and trace the inner edge with the marker (the format).",
+   "Rest the plane on your fingertips, close one eye and don't move your head.",
+   "Trace the edges on the plane exactly as you see them, without naming the parts; correct with the damp tissue.",
+   "Repeat with more complicated poses (fist, crossed fingers, an object in your hand) and keep the best drawing."],
+  why:"Lets you grasp hands-on that drawing is copying what lies on the plane."},
+ pianostanza:{t:"Look at the world through the plane", min:"5 min",
+  mat:"Picture plane with the large viewfinder",
+  steps:["Hold the plane in front of your face, parallel to your eyes, and close one eye.",
+   "Move it closer and farther to change the framing.",
+   "Compare the angles of the ceiling or of a table with the crosshairs: vertical and horizontal.",
+   "Imagine tracing them; then put the plane down and try to “see” it anyway."],
+  why:"Prepares the imaginary picture plane you'll always use."},
+ contmod:{t:"Modified contour drawing of your hand on a toned ground", min:"1 hour",
+  mat:"Drawing pad, graphite stick, paper towel, HB and 4B pencils, three erasers, the plane with the hand drawn on it",
+  steps:["Tape the sheets at the four corners and draw the format using the viewfinder as a template.",
+   "Tone the paper: light graphite, then rub in circles to an even silver gray. Add the crosshairs, lightly.",
+   "Transfer the main points of the drawing on the plane to the paper using the crosshairs (same scale).",
+   "Put your hand back in the pose, close one eye and slowly draw every undulation of the edges, looking at your hand 90% of the time.",
+   "For the nails draw the shapes of skin around them; if a part stumps you, move to the next shape.",
+   "Finish: erase out the lights, darken the shadows, optionally lighten the background."],
+  why:"It's the first “real” drawing: three-dimensional because it was copied from a flat view."},
+ sedia:{t:"Negative spaces of a chair", min:"1 hour or more",
+  mat:"Large viewfinder, picture plane, marker, drawing pad, pencils, erasers, graphite, paper towel",
+  steps:["Format with the outer edge of the plane, toned ground, light crosshairs.",
+   "Place a chair (ideally with rungs and slats) in front of a plain wall, 7–8 ft (2–2.5 m) from you. A lamp can add an interesting shadow.",
+   "Compose with viewfinder and plane, one eye closed; imagine the chair disappearing and only the spaces remaining.",
+   "Choose a simple space as your basic unit (e.g. between two slats), draw it on the plane and transfer it to the paper, checking position and angles against the crosshairs.",
+   "From there draw one space after another like puzzle pieces, asking yourself only about widths and angles relative to the unit and to vertical/horizontal.",
+   "At the end lighten the spaces or the chair with the eraser and add the shadows."],
+  why:"The verbal part won't deal with “nothing”: the chair comes out right on its own."},
+ copiespazi:{t:"Copy Homer and Rubens using negative spaces", min:"30–45 min",
+  mat:"Images on pp. 189 and 190, pencil, paper",
+  steps:["Copy Winslow Homer's boy on the wicker chair (p. 189), focusing on the negative spaces.",
+   "Turn Rubens's studies of arms and legs (p. 190) upside down and draw the spaces around the forms first.",
+   "Then turn the drawing right side up and complete the inner details."],
+  why:"“Difficult” foreshortening becomes easy when you look around the forms."},
+ spaziovunque:{t:"Negative space hunt", min:"every day",
+  mat:"Just your eyes",
+  steps:["During the day look for negative spaces: between branches, between buildings, the arrow in the FedEx logo.",
+   "Imagine drawing them edge by edge.",
+   "Do the same with a basket, a ladder, a whisk: ordinary objects that become beautiful."],
+  why:"Mental practice makes the new perception automatic."},
+ corridoio:{t:"One-point perspective: the hallway", min:"10 min + drawing",
+  mat:"A long hallway, picture plane, pencil",
+  steps:["Stand at the end of the hallway, in the center. Find your horizon line on the far wall and pick a point: the vanishing point.",
+   "Hold up the plane parallel to your eyes, align the horizontal crosshair with the horizon and close one eye.",
+   "Line up the pencil on the plane with the wall-ceiling edge: it slants down toward the vanishing point. Repeat on the other side and with the doors.",
+   "The edges along the floor instead slant up toward the same point; verticals stay vertical.",
+   "Sit down (lower horizon) and notice how the angles change.",
+   "Draw the hallway in one-point perspective."],
+  why:"Builds the “perspective mind-set” you'll later use by eye."},
+ angolo:{t:"Sighting the angles of a room corner", min:"20 min",
+  mat:"Plane with viewfinder, marker, pencil, paper",
+  steps:["Sit 10–13 ft (3–4 m) from a corner of the room, preferably an uncluttered one.",
+   "Compose with the plane, align the crosshairs at eye level and trace the vertical corner edge, then the ceiling-wall and floor-wall edges.",
+   "Transfer the lines to paper: extended, they would converge at two vanishing points off the page.",
+   "Now do it again with just the pencil: vertical for the corner edge, horizontal at the top, and “photograph” the triangle each angle forms.",
+   "Always compare with the horizontal or the vertical, choosing whichever gives the smaller angle."],
+  why:"Angles can only be seen by comparing them with the two constants."},
+ gesto:{t:"The gesture for measuring proportions", min:"10 min",
+  mat:"Pencil",
+  steps:["Close one eye, arm extended and elbow locked, pencil on the imaginary plane.",
+   "Mark the width of the basic unit with your thumb (e.g. the top of a door).",
+   "Compare it with another measurement: 1:1, 1:2, 1:2⅔…",
+   "Remember the ratio and “erase the measurement from the pencil”.",
+   "In the drawing remeasure the unit and apply the same ratio: one… two…"],
+  why:"Avoids the most common mistake: carrying the real measurement straight onto the paper."},
+ duepunti:{t:"Two-point perspective drawing", min:"1–2 hours",
+  mat:"Toned pad, pencils, erasers, plane with large viewfinder, two chairs",
+  steps:["Starting procedure as for the chair; format with the outer edge of the plane.",
+   "Pick an interesting spot (a kitchen corner, an open door, a balcony, an intersection): not necessarily an easy one.",
+   "Compose with the viewfinder, choose a medium basic unit (window, door, picture) and draw it on the plane.",
+   "Transfer it to the paper using the four quadrants of the crosshairs (enlarging a little).",
+   "Proceed from part to adjacent part, sighting angles and proportions; use negative spaces for small objects and foliage.",
+   "Squint to see the large masses of light and shadow: erase out the lights, darken the shadows. Check the parts that look “off” with the plane."],
+  why:"With edges, spaces and relationships you can draw anything you see."},
+ costanza:{t:"Testing size constancy", min:"15 min",
+  mat:"A piece of paper to notch, picture plane, marker, a mirror",
+  steps:["The four men (p. 230): notch a slip as tall as one figure and check that they're all the same; then turn the book upside down.",
+   "The two tables (p. 232): trace one tabletop on the picture plane and lay it over the other.",
+   "In a crowded place look at near and far heads through a paper tube.",
+   "In the mirror, at arm's length, mark the top of your head and your chin with the marker: the image is about half life-size."],
+  why:"The brain must be “caught in the act” before you'll believe the measurements."},
+ misuretesta:{t:"Head proportions (frontal and profile)", min:"20 min",
+  mat:"Paper, pencil, mirror, photos of faces",
+  steps:["Draw a frontal oval with the central axis and the eye-level line halfway down.",
+   "On your own head: measure with the pencil from the inner corner of the eye to the chin, then from the eyes to the top of the head. They're equal.",
+   "Check on photos, in the mirror and on the TV screen.",
+   "Draw the profile blank (p. 244) with the eye-level line at the halfway mark.",
+   "Measure the back of the ear with the isosceles-triangle rule, then the bottom of the ear and the point where neck and skull meet; mark them on the blank."],
+  why:"Memorizing these constants avoids the most common mistakes."},
+ sargent:{t:"Copying Sargent's Madame X profile", min:"1 hour",
+  mat:"Drawing pad, HB and 4B pencils, erasers, picture plane as a template",
+  steps:["Draw the format with the plane and light crosshairs; no toned ground (it's a line drawing).",
+   "Lay the plane over the drawing on p. 249 to see where the crosshairs fall and choose the basic unit (ear, nose, eye-to-chin).",
+   "Follow the checks on pp. 251–252: hairline, tip of the nose, nose-chin angle, negative spaces in front of the face and neck, position of the ear.",
+   "Assemble the drawing like a puzzle, comparing everything with the basic unit.",
+   "At the end turn both original and copy upside down: the errors jump out."],
+  why:"A dress rehearsal before the real model."},
+ profilo:{t:"Profile portrait from life", min:"1 hour or more",
+  mat:"A model (even someone watching TV or reading), picture plane, marker, drawing pad, pencils, erasers, two chairs",
+  steps:["Format, light toned ground (or none, for a line drawing) and crosshairs.",
+   "Model facing left if you're right-handed; sit 2–4 ft (60–120 cm) away.",
+   "Compose with the plane, leaving room for neck and shoulders (the chin shouldn't touch the edge).",
+   "Eye-to-chin basic unit: mark it on the plane and transfer it to the paper, along with the top of the hair and the back of the head.",
+   "Start from the negative space in front of the profile; check the nose-chin angle, the space under the nostril, the angle of the eyelid and of the line of the mouth.",
+   "Place the ear with the triangle, measure the back of the head, render the hair as masses and directions, then neck and collar through the negative spaces."],
+  why:"Here the first three skills become a single skill."},
+ courbet:{t:"Look at Courbet upside down", min:"5 min",
+  mat:"Just the book",
+  steps:["Look at Courbet's self-portrait upside down: you only see light and dark blotches.",
+   "Turn it right side up: the same blotches become a head in relief.",
+   "Look at the blotchy images on p. 272: first you see the pattern, then you understand what it represents."],
+  why:"Understanding that shadows should be drawn as shapes, not interpreted."},
+ frontale:{t:"Facial proportions in the mirror", min:"20 min",
+  mat:"Mirror, paper, pencil",
+  steps:["In front of the mirror (which acts as the picture plane) draw an oval with a central axis and the eye-level line halfway down.",
+   "Tilt your head: axis and eye-level line stay at right angles.",
+   "Divide the eye-level line into fifths (one eye of space between the eyes).",
+   "Find the base of the nose with the inverted triangle from the outer corners of the eyes, then the mouth a third of the way from nose to chin.",
+   "Mark nostrils, corners of the mouth, ears and neck width; then check on other people and photos."],
+  why:"A general guide to adapt to every face."},
+ tretquarti:{t:"The three-quarter view in the mirror", min:"30 min",
+  mat:"Mirror, paper, pencil",
+  steps:["Turn your head until the tip of the nose almost touches the contour of the far cheek.",
+   "Find the central axis (center of the bridge of the nose and of the upper lip) and its tilt; the eye-level line is perpendicular to it.",
+   "Start from the closed shape between nose and turned cheek; draw the far eye through the shapes around it (above, beside, the white, below).",
+   "Near eye: it's about one eye-width from the edge of the nose.",
+   "Lines parallel to the axis for nostrils and corners of the mouth; ear with the front-of-eye → back-of-ear rule."],
+  why:"Prepares the final self-portrait, preferably in three-quarter view."},
+ steichen:{t:"Copying the Steichen detail", min:"1 hour",
+  mat:"4B (or 6B) pencil, erasers (one cut to a point), picture plane, graphite, paper towel",
+  steps:["Format with a viewfinder; tone the paper to the darkest gray you can.",
+   "Lay the plane over the image on p. 288; make the crosshairs on the paper with the eraser along a ruler.",
+   "Choose the basic unit (e.g. the length of the nose) and transfer it.",
+   "“Draw” with the eraser: first the large shapes of light, then the brightest lights (forehead, scarf, tip of the nose).",
+   "Darken the shadow areas with the 4B, keeping the tones smooth.",
+   "Step back, squint, and stop as soon as the face “appears”. Don't draw the eyes."],
+  why:"Teaches how little it takes for the viewer to see everything."},
+ tratteggio:{t:"Hatching and crosshatching", min:"15 min + practice",
+  mat:"Paper, well-sharpened HB or 4B pencil",
+  steps:["Make a group of 8–10 parallel marks moving your hand from the wrist: that's a “set”.",
+   "Try direction, speed, spacing and length until you find your own.",
+   "Cross a second set at a slightly different angle (vibrating effect) or a sharper one.",
+   "Layer several sets to darken; also try curved strokes that follow the form.",
+   "Practice on spheres and cylinders, even while on the phone."],
+  why:"Hatching becomes your personal way of making tones."},
+ autoritratto:{t:"Self-portrait in light and shadow", min:"1–2 hours",
+  mat:"Drawing pad, pencils, erasers, mirror at arm's length, adjustable lamp, graphite, optionally a hat",
+  steps:["Format and toned ground (light, medium or dark: your choice), crosshairs.",
+   "Mirror at arm's length (it's your picture plane), board leaning against the wall, lamp to one side. Choose a frontal or three-quarter pose and don't move anything again.",
+   "Choose the basic unit (e.g. eye-to-chin) and mark its ends on the mirror with the marker; transfer them to the paper.",
+   "Squint and erase out the large shapes of light; then darken the shadowed side with the 4B.",
+   "Don't draw the features right away: let them emerge from the shadows (for the eyes, a finger smudged with graphite is enough).",
+   "Add the smaller shadows; get up now and then to look from a distance and correct."],
+  why:"Brings the four skills together: the fifth, the likeness, emerges by itself."},
+ confronto:{t:"Before and after", min:"10 min",
+  mat:"The three pre-instruction drawings and the final self-portrait",
+  steps:["Put the initial and the final self-portraits side by side.",
+   "Notice what changed: fewer symbols, more observation.",
+   "Measure the proportions of the end-of-course self-portraits in ch. 2.",
+   "Bonus: a self-portrait as a character from art history."],
+  why:"Makes visible the progress we tend to forget."},
+ taccuino:{t:"A drawing a day", min:"10 min a day",
+  mat:"A small sketchbook, a pencil",
+  steps:["Always carry a sketchbook.",
+   "In idle moments draw something nearby: a cup, scissors, a leaf.",
+   "Or copy a newspaper photo upside down (sports and dance have beautiful negative spaces).",
+   "When you can't draw, look for negative spaces, your eye level and angles around you.",
+   "Tap “I drew today” on the home screen to count the days in a row."],
+  why:"New pathways in the brain only consolidate with repetition."},
+ problema:{t:"Draw one of your problems", min:"30 min",
+  mat:"A sheet of paper and a real problem",
+  steps:["Pick a real problem or decision.",
+   "First insight: what are the shared edges (with whom? soft or hard)? What's in the negative spaces? Where's the horizon, what's the basic unit? What's in light and what's in shadow?",
+   "Mentally turn the picture upside down to look for what you're missing.",
+   "Saturation: gather the information you need.",
+   "Incubation: give your brain a deadline and do something else.",
+   "When the “aha” comes, verify it and put it into practice step by step."],
+  why:"Transfer is learned best when you practice it on purpose."},
+ insegna:{t:"Teach someone to draw", min:"an afternoon",
+  mat:"Your materials, the book",
+  steps:["Pick a friend or family member who “can't draw”.",
+   "Have them do the pre-instruction drawings.",
+   "Guide them through Vase/Faces, upside-down drawing and pure contour.",
+   "Compare the results and tell them about the five skills."],
+  why:"Explaining the process deepens your own understanding."}
+},
+mats:{
+  bond:["Plain paper (copy paper)", "for exercises and tryouts"],
+  album:["Drawing pad, about 11×14 in", "paper around 80 lb (120 g)"],
+  hb:["HB writing pencil with eraser", "the American #2"],
+  "4b":["4B drawing pencil", "for darks and shadows"],
+  penna1:["Fine-tip black non-permanent marker", "for drawing on the picture plane"],
+  penna2:["Fine-tip black permanent marker", "for the crosshairs on the plane"],
+  grafite:["4B graphite stick", "for the toned ground"],
+  tempera:["Pencil sharpener", "a small one is fine"],
+  gomma1:["Soft pink eraser", "Pink Pearl type"],
+  gomma2:["White plastic eraser", "Staedtler Mars type, to cut to a point"],
+  gomma3:["Kneaded eraser", "to lighten without rubbing"],
+  nastro:["Low-tack masking tape", "to hold the sheets in place"],
+  clip:["Two 1-inch black binder clips", "to join viewfinder and plane"],
+  tavola:["Drawing board, about 15×18 in", "a cutting board or stiff cardboard works too"],
+  piano:["Clear picture plane, 8×10 in", "1/16 in plastic, or glass with taped edges"],
+  mirini:["Two black cardboard viewfinders", "to build yourself (pp. 46–47)"],
+  specchio:["Small mirror, about 5×7 in", "or a wall mirror"],
+  timer:["Timer or alarm clock", "for pure contour drawing"],
+  lampada:["Adjustable lamp", "for the self-portrait (ch. 10)"]
+},
+memo:[
+  {t:"The five skills", items:["Edges: the contour shared between two things.","Spaces: the negative spaces that share edges with the forms.","Relationships: angles relative to vertical/horizontal and proportions relative to the basic unit.","Lights and shadows: the logic of light, values.","Gestalt: the whole, which emerges by itself."]},
+  {t:"Routine before every drawing", items:["Draw the format (edge of the viewfinder or of the plane).","Tone the paper, if you want to work on a gray ground.","Draw the light crosshairs.","Compose with viewfinder and plane, one eye closed.","Choose the basic unit (“One”) and draw it on the plane.","Transfer it to the paper with the help of the crosshairs.","Then draw, from adjacent part to adjacent part."]},
+  {t:"Pocket perspective", items:["The horizon is always at your eye level.","Horizontal edges above the horizon: slant down toward the vanishing point.","At eye level: they stay horizontal.","Below the horizon: they slant up toward the vanishing point.","Verticals stay vertical (except for very tall buildings).","Stay on the plane: don't “poke through” it with the pencil."]},
+  {t:"Sighting with the pencil", items:["One eye closed, arm extended, elbow locked.","Angles: compare them with vertical or horizontal (whichever is closer).","Proportions: always relative to the basic unit, as a 1:x ratio.","Erase the measurement from the pencil and remeasure in the drawing.","Believe your measurements: if you see it, draw it."]},
+  {t:"The head in profile", items:["Eye-level line at half the head (top of skull/hair – chin).","Eye-to-chin = back of the eye – back of the ear (isosceles triangle).","Bottom of the ear about level with the space between nose and mouth.","The neck joins the skull high up, about level with the nose or mouth.","The features take up a small part of the head."]},
+  {t:"The head, frontal and three-quarter", items:["Central axis and eye-level line always at right angles.","One eye of space between the eyes (eye-level line in fifths).","Base of the nose: inverted triangle from the outer corners of the eyes.","Mouth about a third of the way from nose to chin; corners under the pupils.","Nostrils under the inner corners of the eyes; ears from the eyes to nose-mouth.","Three-quarter: front corner of the eye – back of the ear = eye-to-chin; near eye one eye-width from the nose."]},
+  {t:"Logic of light", items:["Highlight: where the light strikes directly.","Cast shadow: the darkest, where the light is blocked.","Reflected light: light bounced off nearby surfaces.","Crest shadow: on the ridge of the form, between light and reflected light.","Squint to see the large masses; stop when the form “appears”."]},
+  {t:"When you're stuck", items:["Do two minutes of pure contour on a complex object.","Turn the model (or the drawing) upside down and keep going.","Draw the adjacent space or shape, not the “hard” part.","Stop naming the parts: ask yourself only about angles, widths, curves.","Get away from distractions: the shift in mode is fragile."]}
+],
+long:{
+intro:[
+ {h:"Drawing like reading", p:[
+  "The book's underlying idea is a comparison with reading. Nobody thinks reading requires a special gift: you learn the letters, the sounds, the syllables, the vocabulary, and at some point the pieces fuse and you “read” without thinking about it. Drawing works the same way: it's a global skill made of smaller skills, and people who say “I can't draw” have usually just never learned one or more of these components.",
+  "The book is designed precisely for people starting from zero who think they have no talent. The exercises don't aim at making “art”, but at building the alphabet of seeing: a solid base from which everyone can then go wherever they like, from portraits to landscapes to abstraction."]},
+ {h:"The five basic skills", p:[
+  "To draw what's in front of you, you need five ways of seeing. Edges: where one thing ends and another begins. Spaces: what lies around and between things. Relationships: angles and proportions, that is, perspective. Lights and shadows: the degrees of light and dark that make things look solid. And the gestalt, the perception of the whole.",
+  "The first four must be taught directly, one at a time, and that's what chapters 6 to 10 do. The fifth can't be taught: it arrives as a consequence, an “aha” you feel when, after carefully observing the parts, you suddenly see the whole thing. The author likens it to aesthetic pleasure, the sense of beauty."]},
+ {h:"The strategy: a task the verbal part rejects", p:[
+  "The heart of the method is a simple observation. The part of the brain that works with words is fast, dominant and tends to jump on every task, even when it's not suited to it. Faced with a face, instead of looking it “names”: eye, nose, mouth, and draws the symbols it knows. Fighting it head-on doesn't work.",
+  "What works is getting around it: offering a task it finds pointless, boring or impossible, so that it steps aside on its own. Every exercise in the book is a variation on this trick: an upside-down image that can't be named, a contour so slow it's unbearable, an empty space that is “nothing”, an angle that contradicts what you know, a shadow that changes shape with every movement."]},
+ {h:"Plasticity, the saboteur and transfer", p:[
+  "Today we know the brain changes with experience: learning a new skill creates new connections. This undermines the idea of a fixed talent, given or withheld at birth. Like reading, once drawing is acquired it stays for life.",
+  "Beware, though, of the “great saboteur”: precisely because it's being pushed aside, the verbal mind will always find something more urgent to do. The remedy is the same: start anyway with something it rejects, even just a negative space or an upside-down copy. Over time the resistance fades. And the skills of seeing, learned by drawing, can be transferred to how you think and solve problems: that's the subject of chapter 11."]}
+],
+c1:[
+ {h:"Why the bicycle", p:[
+  "Teaching drawing is like teaching bike riding: you can describe it in words as much as you like, but you only really get it by trying, perhaps after watching someone do it. That's why phrases like “look harder” or “check the proportions” are of little use: learners don't know what to look at, or how.",
+  "Drawing from life depends on a particular way of seeing, different from the one we use every day to recognize objects and get around. In normal life it's enough to grasp “what” a thing is; to draw it you have to see “how” it really is, with its shapes, its angles, its relationships."]},
+ {h:"It isn't magic", p:[
+  "Many people consider drawing an almost magical ability, and artists often don't help: asked “how do you do it?”, they answer “I look and draw what I see”. True, but it explains nothing. The book aims to remove the mystery: anyone who can sign their name or write a message already has enough coordination. The problem isn't the hand, it's the eye, or rather the way the brain interprets what the eye sees.",
+  "That's why the teaching aims more at unlocking than at adding: the abilities are there, but old habits of seeing cover them up."]},
+ {h:"A different state of mind", p:[
+  "People who draw well enter a particular state: intense concentration, time disappearing, surrounding voices turning into background noise, a feeling of calm and confidence. It's similar to what happens on a long highway drive, while reading a gripping novel or playing a sport.",
+  "This state is fragile: a question or a ringing phone is enough to snap you back to your usual way of thinking. Learning to draw also means learning to create the conditions for entering it, and to recognize it when you're in it."]},
+ {h:"Why difficult subjects", p:[
+  "The exercises deliberately use the subjects considered hardest: a hand, a chair, a room in perspective, a portrait, a self-portrait. The reason is that drawing is always the same task, whatever the subject; you might as well prove to yourself that you can tackle the ones that scare you most.",
+  "Faces have an extra advantage: anyone can tell right away if a portrait is off, so the feedback is immediate, and achieving a likeness gives great confidence. Plus, face recognition is a specialty of the visual part of the brain, the very part we want to train."]}
+],
+c2:[
+ {h:"The tools and why you need them", p:[
+  "The materials are simple: paper, a couple of pencils, a graphite stick, three erasers, tape, a board. Two tools, though, are special: the clear picture plane with crosshairs drawn on it and the black cardboard viewfinders. They look like accessories, but the book considers them essential to understanding what drawing from life really is.",
+  "The picture plane makes concrete a concept that usually stays abstract: looking at the world through a window and copying what you see “flattened” on the glass. The viewfinders are for framing and choosing the composition. They all share the same width-to-height ratio, so what you see in the viewfinder can be transferred to the paper changing only the scale. Once the skills are internalized, you can do without them."]},
+ {h:"The pre-instruction drawings", p:[
+  "Before learning anything, you make three drawings: a person from memory, a self-portrait in a mirror, your own hand. It's an uncomfortable moment, but an important one: progress brings a curious amnesia, you forget how you used to draw and become ever more critical. Having a dated, signed starting point lets you truly measure how far you've come.",
+  "When you look at these drawings, it's worth searching not for flaws but for the little spots where you really observed: the curve of an eyebrow, the fold of a collar. They're the sign that the ability to see is already there."]},
+ {h:"The tyranny of symbols", p:[
+  "Drawing from memory brings out something valuable: the symbol system each of us built as a child. Almond eyes with a little circle, a hooked nose, fingernails like small arches. Often the same symbols reappear unchanged in the self-portrait too, that is, even while looking at a real face: the hand draws what it “knows” instead of what it sees.",
+  "The level of these drawings generally matches the age at which you stopped drawing, often between nine and twelve. It says nothing about potential: it only shows where you stopped. The course doesn't teach technical tricks, but how to see differently, and that's what transforms the results."]},
+ {h:"Your style is already yours", p:[
+  "The book doesn't teach a style. Your signature proves it: it's a drawing made with a line, unique and recognizable, expressing speed, pressure, rhythm, character. Already today, writing your name, you use line expressively.",
+  "Personal style emerges by itself as you learn to see better: two people drawing the same model with the same materials get two portraits that are both good likenesses yet very different. There are many kinds of line, bold, broken, thin and precise, disappearing and reappearing, and none is better than the others. The more clearly you see, the more the drawing also reveals who made it."]}
+],
+c3:[
+ {h:"A double brain", p:[
+  "Seen from above, the two hemispheres look like the two halves of a walnut, joined by a bundle of fibers, the corpus callosum. Each controls the opposite side of the body: the right hand depends on the left hemisphere and vice versa. For a long time the left, seat of language in the vast majority of people, was thought to be the “main” one, and the right a mute younger sibling.",
+  "Roger Sperry and his group's studies on patients whose corpus callosum had been severed changed this view: both hemispheres perform complex functions, but in different ways. Sometimes they cooperate, sometimes one takes charge, sometimes they conflict. To avoid arguments about precise localization, the book speaks of “L-mode” and “R-mode”."]},
+ {h:"L-mode and R-mode", p:[
+  "L-mode is verbal and analytic: it names, breaks down, counts, follows a sequence, uses symbols, reasons in logical steps, keeps track of time. It's perfect for a theorem or an outline, but it tends to simplify: recognizing a thing is enough for it to categorize it and move on.",
+  "R-mode is visual and holistic: it sees how parts fit together, grasps relationships in space, works by analogy and intuition, doesn't feel time passing and accepts what is ambiguous or contradictory. It's what you need to draw what's in front of you, because it doesn't replace reality with a concept. Try describing a spiral staircase without making the spiral gesture and you'll notice how inadequate words can be."]},
+ {h:"An old prejudice", p:[
+  "Many languages betray a bias against the left, and so indirectly against the right hemisphere that controls it: “sinister” comes from the Latin for left, “dexterous” from the word for right; in French gauche means clumsy. Left-handed children used to be forced to use their right hand, often with heavy consequences. As the author notes, words were invented by the verbal half of the brain, which kept the best ones for itself.",
+  "Sudden insights too, Archimedes's classic “eureka” in the bath, are moments when R-mode sees a connection that step-by-step reasoning hadn't found."]},
+ {h:"Left-handers, right-handers and who takes the task", p:[
+  "Left- and right-handers learn to draw the same way: there's no need to switch to the other hand, which only makes the line clumsier. You draw with the hand you normally use.",
+  "The key point for the rest of the book is how the two hemispheres divide the work. Two things seem to count: who gets there first and who cares more. The verbal part is fast and dominant, and only gives way if the task seems too slow, too detailed or impossible for it. The exercises are built exactly this way, so that it's the one to give up."]}
+],
+c4:[
+ {h:"Vase/Faces: feeling the conflict", p:[
+  "The first exercise is designed to create a glitch. You copy half a profile, then trace over it saying the names of the parts out loud: forehead, nose, lips, chin. This switches on the verbal part. Then you're asked to draw the other profile to get a symmetrical vase, a task that can only be solved by looking at shapes, curves and distances.",
+  "Halfway through almost everyone feels confusion, sometimes a real paralysis of the hand: you no longer know whether the line should go right or left. That's exactly the point: making the clash between two ways of thinking perceptible. Everyone finds their own way out, looking at the space between the profiles, drawing a grid, starting from the bottom, no longer thinking of a face, and it's useful to note it down."]},
+ {h:"Thinking like an island navigator", p:[
+  "The book compares two navigators. The European one sets out with a written plan, routes and coordinates, and carries it out stage by stage. The navigator from the Truk Islands keeps the destination in mind in relation to the other islands and constantly corrects course by watching sun, wind and waves: he navigates superbly but couldn't explain it in words.",
+  "The second profile should be drawn like the second navigator. The right questions are purely spatial: where does this curve begin? how deep is it? what angle does it make with the edge of the paper? how long is it compared to the line I just drew? No names, no rules like “the chin juts out as far as the lips”."]},
+ {h:"Upside-down drawing", p:[
+  "Upside-down things are hard to recognize and name: a famous face upside down becomes unrecognizable, your own handwriting illegible. The verbal part, which lives on recognition, finds the task annoying and pointless and withdraws. The visual part, on the other hand, makes no distinction between right side up and upside down: it just sees interesting lines and shapes.",
+  "Copying Picasso's portrait of Stravinsky upside down, almost everyone gets a surprising result. Often the most successful parts are the hardest ones, like the foreshortened crossed legs, because you didn't know what you were drawing. Where the brain does recognize something, the hands and face, the doubts and erasures return. The lesson is simple: if you see it, draw it just as it is."]},
+ {h:"Recognizing the R-state", p:[
+  "You don't perceive the shift from one mode to the other as it happens, but you recognize it afterwards. You lose track of time, other people's words become sounds, you feel alert yet relaxed, confident, and the drawing starts to seem like a fascinating puzzle.",
+  "Repeating the experience with other upside-down drawings helps you get familiar with this feeling. The course's goal is to be able to bring it on even when the subject is right side up, always looking for visual information that the verbal part doesn't want or can't handle."]}
+],
+c5:[
+ {h:"How children draw", p:[
+  "Around a year and a half comes scribbling: the pure pleasure of seeing a line come out of the pencil. Then the great discovery: a mark can stand for something. A circle with two dots becomes mom, the dog, the sun. From there children build a vocabulary of symbols, refine them and repeat them until they become rock-solid.",
+  "Around four or five, drawings tell stories and express emotions: a huge arm because it's the one holding the umbrella, a sister with her teeth on full display. Then comes the symbolic landscape, almost the same for everyone: ground at the bottom, sky at the top, the house with its doorknob, the sun in a corner, trees, cone-shaped mountains. Young children's sense of composition is striking: every element sits exactly where it should within the edges of the paper."]},
+ {h:"The crisis at ten", p:[
+  "Between nine and eleven things change. Language takes over, children focus on individual objects and lose their sense of composition. Above all they want realism: things that look real, that recede into space. And the symbols they know are no longer enough.",
+  "Without suitable teaching the drawing “doesn't come out right”, frustration and embarrassment set in, often made worse by a sarcastic remark from an adult or a classmate. Many stop for good. They become the adults who say they can't draw a straight line and who, if forced to draw a person, still produce the figure they drew at ten."]},
+ {h:"The cube paradox", p:[
+  "To grasp the crux of the problem, a cube seen corner-on is enough. We know it's made of squares and right angles, but to make it look like a cube you have to draw shapes that aren't square, with acute and obtuse angles, exactly as they appear to the eye. Those who start from what they know, right angle at the bottom, straight base, pile up errors and get confused.",
+  "It isn't a problem of the hand: kids draw lines perfectly well. It's knowledge, useful in a thousand other situations, that prevents them from seeing the thing as it is. Picasso said art is a lie that makes us see the truth: here the “lie” is drawing crooked shapes to get a true image."]},
+ {h:"Setting symbols aside", p:[
+  "Faced with a face, the verbal mind pulls out its repertoire: here's the eye, here's the nose, here's the hair. The same goes for hands, trees, grass. There's no need to fight these symbols: just offer tasks for which no symbols exist, so the visual part can look in peace.",
+  "Redrawing the childhood landscape serves to bring them back to light and to remember how “perfect” they were in their way. But drawing from life asks for something else: looking for a long time, gathering a great deal of information and seeing how it fits together, as Dürer did with his hare."]}
+],
+c6:[
+ {h:"What an edge is", p:[
+  "In everyday language an edge is an outline, a boundary. In drawing it has a more precise meaning: it's where two things touch, and the line that represents it, the contour line, belongs to both. The profile in Vase/Faces was both the edge of the face and of the vase; in a jigsaw puzzle the edge of the boat is also the edge of the water.",
+  "The format, that is the edge of the paper, is also a shared edge: it's the outer limit of the sky, the ground, all the shapes that touch it. This seemingly trivial concept is the basis of the next chapter on negative spaces."]},
+ {h:"Pure contour and its paradox", p:[
+  "The chapter's key exercise comes from Kimon Nicolaïdes's method, which asked students to draw imagining they were touching the edge with the pencil and looking at the model instead of the paper. The book's version is more drastic: turned the other way, you draw the creases of your palm for five minutes, extremely slowly, without ever looking at the paper.",
+  "The result looks nothing like a hand: it's a tangle of marks. Yet it's the most effective exercise in the course: when it's skipped, students progress less. The extreme slowness and minuteness bore the verbal part (“it's a crease, I already said that”), which leaves; the visual part discovers that every crease is made of details and every detail of smaller details, almost like a fractal. Childlike wonder at ordinary things returns."]},
+ {h:"The picture plane", p:[
+  "The chapter's most important concept is the picture plane: an imaginary window, always parallel to your face, through which the artist looks. What lies behind it, even if it goes into depth, appears flattened on the glass as in a photograph. Drawing from life means copying that flat image onto the paper.",
+  "Alberti described this idea in the Renaissance, Dürer built actual devices, Van Gogh had a blacksmith make him a very heavy frame that he dragged down to the beach, and Holbein too drew on glass to work faster. With the clear picture plane you do the same: you rest it on your foreshortened hand, close one eye, keep your head still and trace the edges. The result is astonishing: a very difficult view rendered with ease."]},
+ {h:"One eye closed, a single view", p:[
+  "Closing one eye eliminates binocular vision, the kind that gives depth: the image becomes flat and therefore copyable. Keeping your head still guarantees you draw a single view: if a finger can't be seen, you don't draw it. The closer the object, the more it pays to close one eye.",
+  "The paradox is that the flat image, copied onto paper, looks three-dimensional to the viewer. To questions like “how do I make the finger come toward me?” the answer is always the same: draw exactly what you see on the plane. The modified contour on a toned ground brings it all together: you look at the hand almost all the time, check angles with the crosshairs, draw the shapes around the nails instead of the nails, and the result is the course's first real drawing."]}
+],
+c7:[
+ {h:"Negative spaces and positive forms", p:[
+  "Objects are the positive forms; the spaces between and around them are the negative spaces. The name isn't a happy one, but the idea is powerful: in drawing these spaces are as real as the objects. The book's example is a cartoon character crashing through a door and leaving a hole in its shape: what's left of the door is the negative space, solid and with a precise shape.",
+  "Since forms and spaces share edges, drawing a space also means drawing the form next to it. And spaces have no names, no memorized symbols, there's nothing to “know” about them: that's why you see them as they really are. A wild sheep's horns seen foreshortened or an animal's legs become easy if you draw the space between them."]},
+ {h:"What they're for", p:[
+  "Negative spaces have three functions. They make the hard parts easy, like foreshortening and complicated shapes, because you draw them “for free” by looking at what surrounds them. They unify the drawing and strengthen the composition: when spaces and forms get the same attention, the whole sheet becomes interesting. And they train perception: after this lesson you start seeing spaces everywhere, between branches, between buildings, in the hidden arrow of a famous logo.",
+  "The verbal part plays a role too: it doesn't want to deal with “nothing”, so faced with an empty space it withdraws. For the visual part, on the other hand, forms and spaces are equally fascinating."]},
+ {h:"Format and composition", p:[
+  "Composition is the way forms and spaces are arranged within the format, that is within the edges of the drawing. Young children have an instinctive sense of it, then lose it by focusing on objects. Many beginners treat the paper as if it had no edges and then “fill in the background”.",
+  "That's why every drawing starts by choosing the framing with the viewfinder and drawing the format on the paper. The format rules: the same shape looks good in a vertical rectangle and bad in a horizontal one. And if you take care of the negative spaces, many composition problems solve themselves."]},
+ {h:"The basic unit", p:[
+  "One of the most common doubts is where to start. If the first shape is too big, what interested you ends up off the page; if it's too small, you have to fill in with useless things. The basic unit solves the problem: you choose a medium-sized shape or space, call it “One”, position and size it carefully relative to the format and crosshairs, and measure everything else in relation to it: one to three-quarters, one to two, and so on.",
+  "Experienced artists do it in an instant, almost without noticing; Matisse, watching himself in slow motion, was amazed to see his hand measuring in the air before drawing the model's head. The chair is the ideal subject to practice on: we know too much about chairs (equal legs, wide seat) and what we know contradicts what we see. By drawing only the spaces, the chair comes out right on its own."]}
+],
+c8:[
+ {h:"Perspective without fear", p:[
+  "Perspective frightens many students; even Van Gogh struggled with it for a long time. The book tackles it in two steps: first a few concepts of formal perspective, then the method almost all artists actually use, intuitive perspective or “sighting”. It's like the rules of the road: at first they seem too many, then they become automatic and driving is a pleasure.",
+  "The real difficulty is the paradox. A hallway has horizontal ceiling and floor and a constant height, but to draw it you must draw slanted lines that converge. The verbal part protests (“that can't be!”), the visual part accepts what it sees. One student, after measuring the same angle three times and saying it was impossible, finally drew it and discovered that it worked."]},
+ {h:"The concepts of formal perspective", p:[
+  "The point of view is fixed: you don't move and you don't turn your head. The picture plane stays parallel to your eyes. The horizon line is always at the viewer's eye level: if you climb a cliff it rises with you, if you sit down it drops, even when it isn't visible. Where to put it on the page is a compositional choice.",
+  "In one-point perspective, horizontal edges going into depth converge toward a single vanishing point on the horizon. Those above the horizon slant down toward it, those below slant up, those at eye level stay horizontal. The verticals of buildings stay vertical, except in the rare three-point perspective, looking at skyscrapers from below or above."]},
+ {h:"Two vanishing points and sighting", p:[
+  "In reality the most common view is two-point, often with many objects oriented differently, each with its own points. Almost always these points fall off the page, sometimes very far away: nobody wants to work with strings and yard-long rulers.",
+  "That's why you sight. The formal rules remain as an expectation: I know this edge above my eyes must slant down, so I look for it. Then I measure the real angle by comparing it with the vertical or the horizontal, the two constants the artist clings to like a life preserver. It's better to remember the “pie slice” the angle forms rather than the degrees, and to choose the reference that gives the smaller angle. Always staying on the plane: the pencil mustn't “poke through” it by pointing toward the back of the room."]},
+ {h:"Measuring proportions", p:[
+  "The second half of sighting concerns proportions. The gesture is formal: one eye closed, arm extended, elbow locked so the scale stays constant, pencil on the imaginary plane. You measure the basic unit by marking it with your thumb on the pencil, compare it with another measurement and get a simple ratio, for example one to two and two-thirds.",
+  "Then comes the rule students summed up as “erase the measurement from the pencil”: the drawing has a different scale from reality, so you don't carry the measurement onto the paper, you carry the ratio. You remeasure the unit in the drawing and apply the same ratio. The hardest part isn't technical: it's believing your own measurements without endlessly rechecking them. Those who learn to sight can draw anything they see, foreshortening included."]}
+],
+c9:[
+ {h:"The brain retouches what you see", p:[
+  "One of the most surprising phenomena for those learning to draw is perceptual constancy. The brain knows that heads are more or less the same size and that a table is rectangular, and it corrects the image coming from the eye to match what it knows. It doesn't warn us it has done so.",
+  "The book's examples are disconcerting: four identical figures in a landscape look different sizes; two identical tabletops look one long and narrow and the other almost square; your own head in the mirror seems life-size but is half the real size. Even after measuring, the illusion remains. The only remedy is to introduce a “snag”, a measurement, and then trust it more than the feeling."]},
+ {h:"The chopped-off skull", p:[
+  "The most common mistake in beginners' portraits concerns the position of the eyes. Almost everyone sees them a third of the way down, while in adults the eye-level line is at half the head, between the top of the skull (or hair) and the bottom of the chin. Since the features are the interesting part, the brain enlarges them and shrinks the forehead and skull, and in the drawing the head ends up cut off at the top.",
+  "The students in one of the author's classes, even while measuring, sincerely said they couldn't see it: “we'll see it when we believe it”. Measuring on your own head, in the mirror, on photos, even on the TV screen, serves to convince the logical part. The features actually occupy a small portion of the head, and a whole skull completely changes the likeness."]},
+ {h:"Ear, neck and other measurements", p:[
+  "In profile the second typical mistake is the ear too close to the features, which also leads to cutting off the back of the skull. The rule to remember: the distance from the eye-level line to the chin equals that from the back of the eye to the back of the ear. Joining the three points you visualize an isosceles triangle right on the model.",
+  "The bottom of the ear falls roughly between nose and mouth, but it varies from person to person and must be checked. The neck joins the skull higher than you'd think, roughly at the level of the nose or mouth, and it's wide: no thin neck stuck under an oval as in children's drawings."]},
+ {h:"From Sargent to the real model", p:[
+  "Copying a master drawing is an old method back in fashion: it forces you to slow down and see what the artist saw, and copied images stay imprinted for a long time. Sargent's profile of Madame X lets you practice every step: basic unit, negative spaces in front of the face and neck, angles relative to the crosshairs, position of the ear.",
+  "Then the real portrait. A few tricks help get around the symbols: drawing the white of the eye as a negative space instead of the iris; looking at the spaces around glasses, which in profile have shapes different from the ones we know; drawing the collar through the spaces around it; rendering hair by masses, directions and dark areas instead of drawing individual hairs. And above all avoiding verbal judgments about the model: whoever thinks “he has a long face” ends up drawing it longer than it really is."]}
+],
+c10:[
+ {h:"The logic of light", p:[
+  "Light-and-shadow, which students call “shading”, becomes in the book the logic of light: light falls on forms and produces lights and shadows in predictable ways. There are four elements. The highlight, where the source strikes most directly. The cast shadow, the darkest, where the object blocks the light. Reflected light, weaker, bounced off nearby surfaces. The crest shadow, on the ridge of the form between highlight and reflected light.",
+  "The last two are the hardest to see but they're the ones that “round out” forms. It's all measured in values, from the white of the paper to the densest black of the graphite: lights = high values, darks = low values. The ideal path goes from line to shapes, to relationships, to values, and from there to color and painting."]},
+ {h:"Why it works: shapes without names", p:[
+  "Shadow shapes have no names and change with every slightest movement of the model: the verbal part has no use for them and leaves the field. We constantly use this information to understand the volume of things, but without noticing. Turning a chiaroscuro self-portrait upside down you see only a mosaic of blotches; set right, the blotches vanish and a head in relief remains.",
+  "Here lies another paradox: if you draw the shapes of light and shadow exactly as they appear, viewers don't notice them, they just see a “real” face. The visual part of the brain is excellent at filling in missing information, and the magic relies on this: given a few right clues, the viewer sees things that aren't drawn, like the shadowed eye in Hopper's self-portrait or in Steichen's photograph. The hard part is knowing when to stop."]},
+ {h:"Facial proportions", p:[
+  "Portraits come in three poses: frontal, profile, three-quarter. In the frontal view some general rules apply, to be adapted to each face: the central axis and the eye-level line always stay at right angles even if the head is tilted; there's one eye's space between the eyes; the base of the nose is found with an inverted triangle starting from the outer corners of the eyes; the mouth is about a third of the way from nose to chin; the nostrils fall under the inner corners of the eyes, the corners of the mouth under the pupils; the ears go from the eyes to nose-mouth; the neck is nearly as wide as the jaw. Noses, mouths, ears and necks are almost always bigger than you expect.",
+  "The three-quarter view is the most expressive and the trickiest: the two halves of the face have different widths, the eye and mouth on the turned side are shorter and change shape, you see the side and base of the nose. All this contradicts the symmetrical symbols of childhood. The classic mistake is moving the near eye closer to the nose: the distance is about one eye-width. For the ear the rule becomes: from the front corner of the eye to the back of the ear = eye-to-chin."]},
+ {h:"Hatching, self-portrait and gestalt", p:[
+  "For tones there are two techniques. Hatching: groups of parallel marks made moving the hand from the wrist, crossed at a slightly different or sharper angle, layered to darken; every artist develops their own, almost a signature. And continuous tone, made with small overlapping movements. Both can only be learned through practice.",
+  "The final self-portrait brings it all together: the mirror acts as the picture plane, a lamp to one side creates clear lights and shadows, you start from the large masses by erasing the lights out of the gray ground and darkening the shadows, and the features are allowed to emerge instead of being drawn first. Now and then you get up to look critically from a distance and then go back to work. In the end, next to the initial self-portrait, the difference is obvious: no more symbols, but observation. The likeness, the gestalt, comes by itself as the result of all the parts seen well."]}
+],
+c11:[
+ {h:"Keep drawing", p:[
+  "New connections in the brain only consolidate with repetition. The advice is simple: a small sketchbook always with you and a drawing of whatever happens to be at hand in idle moments. Copying newspaper photos upside down is the quickest way to shift modes; drawing from life and copying the masters are the best practice.",
+  "Even when you can't draw you can train your eye: look for negative spaces, find your own horizon line, judge an angle against the vertical, check the proportions of faces on TV."]},
+ {h:"Computers and the visual mind", p:[
+  "Computers imitate the verbal, sequential way of thinking very well: they count, sort and follow procedures better than we do. Progress in visual abilities has been much slower: recognizing a face in three-quarter view or telling a friendly smile from a mocking one remains hard for machines and very easy for a child.",
+  "That's why the author finds it paradoxical that schools stress more and more precisely the skills in which machines outdo us, neglecting perceptual ones. She takes up a proposal: teach kids how their brain works, which mode each problem needs and how to access it."]},
+ {h:"The five stages of creativity", p:[
+  "The creative process is described in five stages, each with a prevailing mode. First insight (R): looking around you notice something that doesn't add up and a question arises, “I wonder why…”. Saturation (L): you gather everything known about the problem, until the information won't fit together and frustration sets in. Incubation (R): you stop thinking about it and the mind works on its own, searching for the pattern in which everything holds together.",
+  "Then illumination, the sudden “aha” that often comes while doing something else, with a sense of joy and of things falling into place. Finally verification (L guided by R): the laborious part of turning the insight into something concrete, which many never complete. You can even “program” incubation: tell yourself you need a solution by a certain date, and then let go."]},
+ {h:"Seeing a problem like a drawing", p:[
+  "The example of the designer who must decide whether to accept a client shows how to use the five skills as metaphors. Edges: where do my interests touch the other's, and what's that boundary like, soft or hard? Negative spaces: what don't I know, who else decides? Relationships: what's each party's horizon, what's the basic unit to measure everything against, time, money, quality? Lights and shadows: what's clear and what stays in the dark? The gestalt: look at the whole, perhaps turning it upside down in your mind.",
+  "The chapter closes with real examples, like two inventors rethinking a surgical retractor used for almost a century, and with cave art, proof of an extraordinary ability to imagine and visualize tens of thousands of years ago. The final question is whether we can recover that visual power to foresee the dangers and opportunities of the future."]}
+],
+c12:[
+ {h:"Drawing reveals you", p:[
+  "Every drawing, whatever its subject, also shows who made it: how they see things and what they feel. You draw in visual mode, in silence, and then you can return to words to interpret what emerged; if words aren't enough, you go back to intuition again. The book's exercises are only the first steps of this journey.",
+  "Learning to draw never ends: there's always the feeling that in the next drawing you'll see a little deeper."]},
+ {h:"Advice for going on", p:[
+  "Draw everything: no subject is too hard or too ordinary, even a tuft of grass or an artichoke. Study the masters by copying their drawings, not to imitate their style but to understand how they looked. Protect your own style and give it time to grow. If a drawing goes wrong, stop, calm down and remember that everything you need is right there in front of your eyes.",
+  "Don't wait for inspiration: you have to set up the conditions for entering the right state, every day, otherwise the newly opened paths close again. And teach someone else, because explaining the lessons fixes them in the one explaining too. Finally, use the same skills for life's problems: look at them from several points of view, see their parts in the right proportions, let them ripen while you do something else."]}
+]
+}
+};
+
+/* ---------- testi dell'interfaccia nelle due lingue ---------- */
+const UI = {
+ it:{
+  locale:"it-IT", greet:["Ciao!", "Matita pronta?", "Si disegna!", "Occhio aperto!", "Guarda bene!"], mascot:"Matitina, la mascotte",
+  tabs:["Libro", "Esercizi", "Promemoria", "Opzioni"], sections:"Sezioni",
+  nextEx:(n) => "Prossimo esercizio · cap. " + n, openEx:"Apri l'esercizio", bravo:"Bravissimo!", courseDone:"Corso completato",
+  allDone:"Hai fatto tutti gli esercizi", keepOn:"Ora un disegno al giorno, e copia i maestri.",
+  exDone:"Esercizi fatti", streak:"Giorni di fila", drewToday:"✓ Oggi hai disegnato", iDrew:"Ho disegnato oggi",
+  chapters:"Capitoli", plusIntro:"+ intro", nEx:(n) => n ? n + (n > 1 ? " esercizi" : " esercizio") : "solo lettura",
+  footBook:"Compagna di studio per <i>Drawing on the Right Side of the Brain</i> di Betty Edwards (4ª ed., 2012). Le pagine sono quelle del PDF.",
+  footData:"I dati sono salvati solo su questo dispositivo.",
+  ch:"cap.", Ch:"Cap.", intro:"Introduzione", Intro:"Intro", chapter:"Capitolo", book:"Libro",
+  howRead:"Come leggere il capitolo", short:"In breve", long:"Approfondito", idea:"L'idea", key:"Concetti chiave", exercises:"Esercizi",
+  ofDone:(a, b) => a + " di " + b + " fatti", reading:"Lettura", readUndo:"✓ Capitolo letto · annulla", iRead:"Ho letto il capitolo",
+  exercise:"esercizio", imgAt:"Immagine a p.", need:"Ti serve", steps:"In breve", why:"Perché",
+  full:(p) => "Le istruzioni complete sono nel libro, da p. " + p + ": leggile prima di iniziare.",
+  doneOn:(d) => "✓ Fatto il " + d, undo:"Segna come da fare", markDone:"Segna come fatto", notes:"I tuoi appunti",
+  notesPh:"Com'è andata? Cosa hai notato? Quanto tempo ci hai messo?", autosave:"Si salvano da soli.", saved:"Salvato.",
+  memo:"Promemoria", memoH:"Da tenere sottomano", mats:"Materiali", matsHint:(a, b) => "Elenco completo alle pp. " + a + "–" + b + ". Tocca ciò che hai già.", inBook:"Nel libro: PDF p.",
+  opts:"Opzioni", optsH:"Lingua, colori, pagine e dati", lang:"Lingua", box:"Scatola di colori", tryThem:"Tocca per provarli",
+  pages:"Numeri di pagina", pagesP:"Le pagine sono quelle del PDF della 4ª edizione (2012). Se il tuo file ha pagine in più o in meno, correggi qui lo scarto: tutte le pagine dell'app si spostano.",
+  less:"Meno", more:"Più", pagesTry:(p) => "Prova: il capitolo 1 dovrebbe iniziare a p. " + p + ".",
+  backup:"Backup", exp:"Esporta backup", imp:"Ripristina backup", restored:"Backup ripristinato.", bad:"File non valido: nessun dato modificato.",
+  disclaimer:"Matitina non è affiliata all'autrice né all'editore: riassunti e schede sono scritti apposta per l'app, il libro resta indispensabile."
+ },
+ en:{
+  locale:"en-GB", greet:["Hi!", "Pencil ready?", "Let's draw!", "Eyes open!", "Look closely!"], mascot:"Matitina, the mascot",
+  tabs:["Book", "Exercises", "Reminders", "Options"], sections:"Sections",
+  nextEx:(n) => "Next exercise · ch. " + n, openEx:"Open the exercise", bravo:"Well done!", courseDone:"Course completed",
+  allDone:"You've done all the exercises", keepOn:"Now one drawing a day, and copy the masters.",
+  exDone:"Exercises done", streak:"Days in a row", drewToday:"✓ You drew today", iDrew:"I drew today",
+  chapters:"Chapters", plusIntro:"+ intro", nEx:(n) => n ? n + (n > 1 ? " exercises" : " exercise") : "reading only",
+  footBook:"Study companion for <i>Drawing on the Right Side of the Brain</i> by Betty Edwards (4th ed., 2012). Page numbers refer to the PDF.",
+  footData:"Your data is saved only on this device.",
+  ch:"ch.", Ch:"Ch.", intro:"Introduction", Intro:"Intro", chapter:"Chapter", book:"Book",
+  howRead:"How to read the chapter", short:"In short", long:"In depth", idea:"The idea", key:"Key concepts", exercises:"Exercises",
+  ofDone:(a, b) => a + " of " + b + " done", reading:"Reading", readUndo:"✓ Chapter read · undo", iRead:"I've read the chapter",
+  exercise:"exercise", imgAt:"Image on p.", need:"You need", steps:"Steps", why:"Why",
+  full:(p) => "The full instructions are in the book, from p. " + p + ": read them before you start.",
+  doneOn:(d) => "✓ Done on " + d, undo:"Mark as not done", markDone:"Mark as done", notes:"Your notes",
+  notesPh:"How did it go? What did you notice? How long did it take?", autosave:"They save automatically.", saved:"Saved.",
+  memo:"Reminders", memoH:"Keep these at hand", mats:"Materials", matsHint:(a, b) => "Full list on pp. " + a + "–" + b + ". Tap what you already have.", inBook:"In the book: PDF p.",
+  opts:"Options", optsH:"Language, colors, pages and data", lang:"Language", box:"Color box", tryThem:"Tap to try them",
+  pages:"Page numbers", pagesP:"Page numbers are those of the PDF of the 4th edition (2012). If your file has more or fewer pages, set the offset here: every page in the app shifts.",
+  less:"Less", more:"More", pagesTry:(p) => "Check: chapter 1 should start on p. " + p + ".",
+  backup:"Backup", exp:"Export backup", imp:"Restore backup", restored:"Backup restored.", bad:"Invalid file: no data was changed.",
+  disclaimer:"Matitina is not affiliated with the author or the publisher: summaries and cards are written specifically for the app, and the book remains essential."
+ }
+};
+const LANGS = [{id:"en", name:"English"}, {id:"it", name:"Italiano"}];
 const EXS = [];   // tutti gli esercizi in ordine, con il capitolo di appartenenza
 CH.forEach((c, i) => { c.k = "var(--k" + (i % 6 + 1) + ")"; c.ex.forEach(e => { e.ch = c.id; EXS.push(e); }); });
 
 /* ---------- stato salvato ---------- */
 const KEY = "matitina.v1";     // non cambiarla mai dopo la prima pubblicazione: è dove stanno i dati dell'utente
 const app = document.getElementById("app");
-function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, view:"breve", palette:"fauve"}; }
+function fresh(){ return {done:{}, notes:{}, read:{}, mats:{}, days:{}, streak:0, last:null, off:0, view:"breve", palette:"fauve", lang:"en"}; }
 function load(){ try{ const r = localStorage.getItem(KEY); if(r) return Object.assign(fresh(), JSON.parse(r)); }catch(e){} return fresh(); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 let S = load();
+
+/* ---------- lingua: inglese (predefinita) o italiano ---------- */
+// copia dei testi italiani originali, per tornarci dopo essere passati all'inglese
+const IT = {
+  ch: CH.map(c => ({title:c.it, sub:c.en, idea:c.idea, points:c.points, long:c.long})),
+  ex: EXS.map(e => ({t:e.t, min:e.min, mat:e.mat, steps:e.steps, why:e.why})),
+  mats: MATS.map(m => ({t:m.t, s:m.s})),
+  memo: MEMO.map(m => ({t:m.t, items:m.items}))
+};
+let tx = UI.en;
+const tr = (k, ...a) => typeof tx[k] === "function" ? tx[k](...a) : tx[k];
+function applyLang(){
+  if(!UI[S.lang]) S.lang = "en";
+  const en = S.lang === "en"; tx = UI[S.lang];
+  try{ document.documentElement.lang = S.lang; }catch(e){}
+  CH.forEach((c, i) => Object.assign(c, en ? {title:c.en, sub:"", idea:EN.ch[c.id].idea, points:EN.ch[c.id].points, long:EN.long[c.id] || []} : IT.ch[i]));
+  EXS.forEach((e, i) => Object.assign(e, en ? EN.ex[e.id] : IT.ex[i]));
+  MATS.forEach((m, i) => Object.assign(m, en ? {t:EN.mats[m.id][0], s:EN.mats[m.id][1]} : IT.mats[i]));
+  MEMO.forEach((m, i) => Object.assign(m, en ? EN.memo[i] : IT.memo[i]));
+}
+applyLang();
 
 /* ---------- utilità ---------- */
 const $ = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstElementChild; };
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
 function today(d){ d = d || new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
-function niceDate(s){ const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("it-IT", {day:"numeric", month:"long"}); }
+function niceDate(s){ const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString(tr("locale"), {day:"numeric", month:"long"}); }
 const chById = (id) => CH.find(c => c.id === id);
 const exById = (id) => EXS.find(e => e.id === id);
 // pagine del PDF, con l'eventuale scarto impostato dall'utente
@@ -956,7 +1615,7 @@ function mascot(mood, size){
   else if(mood === "squint") extras = `<path d="M127 70 L127 104" stroke="${K}" stroke-width="7" stroke-linecap="round"/><path d="M127 72 L127 102" stroke="#3E9A57" stroke-width="3.4" stroke-linecap="round"/>`;
   else if(mood === "sad") extras = `<path d="M100 60 Q96 68 100 72 Q104 68 100 60 Z" fill="#7FC0EA" stroke="${K}" stroke-width="1.8"/>`;
   const body = "M48 44 L92 44 L92 120 L48 120 Z";
-  return `<svg class="mascot" viewBox="0 0 140 160" width="${size}" height="${Math.round(size*160/140)}" role="img" aria-label="Matitina, la mascotte">
+  return `<svg class="mascot" viewBox="0 0 140 160" width="${size}" height="${Math.round(size*160/140)}" role="img" aria-label="${esc(tr("mascot"))}">
     <defs>
       <clipPath id="${id}"><path d="${body}"/></clipPath>
       <clipPath id="${id}e"><path d="M51 34 L51 22 Q51 10 70 10 Q89 10 89 22 L89 34 Z"/></clipPath>
@@ -991,11 +1650,11 @@ function mascot(mood, size){
 /* ---------- palette di colori ---------- */
 // ks: i sei pastelli mostrati nel campione
 const PALETTES = [
-  {id:"fauve",      name:"Fauve",      sub:"Pastelli a olio: cobalto, vermiglio, turchese", bg:"#9CC3EC", deep:"#1E2FA0", ks:["#D9262B","#EE9A2C","#3FC2AE","#1F5C3C","#2433A8","#EE97AE"]},
-  {id:"laguna",     name:"Laguna",     sub:"Blu, verde e celeste",                bg:"#F0F3EE", deep:"#1D5E99", ks:["#1F6FB2","#2BA39A","#6CC3E8","#3E9A57","#1D4E89","#7FCBA8"]},
-  {id:"pastelli",   name:"Pastelli",   sub:"La scatola completa, tutti i colori", bg:"#F6F0E3", deep:"#C7362B", ks:["#D93A2E","#EE8A1D","#F2C230","#3F9D4A","#2F6FC4","#8A4FB5"]},
-  {id:"sanguigna",  name:"Sanguigna",  sub:"Terre, ocra e gesso rosso",          bg:"#F5E8DA", deep:"#9C2F1F", ks:["#A8321F","#C9662F","#D9A441","#7C8B3E","#6E4A35","#B85A6B"]},
-  {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]}
+  {id:"fauve",      name:"Fauve",      sub:"Pastelli a olio: cobalto, vermiglio, turchese", en:["Fauve", "Oil pastels: cobalt, vermilion, turquoise"], bg:"#9CC3EC", deep:"#1E2FA0", ks:["#D9262B","#EE9A2C","#3FC2AE","#1F5C3C","#2433A8","#EE97AE"]},
+  {id:"laguna",     name:"Laguna",     sub:"Blu, verde e celeste", en:["Lagoon", "Blue, green and sky blue"], bg:"#F0F3EE", deep:"#1D5E99", ks:["#1F6FB2","#2BA39A","#6CC3E8","#3E9A57","#1D4E89","#7FCBA8"]},
+  {id:"pastelli",   name:"Pastelli",   sub:"La scatola completa, tutti i colori", en:["Crayons", "The full box, every color"], bg:"#F6F0E3", deep:"#C7362B", ks:["#D93A2E","#EE8A1D","#F2C230","#3F9D4A","#2F6FC4","#8A4FB5"]},
+  {id:"sanguigna",  name:"Sanguigna",  sub:"Terre, ocra e gesso rosso", en:["Sanguine", "Earths, ochre and red chalk"], bg:"#F5E8DA", deep:"#9C2F1F", ks:["#A8321F","#C9662F","#D9A441","#7C8B3E","#6E4A35","#B85A6B"]},
+  {id:"carboncino", name:"Carboncino", sub:"Grafite e grigi caldi, la più sobria", en:["Charcoal", "Graphite and warm grays, the most understated"], bg:"#EEEBE4", deep:"#33414A", ks:["#2F3A40","#6B6F72","#A39B8B","#4E6A73","#7A5C45","#56495E"]}
 ];
 if(!PALETTES.some(p => p.id === S.palette)){ S.palette = "fauve"; save(); }   // palette delle versioni precedenti
 if((S.ui || 0) < 2){ S.palette = "fauve"; S.ui = 2; save(); }                   // nuova grafica: una volta sola si passa a Fauve
@@ -1058,8 +1717,9 @@ function mount(v){
 
 /* ---------- barra delle sezioni in basso ---------- */
 function tabBar(active){
-  const tabs = [["home","Libro",ICON.book,home,"--k1"],["list","Esercizi",ICON.pencil,list,"--k2"],["memo","Promemoria",ICON.pin,memo,"--k4"],["settings","Opzioni",ICON.gear,settings,"--k5"]];
-  const bar = $(`<nav class="tabbar" aria-label="Sezioni">${tabs.map(([id, l, icon, , k]) => `<button class="tab cr ${id === active ? "on" : ""}" data-t="${id}" ${id === active ? 'aria-current="page"' : ""}><span style="color:var(${k});display:flex">${icon}</span><span>${l}</span></button>`).join("")}</nav>`);
+  const [l1, l2, l3, l4] = tr("tabs");
+  const tabs = [["home",l1,ICON.book,home,"--k1"],["list",l2,ICON.pencil,list,"--k2"],["memo",l3,ICON.pin,memo,"--k4"],["settings",l4,ICON.gear,settings,"--k5"]];
+  const bar = $(`<nav class="tabbar" aria-label="${esc(tr("sections"))}">${tabs.map(([id, l, icon, , k]) => `<button class="tab cr ${id === active ? "on" : ""}" data-t="${id}" ${id === active ? 'aria-current="page"' : ""}><span style="color:var(${k});display:flex">${icon}</span><span>${l}</span></button>`).join("")}</nav>`);
   bar.querySelectorAll(".tab").forEach(b => b.onclick = () => { if(b.dataset.t !== active) tabs.find(t => t[0] === b.dataset.t)[3](); else window.scrollTo({top:0, behavior:"smooth"}); });
   return bar;
 }
@@ -1068,7 +1728,7 @@ function exRow(e, i, showCh){
   const c = chById(e.ch), done = !!S.done[e.id];
   return `<button class="row cr ${done ? "done" : ""}" data-ex="${e.id}" style="--k:${c.k}">
     <span class="num cr">${done ? "✓" : esc(i)}</span>
-    <span class="t"><b>${esc(e.t)}</b><span class="sub">PDF p. ${esc(pgs(e.pp))} · ${esc(e.min)}${showCh ? " · cap. " + esc(c.n) : ""}</span></span>
+    <span class="t"><b>${esc(e.t)}</b><span class="sub">PDF p. ${esc(pgs(e.pp))} · ${esc(e.min)}${showCh ? " · " + tr("ch") + " " + esc(c.n) : ""}</span></span>
     <span class="go" aria-hidden="true">›</span>
   </button>`;
 }
@@ -1096,36 +1756,36 @@ function home(){
   const n = doneCount(), drew = S.days[today()];
   const hero = next ? `
     <section class="hero cr"><div class="hero-in cr">
-      <div class="hero-art">${scene()}<span class="bubble cr">${esc(pick(GREET))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
-      <span class="label">Prossimo esercizio · cap. ${esc(chById(next.ch).n)}</span>
+      <div class="hero-art">${scene()}<span class="bubble cr">${esc(pick(tr("greet")))}</span>${mascot(n ? "wave" : "happy", 100)}</div>
+      <span class="label">${esc(tr("nextEx", chById(next.ch).n))}</span>
       <h2>${esc(next.t)}</h2>
       <span class="pg cr">${ICON.page} PDF p. ${esc(pgs(next.pp))}</span>
-      <button class="btn btn-deep cr" id="go">Apri l'esercizio</button>
+      <button class="btn btn-deep cr" id="go">${esc(tr("openEx"))}</button>
     </div></section>` : `
     <section class="hero cr"><div class="hero-in cr">
-      <div class="hero-art">${scene()}<span class="bubble cr">Bravissimo!</span>${mascot("cheer", 100)}</div>
-      <span class="label">Corso completato</span>
-      <h2>Hai fatto tutti gli esercizi</h2>
-      <p>Ora un disegno al giorno, e copia i maestri.</p>
+      <div class="hero-art">${scene()}<span class="bubble cr">${esc(tr("bravo"))}</span>${mascot("cheer", 100)}</div>
+      <span class="label">${esc(tr("courseDone"))}</span>
+      <h2>${esc(tr("allDone"))}</h2>
+      <p>${esc(tr("keepOn"))}</p>
     </div></section>`;
   const v = $(`<div class="pop">
     <header class="top">
       <div class="brand">${mascot("happy", 40)}${logo()}</div>
       <div class="stats">
-        <span class="chip cr" title="Esercizi fatti">${ICON.check}${n}/${EXS.length}</span>
-        <span class="chip cr" title="Giorni di fila">${ICON.flame}${streakNow()}</span>
+        <span class="chip cr" title="${esc(tr("exDone"))}">${ICON.check}${n}/${EXS.length}</span>
+        <span class="chip cr" title="${esc(tr("streak"))}">${ICON.flame}${streakNow()}</span>
       </div>
     </header>
     ${hero}
-    <button class="btn ${drew ? "btn-ghost" : "btn-main"} cr" id="drew">${drew ? "✓ Oggi hai disegnato" : "Ho disegnato oggi"}</button>
-    <div class="sec-h"><h3>Capitoli</h3><span class="label">${CH.length - 1} + intro</span></div>
+    <button class="btn ${drew ? "btn-ghost" : "btn-main"} cr" id="drew">${esc(tr(drew ? "drewToday" : "iDrew"))}</button>
+    <div class="sec-h"><h3>${esc(tr("chapters"))}</h3><span class="label">${CH.length - 1} ${esc(tr("plusIntro"))}</span></div>
     <div class="list">${CH.map(c => { const pr = chProgress(c); return `
       <button class="row cr ${pr >= 1 ? "done" : ""}" data-ch="${c.id}" style="--k:${c.k}">
         <span class="num cr">${pr >= 1 ? "✓" : esc(c.n)}</span>
-        <span class="t"><b>${esc(c.it)}</b><span class="sub">PDF pp. ${pg(c.from)}–${pg(c.to)} · ${c.ex.length ? c.ex.length + (c.ex.length > 1 ? " esercizi" : " esercizio") : "solo lettura"}</span></span>
+        <span class="t"><b>${esc(c.title)}</b><span class="sub">PDF pp. ${pg(c.from)}–${pg(c.to)} · ${esc(tr("nEx", c.ex.length))}</span></span>
         <span class="meter cr" aria-label="${Math.round(pr * 100)}%"><i style="width:calc(${Math.round(pr * 100)}% - 4px)"></i></span>
       </button>`; }).join("")}</div>
-    <footer class="foot"><span>Compagna di studio per <i>Drawing on the Right Side of the Brain</i> di Betty Edwards (4ª ed., 2012). Le pagine sono quelle del PDF.</span><span>I dati sono salvati solo su questo dispositivo.</span></footer>
+    <footer class="foot"><span>${tr("footBook")}</span><span>${esc(tr("footData"))}</span></footer>
   </div>`);
   if(next) v.querySelector("#go").onclick = () => exercise(next.id, "home");
   v.querySelector("#drew").onclick = () => { if(drew) return; bumpDay(); save(); home(); };
@@ -1134,31 +1794,33 @@ function home(){
   mount(v);
 }
 
+const chLabel = (c) => c.id === "intro" ? tr("intro") : tr("chapter") + " " + esc(c.n);
+
 /* ---------- CAPITOLO: riassunto ed esercizi ---------- */
 function chapter(id){
   screen({s:"chapter", id});
   const c = chById(id), i = CH.indexOf(c), prev = CH[i - 1], nxt = CH[i + 1], long = S.view === "esteso";
   const v = $(`<div class="pop" style="--k:${c.k}">
-    <button class="back" id="bk">${ICON.back} Libro</button>
+    <button class="back" id="bk">${ICON.back} ${esc(tr("book"))}</button>
     <div class="page-h">
-      <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · PDF pp. ${pg(c.from)}–${pg(c.to)}</span>
-      <h2>${esc(c.it)}</h2>${scribble(c.k)}
-      <p class="en">${esc(c.en)}</p>
+      <span class="label">${chLabel(c)} · PDF pp. ${pg(c.from)}–${pg(c.to)}</span>
+      <h2>${esc(c.title)}</h2>${scribble(c.k)}
+      ${c.sub ? `<p class="en">${esc(c.sub)}</p>` : ""}
     </div>
-    <div class="seg cr" role="tablist" aria-label="Come leggere il capitolo">
-      <button class="cr ${long ? "" : "on"}" role="tab" aria-selected="${!long}" data-v="breve">In breve</button>
-      <button class="cr ${long ? "on" : ""}" role="tab" aria-selected="${long}" data-v="esteso">Approfondito</button>
+    <div class="seg cr" role="tablist" aria-label="${esc(tr("howRead"))}">
+      <button class="cr ${long ? "" : "on"}" role="tab" aria-selected="${!long}" data-v="breve">${esc(tr("short"))}</button>
+      <button class="cr ${long ? "on" : ""}" role="tab" aria-selected="${long}" data-v="esteso">${esc(tr("long"))}</button>
     </div>
     ${long ? `<div class="long">${c.long.map(s => `<section class="card cr"><h3>${esc(s.h)}</h3>${s.p.map(p => `<p>${esc(p)}</p>`).join("")}</section>`).join("")}</div>`
-    : `<div class="card cr idea"><span class="label">L'idea</span>${esc(c.idea)}</div>
-    <div class="card cr"><h3>Concetti chiave</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>`}
-    ${c.ex.length ? `<div class="sec-h"><h3>Esercizi</h3><span class="label">${c.ex.filter(e => S.done[e.id]).length} di ${c.ex.length} fatti</span></div>
+    : `<div class="card cr idea"><span class="label">${esc(tr("idea"))}</span>${esc(c.idea)}</div>
+    <div class="card cr"><h3>${esc(tr("key"))}</h3><ol class="points">${c.points.map(p => `<li>${esc(p)}</li>`).join("")}</ol></div>`}
+    ${c.ex.length ? `<div class="sec-h"><h3>${esc(tr("exercises"))}</h3><span class="label">${esc(tr("ofDone", c.ex.filter(e => S.done[e.id]).length, c.ex.length))}</span></div>
       <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>` : ""}
-    <div class="sec-h"><h3>Lettura</h3></div>
-    <button class="btn ${S.read[c.id] ? "btn-ghost" : "btn-deep"} cr" id="read">${S.read[c.id] ? "✓ Capitolo letto · annulla" : "Ho letto il capitolo"}</button>
+    <div class="sec-h"><h3>${esc(tr("reading"))}</h3></div>
+    <button class="btn ${S.read[c.id] ? "btn-ghost" : "btn-deep"} cr" id="read">${esc(tr(S.read[c.id] ? "readUndo" : "iRead"))}</button>
     <div class="nav2">
-      ${prev ? `<button class="btn btn-ghost btn-sm cr" id="prev">‹ ${prev.id === "intro" ? "Intro" : "Cap. " + esc(prev.n)}</button>` : "<span></span>"}
-      ${nxt ? `<button class="btn btn-ghost btn-sm cr" id="nxt">Cap. ${esc(nxt.n)} ›</button>` : "<span></span>"}
+      ${prev ? `<button class="btn btn-ghost btn-sm cr" id="prev">‹ ${prev.id === "intro" ? tr("Intro") : tr("Ch") + " " + esc(prev.n)}</button>` : "<span></span>"}
+      ${nxt ? `<button class="btn btn-ghost btn-sm cr" id="nxt">${tr("Ch")} ${esc(nxt.n)} ›</button>` : "<span></span>"}
     </div>
   </div>`);
   v.querySelector("#bk").onclick = home;
@@ -1175,32 +1837,32 @@ function exercise(id, from, mood){
   screen({s:"ex", id, from});
   const e = exById(id), c = chById(e.ch), done = S.done[id];
   const v = $(`<div class="pop" style="--k:${c.k}">
-    <button class="back" id="bk">${ICON.back} ${from === "list" ? "Esercizi" : from === "home" ? "Libro" : "Capitolo " + esc(c.n)}</button>
+    <button class="back" id="bk">${ICON.back} ${from === "list" ? esc(tr("exercises")) : from === "home" ? esc(tr("book")) : chLabel(c)}</button>
     <div class="page-h">
-      <span class="label">${c.id === "intro" ? "Introduzione" : "Capitolo " + esc(c.n)} · esercizio</span>
+      <span class="label">${chLabel(c)} · ${esc(tr("exercise"))}</span>
       <h2>${esc(e.t)}</h2>${scribble(c.k)}
     </div>
     <div class="meta">
       <span class="pg cr">${ICON.page} PDF p. ${esc(pgs(e.pp))}</span>
-      ${e.img ? `<span class="pg cr">Immagine a p. ${pg(e.img)}</span>` : ""}
+      ${e.img ? `<span class="pg cr">${esc(tr("imgAt"))} ${pg(e.img)}</span>` : ""}
       <span class="chip cr">${esc(e.min)}</span>
     </div>
     <div class="react">${mascot(mood || (done ? "cheer" : "squint"), 96)}</div>
     <div class="card cr">
-      <div class="kv"><span class="label">Ti serve</span><p>${esc(e.mat)}</p></div>
-      <div class="kv"><span class="label">In breve</span><ol class="points">${e.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
-      <div class="kv"><span class="label">Perché</span><p class="why">${esc(e.why)}</p></div>
-      <p class="hint">Le istruzioni complete sono nel libro, da p. ${pg(e.p)}: leggile prima di iniziare.</p>
+      <div class="kv"><span class="label">${esc(tr("need"))}</span><p>${esc(e.mat)}</p></div>
+      <div class="kv"><span class="label">${esc(tr("steps"))}</span><ol class="points">${e.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
+      <div class="kv"><span class="label">${esc(tr("why"))}</span><p class="why">${esc(e.why)}</p></div>
+      <p class="hint">${esc(tr("full", pg(e.p)))}</p>
     </div>
     <div class="donebar">
-      ${done ? `<div class="ok cr">✓ Fatto il ${esc(niceDate(done))}</div>
-        <button class="btn btn-ghost btn-sm cr" id="undo">Segna come da fare</button>`
-      : `<button class="btn btn-deep cr" id="do">Segna come fatto</button>`}
+      ${done ? `<div class="ok cr">${esc(tr("doneOn", niceDate(done)))}</div>
+        <button class="btn btn-ghost btn-sm cr" id="undo">${esc(tr("undo"))}</button>`
+      : `<button class="btn btn-deep cr" id="do">${esc(tr("markDone"))}</button>`}
     </div>
     <div class="card cr">
-      <label class="label" for="note">I tuoi appunti</label>
-      <textarea id="note" placeholder="Com'è andata? Cosa hai notato? Quanto tempo ci hai messo?">${esc(S.notes[id] || "")}</textarea>
-      <p class="hint" id="saved">Si salvano da soli.</p>
+      <label class="label" for="note">${esc(tr("notes"))}</label>
+      <textarea id="note" placeholder="${esc(tr("notesPh"))}">${esc(S.notes[id] || "")}</textarea>
+      <p class="hint" id="saved">${esc(tr("autosave"))}</p>
     </div>
   </div>`);
   v.querySelector("#bk").onclick = () => from === "list" ? list() : from === "home" ? home() : chapter(c.id);
@@ -1210,7 +1872,7 @@ function exercise(id, from, mood){
   let tm;
   v.querySelector("#note").oninput = (ev) => {
     const t = ev.target.value; clearTimeout(tm);
-    tm = setTimeout(() => { if(t.trim()) S.notes[id] = t; else delete S.notes[id]; save(); const s = document.getElementById("saved"); if(s) s.textContent = "Salvato."; }, 400);
+    tm = setTimeout(() => { if(t.trim()) S.notes[id] = t; else delete S.notes[id]; save(); const s = document.getElementById("saved"); if(s) s.textContent = tr("saved"); }, 400);
   };
   mount(v);
 }
@@ -1220,10 +1882,10 @@ function list(){
   screen({s:"list"});
   const n = doneCount();
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Esercizi</span><h2>${n} di ${EXS.length} fatti</h2>${scribble("var(--k2)")}</div>
+    <div class="page-h"><span class="label">${esc(tr("exercises"))}</span><h2>${esc(tr("ofDone", n, EXS.length))}</h2>${scribble("var(--k2)")}</div>
     <div class="react">${mascot(n >= EXS.length ? "cheer" : n ? "happy" : "wave", 90)}</div>
     ${CH.filter(c => c.ex.length).map(c => `
-      <div class="sec-h"><h3>${c.id === "intro" ? "" : "Cap. " + esc(c.n) + " · "}${esc(c.it)}</h3></div>
+      <div class="sec-h"><h3>${c.id === "intro" ? "" : tr("Ch") + " " + esc(c.n) + " · "}${esc(c.title)}</h3></div>
       <div class="list">${c.ex.map((e, k) => exRow(e, k + 1)).join("")}</div>`).join("")}
   </div>`);
   v.querySelectorAll("[data-ex]").forEach(b => b.onclick = () => exercise(b.dataset.ex, "list"));
@@ -1236,21 +1898,21 @@ function memo(){
   screen({s:"memo"});
   const have = MATS.filter(m => S.mats[m.id]).length;
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Promemoria</span><h2>Da tenere sottomano</h2>${scribble("var(--k4)")}</div>
-    <details class="card cr" style="--k:var(--k4)" ${have < MATS.length ? "open" : ""}><summary>Materiali · ${have}/${MATS.length}</summary>
+    <div class="page-h"><span class="label">${esc(tr("memo"))}</span><h2>${esc(tr("memoH"))}</h2>${scribble("var(--k4)")}</div>
+    <details class="card cr" style="--k:var(--k4)" ${have < MATS.length ? "open" : ""}><summary>${esc(tr("mats"))} · ${have}/${MATS.length}</summary>
       <div class="in">
-        <p class="hint" style="margin:0 0 6px">Elenco completo alle pp. ${pg(44)}–${pg(46)}. Tocca ciò che hai già.</p>
+        <p class="hint" style="margin:0 0 6px">${esc(tr("matsHint", pg(44), pg(46)))}</p>
         ${MATS.map(m => `<button class="tick ${S.mats[m.id] ? "on" : ""}" data-m="${m.id}" aria-pressed="${!!S.mats[m.id]}"><span class="bx cr">${S.mats[m.id] ? "✓" : ""}</span><span>${esc(m.t)}<span class="sub">${esc(m.s)}</span></span></button>`).join("")}
       </div>
     </details>
     ${MEMO.map((x, i) => `<details class="card cr" style="--k:var(--k${(i + 1) % 6 + 1})"><summary>${esc(x.t)}</summary>
       <div class="in"><ol class="points">${x.items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
-      <p class="hint">Nel libro: PDF p. ${pg(x.p)}</p></div></details>`).join("")}
+      <p class="hint">${esc(tr("inBook"))} ${pg(x.p)}</p></div></details>`).join("")}
   </div>`);
   v.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
     const id = b.dataset.m; if(S.mats[id]) delete S.mats[id]; else S.mats[id] = 1; save();
     const on = !!S.mats[id]; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.querySelector(".bx").textContent = on ? "✓" : "";
-    v.querySelector("details summary").textContent = "Materiali · " + MATS.filter(m => S.mats[m.id]).length + "/" + MATS.length;
+    v.querySelector("details summary").textContent = tr("mats") + " · " + MATS.filter(m => S.mats[m.id]).length + "/" + MATS.length;
   });
   v.appendChild(tabBar("memo"));
   mount(v);
@@ -1260,26 +1922,29 @@ function memo(){
 function settings(note){
   screen({s:"settings"});
   const v = $(`<div class="pop">
-    <div class="page-h"><span class="label">Opzioni</span><h2>Colori, pagine e dati</h2>${scribble("var(--k5)")}</div>
-    <div class="sec-h"><h3>Scatola di colori</h3><span class="label">Tocca per provarli</span></div>
+    <div class="page-h"><span class="label">${esc(tr("opts"))}</span><h2>${esc(tr("optsH"))}</h2>${scribble("var(--k5)")}</div>
+    <div class="sec-h"><h3>${esc(tr("lang"))}</h3></div>
+    <div class="seg cr" style="--k:var(--k5)" role="radiogroup" aria-label="${esc(tr("lang"))}">${LANGS.map(l => `<button class="cr ${l.id === S.lang ? "on" : ""}" role="radio" aria-checked="${l.id === S.lang}" lang="${l.id}" data-lang="${l.id}">${esc(l.name)}</button>`).join("")}</div>
+    <div class="sec-h"><h3>${esc(tr("box"))}</h3><span class="label">${esc(tr("tryThem"))}</span></div>
     <div class="pals">${PALETTES.map(p => `<button class="pal cr ${p.id === S.palette ? "on" : ""}" data-id="${p.id}">
         <span class="sw cr" style="--fill:${p.bg}">${p.ks.map(k => `<i class="cr flat" style="--fill:${k}"></i>`).join("")}</span>
-        <span class="pt2"><b>${esc(p.name)}</b><span>${esc(p.sub)}</span></span>
+        <span class="pt2"><b>${esc(S.lang === "en" ? p.en[0] : p.name)}</b><span>${esc(S.lang === "en" ? p.en[1] : p.sub)}</span></span>
       </button>`).join("")}</div>
-    <div class="sec-h"><h3>Numeri di pagina</h3></div>
+    <div class="sec-h"><h3>${esc(tr("pages"))}</h3></div>
     <div class="card cr">
-      <p style="margin:0 0 10px">Le pagine sono quelle del PDF della 4ª edizione (2012). Se il tuo file ha pagine in più o in meno, correggi qui lo scarto: tutte le pagine dell'app si spostano.</p>
-      <div class="stepper"><button class="btn btn-ghost cr" id="minus" aria-label="Meno">−</button><output id="off">${S.off > 0 ? "+" + S.off : S.off}</output><button class="btn btn-deep cr" id="plus" aria-label="Più">+</button></div>
-      <p class="hint">Prova: il capitolo 1 dovrebbe iniziare a p. ${pg(33)}.</p>
+      <p style="margin:0 0 10px">${esc(tr("pagesP"))}</p>
+      <div class="stepper"><button class="btn btn-ghost cr" id="minus" aria-label="${esc(tr("less"))}">−</button><output id="off">${S.off > 0 ? "+" + S.off : S.off}</output><button class="btn btn-deep cr" id="plus" aria-label="${esc(tr("more"))}">+</button></div>
+      <p class="hint">${esc(tr("pagesTry", pg(33)))}</p>
     </div>
-    <div class="sec-h"><h3>Backup</h3></div>
+    <div class="sec-h"><h3>${esc(tr("backup"))}</h3></div>
     <div class="stack">
-      <button class="btn btn-ghost cr" id="exp">Esporta backup</button>
-      <label class="btn btn-ghost cr" for="imp">Ripristina backup</label><input type="file" id="imp" accept="application/json,.json" hidden>
+      <button class="btn btn-ghost cr" id="exp">${esc(tr("exp"))}</button>
+      <label class="btn btn-ghost cr" for="imp">${esc(tr("imp"))}</label><input type="file" id="imp" accept="application/json,.json" hidden>
       <span class="msg" id="msg">${esc(note || "")}</span>
     </div>
-    <footer class="foot"><span>Matitina non è affiliata all'autrice né all'editore: riassunti e schede sono scritti apposta per l'app, il libro resta indispensabile.</span></footer>
+    <footer class="foot"><span>${esc(tr("disclaimer"))}</span></footer>
   </div>`);
+  v.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { if(S.lang === b.dataset.lang) return; S.lang = b.dataset.lang; save(); applyLang(); settings(); });
   v.querySelectorAll(".pal").forEach(b => b.onclick = () => { S.palette = b.dataset.id; save(); applyPalette(); settings(); });
   const setOff = (k) => { S.off = Math.max(-50, Math.min(50, k)); save(); settings(); };
   v.querySelector("#minus").onclick = () => setOff((S.off || 0) - 1);
@@ -1292,8 +1957,8 @@ function settings(note){
   };
   v.querySelector("#imp").onchange = (e) => {
     const f = e.target.files[0]; if(!f) return;
-    f.text().then(t => { const d = JSON.parse(t); if(!d || typeof d !== "object" || !d.done) throw 0; S = Object.assign(fresh(), d); save(); applyPalette(); settings("Backup ripristinato."); })
-      .catch(() => settings("File non valido: nessun dato modificato."));
+    f.text().then(t => { const d = JSON.parse(t); if(!d || typeof d !== "object" || !d.done) throw 0; S = Object.assign(fresh(), d); save(); applyPalette(); applyLang(); settings(tr("restored")); })
+      .catch(() => settings(tr("bad")));
   };
   v.appendChild(tabBar("settings"));
   mount(v);

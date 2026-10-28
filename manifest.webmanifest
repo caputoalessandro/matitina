@@ -1,8 +1,8 @@
 {
   "name": "Matitina",
   "short_name": "Matitina",
-  "description": "Compagna di studio per Drawing on the Right Side of the Brain: riassunti dei capitoli ed esercizi con le pagine del PDF.",
-  "lang": "it",
+  "description": "Study companion for Drawing on the Right Side of the Brain: chapter summaries and exercises with their PDF pages.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
