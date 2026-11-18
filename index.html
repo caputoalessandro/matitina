@@ -120,7 +120,11 @@ h2{overflow-wrap:anywhere;hyphens:auto}
 .scribble{display:block;width:120px;height:12px;margin-top:2px}
 .card{padding:16px 18px;margin-bottom:16px;--fill:var(--surface)}
 .card h3{font-size:23px;margin-bottom:8px}
-.idea{--fill:color-mix(in srgb,var(--k) 22%,#fff);--edge:var(--k);font-size:20px;font-weight:700;font-family:var(--f-display);line-height:1.3}
+/* sotto i testi: bianco pieno, senza tratteggio, per la leggibilità */
+.card.cr::before{background:#fff;-webkit-mask-image:none;mask-image:none}
+.goal{--edge:var(--k,var(--line));border-left:0;font-size:18px;font-weight:600}
+.goal p{margin:4px 0 0}
+.idea{--fill:#fff;--edge:var(--k);font-size:20px;font-weight:700;font-family:var(--f-display);line-height:1.3}
 .idea .label{display:block;margin-bottom:6px;font-family:var(--f-mono);font-weight:500;font-size:12px}
 .points{margin:0;padding-left:24px;display:grid;gap:10px}
 .points li::marker{font-family:var(--f-display);font-weight:700;color:color-mix(in srgb,var(--k,var(--deep)) 70%,#000)}
@@ -1426,6 +1430,151 @@ c12:[
 }
 };
 
+/* ---------- obiettivo e lettura del risultato di ogni esercizio (stessi id) ---------- */
+// goal = cosa alleni e cosa devi ottenere · read = come interpretare quello che hai disegnato
+const GOALS = {
+en:{
+ strumenti:{goal:"Make the two tools you'll use for the whole course: a clear sheet with a cross on it (the picture plane) and two cardboard frames (the viewfinders).",
+  read:"It worked if a viewfinder clipped onto the plastic sheet shows a clean window, and the cross lines run exactly through the middle. Small inaccuracies don't matter; what matters is that all the rectangles have the same shape."},
+ pre1:{goal:"Record how you draw a person today, before learning anything. It's not a test: it's a photo of your starting point.",
+  read:"Don't judge it as good or bad. Look for shapes your hand drew automatically (a standard eye, a stick neck, a smile like a curve): those are childhood symbols, and the course will replace them with real observation."},
+ pre2:{goal:"Record how you draw a real face you can see, so you can compare it with your final self-portrait in chapter 10.",
+  read:"Compare it with drawing 1: if the eyes, nose and mouth look the same as in the drawing from memory, you drew what you know, not what you saw. That's completely normal at this stage. Note too where the eyes are: most beginners put them too high."},
+ pre3:{goal:"Record how you draw something real right in front of you, and spot the symbols that repeat across all three drawings.",
+  read:"Look for places where you really looked (a knuckle, a wrinkle, an unusual angle): they prove you can already see. Fingernails or fingers all drawn the same way are symbols. Write both on the back."},
+ firma:{goal:"Realize that you already draw with a personal line every day, and that style is something you have, not something to learn.",
+  read:"If your three versions of your name feel different (calm, nervous, elegant, rushed), you've understood the point: a line carries character. There's no right or wrong version."},
+ vasi:{goal:"Feel in your own body the clash between naming things (verbal mind) and looking at shapes (visual mind).",
+  read:"The exercise works when you get confused or stuck halfway through the second profile: that moment of confusion is the result. How you got unstuck (looking at the space, a grid, starting from the bottom) shows you how to switch into visual mode."},
+ stravinsky:{goal:"Experience the switch into visual mode (R-mode) for the first time, and discover that you can copy a complex drawing accurately.",
+  read:"Turn it the right way up and compare: most people are surprised by how accurate it is. The best parts are usually the ones you couldn't recognize while drawing (like the legs). Parts that look worse (often the hands and face) are where your verbal mind recognized something and took over."},
+ capovolti:{goal:"Repeat the switch into visual mode until you recognize how it feels and can find it again more easily.",
+  read:"Don't only check accuracy: ask yourself how you felt. If you lost track of time, didn't hear sounds around you and felt calm and focused, you were in R-mode. If you kept getting distracted or bored, try again with a quieter setting."},
+ paesaggio:{goal:"Bring back the symbols you used as a child, and the natural sense of composition you had then.",
+  read:"Notice how quickly and confidently each symbol came out: that's what automatic symbols feel like. When you cover one element and the picture feels unbalanced, you're seeing your instinct for composition at work."},
+ contpuro:{goal:"Switch off your verbal mind by looking so slowly and closely that it gets bored, and discover how much detail there is in ordinary things.",
+  read:"The drawing will look like a tangle of lines, not like a hand, and that's the right result. Judge it by what you experienced: if after a minute or two you got absorbed in the lines and forgot the time, it worked. A drawing that looks “nice” probably means you peeked."},
+ pianomano:{goal:"Understand with your own hands that drawing from life means copying a flat image, exactly as it appears on a pane of glass.",
+  read:"The traced hand should look three-dimensional even though you only copied flat lines: that's the key discovery. If parts look odd, you probably moved your head or opened both eyes while tracing."},
+ pianostanza:{goal:"Learn to imagine the picture plane in front of you, so you can later “see” the flat image without the plastic sheet.",
+  read:"It worked if you noticed that edges you know are horizontal (ceiling, table) actually look slanted on the sheet. If, after putting the sheet down, you can still picture those angles, you've started to internalize the plane."},
+ contmod:{goal:"Make your first complete drawing from life, combining slow observation, the picture plane and a gray background.",
+  read:"Check that the hand looks solid and that tricky parts (fingers pointing at you, nails) look believable. If something looks flat or wrong, compare it with the tracing on the plastic: usually you drew what you know about hands instead of what you saw."},
+ sedia:{goal:"Learn to draw the empty spaces instead of the object, and see that the object comes out right by itself.",
+  read:"Look at the chair: if the legs, slats and rungs look believable even though you drew only the spaces, you've got it. Where the chair looks wrong, you probably went back to drawing the chair itself instead of the spaces around it."},
+ copiespazi:{goal:"Use negative spaces to handle foreshortening (arms and legs coming toward you), which is usually the hardest thing to draw.",
+  read:"Compare your copy with the original: arms and legs should look shortened in the right way. If they look too long, you drew the limb as you know it, not the spaces around it."},
+ spaziovunque:{goal:"Make seeing negative spaces automatic, so your eye does it even when you're not drawing.",
+  read:"There's no drawing to judge. It's working when you start noticing spaces without trying: between branches, under a table, between two people."},
+ corridoio:{goal:"Understand with your own eyes how lines going into the distance slant toward a single vanishing point.",
+  read:"In your drawing, all the edges going into the distance should meet at one point at your eye level. If a line doesn't, measure it again: lines above your eyes slant down, lines below slant up."},
+ angolo:{goal:"Learn to measure angles by comparing them with a vertical or horizontal line, instead of guessing.",
+  read:"Lay the plastic sheet over your drawing, or check again with the pencil: if the angles match, your eye is learning. If the angles you drew are too flat or too steep, your brain “straightened” them toward what it expects."},
+ gesto:{goal:"Learn the basic gesture for measuring proportions: compare sizes as ratios, not as actual lengths.",
+  read:"It's working if your measurement stays the same when you repeat it (elbow locked, one eye closed), and if you can describe things as ratios (“the door is 1 to 2½”). If the numbers change every time, your arm is bending."},
+ duepunti:{goal:"Use edges, spaces and relationships together to draw a whole real scene with depth.",
+  read:"The scene should feel deep and stable. If something looks “wrong”, check its angle against the vertical or horizontal and its size against the basic unit: the mistake is almost always an angle you guessed instead of measuring."},
+ costanza:{goal:"Catch your brain secretly changing sizes, so you'll trust measurements over what you think you see.",
+  read:"The surprise is the result: identical figures that look different, a reflection half the size of your head. If you're still not convinced after measuring, that's normal: the illusion doesn't go away, you just learn to trust the measurement."},
+ misuretesta:{goal:"Learn the basic proportions of the head and check them on real people, so you stop putting the eyes too high.",
+  read:"On real heads, eye level is halfway between the top of the head and the chin. If your measurements say so but it still “looks wrong”, that's your brain at work: trust the measurement."},
+ sargent:{goal:"Rehearse all the steps of a profile portrait on a still image, before working with a real person.",
+  read:"Turn the original and your copy upside down: the differences jump out. The most common ones are the ear too close to the face and the back of the head cut off. Fix them by checking against the basic unit."},
+ profilo:{goal:"Draw a real person in profile, using edges, spaces and relationships together as one skill.",
+  read:"Aim for a likeness, not perfection. If it doesn't look like the person, check the eye level (halfway down the head), the position of the ear and the angle from nose to chin: these are where it usually goes wrong."},
+ courbet:{goal:"Understand that light and shadow are just shapes, and that the brain turns them into volume by itself.",
+  read:"It worked if upside down you saw only blotches and right side up a solid head. That's the lesson: draw the blotches as they are, and the viewer's brain will do the rest."},
+ frontale:{goal:"Learn the general proportions of a face seen from the front, to use as a starting guide.",
+  read:"Compare your guide with real faces: the rules (one eye between the eyes, eye line halfway down) will be roughly right, but every face differs a little. The differences are what make a person look like themselves."},
+ tretquarti:{goal:"Understand how a face changes when it turns: the far side gets narrower and the features change shape.",
+  read:"Check the most common mistake: the near eye too close to the nose (it should be about one eye's width away). If the face looks flat or symmetrical, you drew it as if seen from the front."},
+ steichen:{goal:"Learn to draw with light and shadow instead of lines, and discover how little you need for the viewer to see a face.",
+  read:"It worked if a face “appears” from the gray when you squint, even without drawn eyes. If it looks muddy, you probably kept adding: stopping earlier is part of the skill."},
+ tratteggio:{goal:"Develop your own way of making tones with lines, which you'll use to shade any drawing.",
+  read:"There's no correct hatching. Look for even sets of lines and smooth steps from light to dark. With practice your lines will become faster and more regular, and recognizably yours."},
+ autoritratto:{goal:"Bring all four skills together in a finished self-portrait, and let the likeness (the fifth skill) emerge by itself.",
+  read:"Put it next to your “before” self-portrait: look for fewer symbols, eyes in the right place, a whole skull, and believable light and shadow. Don't expect perfection: what matters is that you drew what you saw."},
+ confronto:{goal:"See your progress clearly, before you forget how you used to draw.",
+  read:"Look for concrete differences: real shapes instead of symbols, better proportions, more confident lines. Write them down: they're your proof that drawing can be learned."},
+ taccuino:{goal:"Keep the new ways of seeing alive through short, regular practice.",
+  read:"Don't judge single sketches. What counts is regularity: if you're drawing most days and switching into drawing mode more easily, it's working."},
+ problema:{goal:"Use the five drawing skills as a way of thinking about a real problem.",
+  read:"It worked if you discovered something new: a missing piece of information, another person's point of view, a better question. You don't need to solve the problem right away."},
+ insegna:{goal:"Fix what you've learned by explaining it, and share it with someone who thinks they can't draw.",
+  read:"It worked if they're surprised by their upside-down drawing, and if you found you could explain why it works. Where your explanation got stuck shows you what's worth reviewing."}
+},
+it:{
+ strumenti:{goal:"Costruire i due strumenti che userai per tutto il corso: il foglio trasparente con la croce (piano trasparente) e le due cornici di cartoncino (mirini).",
+  read:"È riuscito se il mirino fissato al piano mostra una finestra pulita e le linee della croce passano esattamente al centro. Piccole imprecisioni non contano: conta che tutti i rettangoli abbiano la stessa forma."},
+ pre1:{goal:"Registrare come disegni una persona oggi, prima di imparare qualsiasi cosa. Non è una prova: è una foto del tuo punto di partenza.",
+  read:"Non giudicarlo bello o brutto. Cerca le forme che la mano ha tracciato in automatico (un occhio standard, un collo a bastoncino, il sorriso a curva): sono i simboli dell'infanzia, e il corso li sostituirà con l'osservazione."},
+ pre2:{goal:"Registrare come disegni un volto vero che hai davanti, per confrontarlo con l'autoritratto finale del capitolo 10.",
+  read:"Confrontalo con il disegno 1: se occhi, naso e bocca sono uguali a quelli disegnati a memoria, hai disegnato quello che sai, non quello che vedi. In questa fase è normalissimo. Guarda anche dove sono gli occhi: quasi tutti all'inizio li mettono troppo in alto."},
+ pre3:{goal:"Registrare come disegni una cosa vera che hai proprio davanti, e trovare i simboli che si ripetono nei tre disegni.",
+  read:"Cerca i punti in cui hai guardato davvero (una nocca, una piega, un angolo insolito): dimostrano che sai già vedere. Unghie o dita tutte uguali sono simboli. Annota entrambe le cose sul retro."},
+ firma:{goal:"Accorgerti che disegni già ogni giorno con una linea personale, e che lo stile è qualcosa che hai, non che devi imparare.",
+  read:"Se le tre versioni del tuo nome comunicano cose diverse (calma, nervosismo, eleganza, fretta), hai colto il punto: la linea trasmette carattere. Non esiste una versione giusta o sbagliata."},
+ vasi:{goal:"Sentire su di te lo scontro tra dare un nome alle cose (mente verbale) e guardare le forme (mente visiva).",
+  read:"L'esercizio funziona quando a metà del secondo profilo ti confondi o ti blocchi: quel momento di confusione è il risultato. Il modo in cui ne sei uscito (guardare lo spazio, una griglia, partire dal basso) ti mostra come passare alla modalità visiva."},
+ stravinsky:{goal:"Provare per la prima volta il passaggio alla modalità visiva (R) e scoprire che sai copiare con precisione un disegno complesso.",
+  read:"Raddrizzalo e confronta: quasi tutti si sorprendono di quanto sia preciso. Le parti migliori di solito sono quelle che non riconoscevi mentre disegnavi (come le gambe). Le parti peggiori (spesso mani e volto) sono quelle in cui la mente verbale ha riconosciuto qualcosa e ha preso il comando."},
+ capovolti:{goal:"Ripetere il passaggio alla modalità visiva finché non riconosci com'è e lo ritrovi più facilmente.",
+  read:"Non guardare solo la precisione: chiediti come ti sei sentito. Se hai perso la cognizione del tempo, non sentivi i rumori intorno ed eri calmo e concentrato, eri in modalità R. Se ti distraevi o ti annoiavi, riprova in un posto più tranquillo."},
+ paesaggio:{goal:"Riportare a galla i simboli che usavi da bambino e il senso naturale della composizione che avevi allora.",
+  read:"Nota con quanta rapidità e sicurezza è uscito ogni simbolo: è così che funzionano i simboli automatici. Quando copri un elemento e il disegno ti sembra sbilanciato, stai vedendo all'opera il tuo istinto per la composizione."},
+ contpuro:{goal:"Spegnere la mente verbale guardando così lentamente e da vicino da annoiarla, e scoprire quanti dettagli ci sono nelle cose comuni.",
+  read:"Il disegno sembrerà un groviglio di linee, non una mano, ed è il risultato giusto. Giudicalo da quello che hai provato: se dopo un minuto o due ti sei perso nelle linee e hai dimenticato il tempo, ha funzionato. Un disegno «carino» probabilmente vuol dire che hai sbirciato."},
+ pianomano:{goal:"Capire con le tue mani che disegnare dal vero significa copiare un'immagine piatta, esattamente come appare su un vetro.",
+  read:"La mano ricalcata dovrebbe sembrare tridimensionale anche se hai copiato solo linee piatte: è questa la scoperta. Se alcune parti sembrano strane, probabilmente hai mosso la testa o aperto entrambi gli occhi."},
+ pianostanza:{goal:"Imparare a immaginare il piano davanti a te, per poter poi «vedere» l'immagine piatta anche senza il foglio di plastica.",
+  read:"È riuscito se hai notato che bordi che sai orizzontali (soffitto, tavolo) sul piano appaiono inclinati. Se, posato il piano, riesci ancora a immaginare quegli angoli, hai cominciato a interiorizzarlo."},
+ contmod:{goal:"Fare il tuo primo disegno completo dal vero, unendo osservazione lenta, piano trasparente e fondo grigio.",
+  read:"Controlla che la mano sembri solida e che le parti difficili (dita verso di te, unghie) siano credibili. Se qualcosa sembra piatto o sbagliato, confrontalo con il ricalco sul piano: di solito hai disegnato quello che sai delle mani invece di quello che vedevi."},
+ sedia:{goal:"Imparare a disegnare gli spazi vuoti invece dell'oggetto, e vedere che l'oggetto viene giusto da solo.",
+  read:"Guarda la sedia: se gambe, stecche e traverse sono credibili anche se hai disegnato solo gli spazi, ci sei. Dove la sedia sembra sbagliata, probabilmente sei tornato a disegnare la sedia invece degli spazi intorno."},
+ copiespazi:{goal:"Usare gli spazi negativi per gli scorci (braccia e gambe che vengono verso di te), di solito la cosa più difficile da disegnare.",
+  read:"Confronta la copia con l'originale: braccia e gambe devono apparire accorciate nel modo giusto. Se sembrano troppo lunghe, hai disegnato l'arto come lo conosci, non gli spazi intorno."},
+ spaziovunque:{goal:"Rendere automatico il vedere gli spazi negativi, così l'occhio lo fa anche quando non disegni.",
+  read:"Non c'è un disegno da giudicare. Funziona quando cominci a notare gli spazi senza sforzo: tra i rami, sotto un tavolo, tra due persone."},
+ corridoio:{goal:"Capire con i tuoi occhi come le linee che vanno in profondità si inclinano verso un unico punto di fuga.",
+  read:"Nel disegno tutti i bordi che vanno in profondità devono incontrarsi in un punto all'altezza dei tuoi occhi. Se una linea non ci arriva, misurala di nuovo: sopra gli occhi le linee scendono, sotto salgono."},
+ angolo:{goal:"Imparare a misurare gli angoli confrontandoli con una verticale o un'orizzontale, invece di tirare a indovinare.",
+  read:"Sovrapponi il piano al disegno o ricontrolla con la matita: se gli angoli coincidono, l'occhio sta imparando. Se li hai disegnati troppo piatti o troppo ripidi, il cervello li ha «raddrizzati» verso quello che si aspetta."},
+ gesto:{goal:"Imparare il gesto base per misurare le proporzioni: confrontare le misure come rapporti, non come lunghezze reali.",
+  read:"Funziona se ripetendo la misura ottieni lo stesso risultato (gomito bloccato, un occhio chiuso) e se riesci a descrivere le cose come rapporti («la porta è 1 a 2½»). Se i numeri cambiano ogni volta, il braccio si sta piegando."},
+ duepunti:{goal:"Usare insieme bordi, spazi e rapporti per disegnare un'intera scena reale con profondità.",
+  read:"La scena deve sembrare profonda e stabile. Se qualcosa «non torna», controlla il suo angolo rispetto a verticale e orizzontale e la sua misura rispetto all'unità base: quasi sempre l'errore è un angolo indovinato invece che misurato."},
+ costanza:{goal:"Cogliere il cervello mentre cambia di nascosto le dimensioni, per fidarti delle misure più di quello che credi di vedere.",
+  read:"La sorpresa è il risultato: figure identiche che sembrano diverse, un riflesso grande la metà della tua testa. Se anche dopo aver misurato non sei convinto, è normale: l'illusione non sparisce, impari solo a fidarti della misura."},
+ misuretesta:{goal:"Imparare le proporzioni base della testa e verificarle su persone vere, per smettere di mettere gli occhi troppo in alto.",
+  read:"Sulle teste vere gli occhi sono a metà tra la cima della testa e il mento. Se le misure lo confermano ma ti «sembra sbagliato», è il cervello all'opera: fidati della misura."},
+ sargent:{goal:"Provare tutti i passaggi del ritratto di profilo su un'immagine ferma, prima di lavorare con una persona vera.",
+  read:"Capovolgi originale e copia: le differenze saltano all'occhio. Le più comuni sono l'orecchio troppo vicino al viso e la nuca tagliata. Correggile confrontando con l'unità base."},
+ profilo:{goal:"Disegnare una persona vera di profilo, usando bordi, spazi e rapporti insieme come un'unica abilità.",
+  read:"Punta alla somiglianza, non alla perfezione. Se non somiglia, controlla la linea degli occhi (a metà testa), la posizione dell'orecchio e l'angolo naso-mento: è lì che di solito si sbaglia."},
+ courbet:{goal:"Capire che luci e ombre sono solo forme, e che il cervello le trasforma da solo in volume.",
+  read:"È riuscito se capovolto vedevi solo macchie e raddrizzato una testa in rilievo. È questa la lezione: disegna le macchie come sono e il cervello di chi guarda farà il resto."},
+ frontale:{goal:"Imparare le proporzioni generali del volto visto di fronte, da usare come guida di partenza.",
+  read:"Confronta la guida con volti veri: le regole (un occhio tra gli occhi, linea degli occhi a metà) saranno più o meno giuste, ma ogni volto è un po' diverso. Le differenze sono proprio ciò che rende una persona riconoscibile."},
+ tretquarti:{goal:"Capire come cambia un volto quando si gira: il lato lontano si stringe e i lineamenti cambiano forma.",
+  read:"Controlla l'errore più comune: l'occhio vicino troppo attaccato al naso (deve stare a circa un occhio di distanza). Se il volto sembra piatto o simmetrico, l'hai disegnato come se fosse di fronte."},
+ steichen:{goal:"Imparare a disegnare con luci e ombre invece che con le linee, e scoprire quanto poco serve perché chi guarda veda un volto.",
+  read:"È riuscito se, socchiudendo gli occhi, un volto «appare» dal grigio anche senza occhi disegnati. Se sembra sporco, probabilmente hai continuato ad aggiungere: fermarsi prima fa parte dell'abilità."},
+ tratteggio:{goal:"Sviluppare il tuo modo di creare i toni con le linee, da usare per ombreggiare qualsiasi disegno.",
+  read:"Non esiste un tratteggio giusto. Cerca gruppi di linee regolari e passaggi graduali dal chiaro allo scuro. Con la pratica le linee diventano più veloci, regolari e riconoscibili come tue."},
+ autoritratto:{goal:"Unire le quattro abilità in un autoritratto finito e lasciare che la somiglianza (la quinta abilità) emerga da sola.",
+  read:"Mettilo accanto all'autoritratto «prima»: cerca meno simboli, occhi al posto giusto, il cranio intero, luci e ombre credibili. Non aspettarti la perfezione: conta che tu abbia disegnato quello che vedevi."},
+ confronto:{goal:"Vedere chiaramente i tuoi progressi, prima di dimenticare come disegnavi.",
+  read:"Cerca differenze concrete: forme reali al posto dei simboli, proporzioni migliori, linee più sicure. Scrivile: sono la prova che disegnare si impara."},
+ taccuino:{goal:"Tenere vivo il nuovo modo di vedere con una pratica breve e regolare.",
+  read:"Non giudicare i singoli schizzi. Conta la regolarità: se disegni quasi ogni giorno e passi più facilmente alla modalità del disegno, sta funzionando."},
+ problema:{goal:"Usare le cinque abilità del disegno come modo di pensare a un problema reale.",
+  read:"È riuscito se hai scoperto qualcosa di nuovo: un'informazione che mancava, il punto di vista di un'altra persona, una domanda migliore. Non serve risolvere subito il problema."},
+ insegna:{goal:"Fissare quello che hai imparato spiegandolo, e condividerlo con chi pensa di non saper disegnare.",
+  read:"È riuscito se l'altra persona si stupisce del suo disegno capovolto e se tu sei riuscito a spiegare perché funziona. Dove la spiegazione si è inceppata, c'è qualcosa da ripassare."}
+}
+};
+
 /* ---------- testi dell'interfaccia nelle due lingue ---------- */
 const UI = {
  it:{
@@ -1440,7 +1589,7 @@ const UI = {
   ch:"cap.", Ch:"Cap.", intro:"Introduzione", Intro:"Intro", chapter:"Capitolo", book:"Libro",
   howRead:"Come leggere il capitolo", short:"In breve", long:"Approfondito", idea:"L'idea", key:"Concetti chiave", exercises:"Esercizi",
   ofDone:(a, b) => a + " di " + b + " fatti", reading:"Lettura", readUndo:"✓ Capitolo letto · annulla", iRead:"Ho letto il capitolo",
-  exercise:"esercizio", imgAt:"Immagine a p.", need:"Ti serve", steps:"In breve", why:"Perché",
+  exercise:"esercizio", imgAt:"Immagine a p.", need:"Ti serve", steps:"In breve", why:"Perché funziona", goal:"Obiettivo", readRes:"Come leggere il risultato",
   full:(p) => "Le istruzioni complete sono nel libro, da p. " + p + ": leggile prima di iniziare.",
   doneOn:(d) => "✓ Fatto il " + d, undo:"Segna come da fare", markDone:"Segna come fatto", notes:"I tuoi appunti",
   notesPh:"Com'è andata? Cosa hai notato? Quanto tempo ci hai messo?", autosave:"Si salvano da soli.", saved:"Salvato.",
@@ -1463,7 +1612,7 @@ const UI = {
   ch:"ch.", Ch:"Ch.", intro:"Introduction", Intro:"Intro", chapter:"Chapter", book:"Book",
   howRead:"How to read the chapter", short:"In short", long:"In depth", idea:"The idea", key:"Key concepts", exercises:"Exercises",
   ofDone:(a, b) => a + " of " + b + " done", reading:"Reading", readUndo:"✓ Chapter read · undo", iRead:"I've read the chapter",
-  exercise:"exercise", imgAt:"Image on p.", need:"You need", steps:"Steps", why:"Why",
+  exercise:"exercise", imgAt:"Image on p.", need:"You need", steps:"Steps", why:"Why it works", goal:"Goal", readRes:"How to read your result",
   full:(p) => "The full instructions are in the book, from p. " + p + ": read them before you start.",
   doneOn:(d) => "✓ Done on " + d, undo:"Mark as not done", markDone:"Mark as done", notes:"Your notes",
   notesPh:"How did it go? What did you notice? How long did it take?", autosave:"They save automatically.", saved:"Saved.",
@@ -1502,7 +1651,7 @@ function applyLang(){
   const en = S.lang === "en"; tx = UI[S.lang];
   try{ document.documentElement.lang = S.lang; }catch(e){}
   CH.forEach((c, i) => Object.assign(c, en ? {title:c.en, sub:"", idea:EN.ch[c.id].idea, points:EN.ch[c.id].points, long:EN.long[c.id] || []} : IT.ch[i]));
-  EXS.forEach((e, i) => Object.assign(e, en ? EN.ex[e.id] : IT.ex[i]));
+  EXS.forEach((e, i) => Object.assign(e, en ? EN.ex[e.id] : IT.ex[i], GOALS[en ? "en" : "it"][e.id]));
   MATS.forEach((m, i) => Object.assign(m, en ? {t:EN.mats[m.id][0], s:EN.mats[m.id][1]} : IT.mats[i]));
   MEMO.forEach((m, i) => Object.assign(m, en ? EN.memo[i] : IT.memo[i]));
 }
@@ -1848,9 +1997,11 @@ function exercise(id, from, mood){
       <span class="chip cr">${esc(e.min)}</span>
     </div>
     <div class="react">${mascot(mood || (done ? "cheer" : "squint"), 96)}</div>
+    <div class="card cr goal"><span class="label">${esc(tr("goal"))}</span><p>${esc(e.goal)}</p></div>
     <div class="card cr">
       <div class="kv"><span class="label">${esc(tr("need"))}</span><p>${esc(e.mat)}</p></div>
       <div class="kv"><span class="label">${esc(tr("steps"))}</span><ol class="points">${e.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
+      <div class="kv"><span class="label">${esc(tr("readRes"))}</span><p>${esc(e.read)}</p></div>
       <div class="kv"><span class="label">${esc(tr("why"))}</span><p class="why">${esc(e.why)}</p></div>
       <p class="hint">${esc(tr("full", pg(e.p)))}</p>
     </div>
